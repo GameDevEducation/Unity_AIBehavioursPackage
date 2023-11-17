@@ -2,194 +2,195 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum EBlackboardKey
+namespace CommonCore
 {
-    Character_FocusObject,
-
-    Household_ObjectsInUse,
-
-    Memories_ShortTerm,
-    Memories_LongTerm
-}
-
-public class Blackboard
-{
-    Dictionary<EBlackboardKey, int>         IntValues           = new Dictionary<EBlackboardKey, int>();
-    Dictionary<EBlackboardKey, float>       FloatValues         = new Dictionary<EBlackboardKey, float>();
-    Dictionary<EBlackboardKey, bool>        BoolValues          = new Dictionary<EBlackboardKey, bool>();
-    Dictionary<EBlackboardKey, string>      StringValues        = new Dictionary<EBlackboardKey, string>();
-    Dictionary<EBlackboardKey, Vector3>     Vector3Values       = new Dictionary<EBlackboardKey, Vector3>();
-    Dictionary<EBlackboardKey, GameObject>  GameObjectValues    = new Dictionary<EBlackboardKey, GameObject>();
-    Dictionary<EBlackboardKey, object>      GenericValues       = new Dictionary<EBlackboardKey, object>();
-
-    public void SetGeneric<T>(EBlackboardKey key, T value)
+    public class Blackboard<BlackboardKeyType>
     {
-        GenericValues[key] = value;
-    }
+        Dictionary<BlackboardKeyType, int> IntValues = new();
+        Dictionary<BlackboardKeyType, float> FloatValues = new();
+        Dictionary<BlackboardKeyType, bool> BoolValues = new();
+        Dictionary<BlackboardKeyType, string> StringValues = new();
+        Dictionary<BlackboardKeyType, Vector3> Vector3Values = new();
+        Dictionary<BlackboardKeyType, GameObject> GameObjectValues = new();
+        Dictionary<BlackboardKeyType, MonoBehaviour> MonoBehaviourValues = new();
+        Dictionary<BlackboardKeyType, object> GenericValues = new();
 
-    public T GetGeneric<T>(EBlackboardKey key)
-    {
-        if (!GenericValues.ContainsKey(key))
-            throw new System.ArgumentException($"Could not find value for {key} in GenericValues");
-
-        return (T)GenericValues[key];
-    }
-
-    public bool TryGetGeneric<T>(EBlackboardKey key, out T value, T defaultValue)
-    {
-        if (GenericValues.ContainsKey(key))
+        public void SetGeneric<T>(BlackboardKeyType InKey, T InValue)
         {
-            value = (T)GenericValues[key];
-            return true;
+            GenericValues[InKey] = InValue;
         }
 
-        value = defaultValue;
-        return false;
-    }
-
-    private T Get<T>(Dictionary<EBlackboardKey, T> keySet, EBlackboardKey key)
-    {
-        if (!keySet.ContainsKey(key))
-            throw new System.ArgumentException($"Could not find value for {key} in {typeof(T).Name}Values");
-
-        return keySet[key];
-    }
-
-    private bool TryGet<T>(Dictionary<EBlackboardKey, T> keySet, EBlackboardKey key, out T value, T defaultValue = default)
-    {
-        if (keySet.ContainsKey(key))
+        public T GetGeneric<T>(BlackboardKeyType InKey)
         {
-            value = keySet[key];
-            return true;
+            if (!GenericValues.ContainsKey(InKey))
+                throw new System.ArgumentException($"Could not find value for {InKey} in GenericValues");
+
+            return (T)GenericValues[InKey];
         }
 
-        value = default;
-        return false;
-    }
-
-    public void Set(EBlackboardKey key, int value)
-    {
-        IntValues[key] = value;
-    }
-
-    public int GetInt(EBlackboardKey key)
-    {
-        return Get(IntValues, key);
-    }
-
-    public bool TryGet(EBlackboardKey key, out int value, int defaultValue = 0)
-    {
-        return TryGet(IntValues, key, out value, defaultValue);
-    }
-
-    public void Set(EBlackboardKey key, float value)
-    {
-        FloatValues[key] = value;
-    }
-
-    public float GetFloat(EBlackboardKey key)
-    {
-        return Get(FloatValues, key);
-    }
-
-    public bool TryGet(EBlackboardKey key, out float value, float defaultValue = 0)
-    {
-        return TryGet(FloatValues, key, out value, defaultValue);
-    }
-
-    public void Set(EBlackboardKey key, bool value)
-    {
-        BoolValues[key] = value;
-    }
-
-    public bool GetBool(EBlackboardKey key)
-    {
-        return Get(BoolValues, key);
-    }
-
-    public bool TryGet(EBlackboardKey key, out bool value, bool defaultValue = false)
-    {
-        return TryGet(BoolValues, key, out value, defaultValue);
-    }
-
-    public void Set(EBlackboardKey key, string value)
-    {
-        StringValues[key] = value;
-    }
-
-    public string GetString(EBlackboardKey key)
-    {
-        return Get(StringValues, key);
-    }
-
-    public bool TryGet(EBlackboardKey key, out string value, string defaultValue = "")
-    {
-        return TryGet(StringValues, key, out value, defaultValue);
-    }
-
-    public void Set(EBlackboardKey key, Vector3 value)
-    {
-        Vector3Values[key] = value;
-    }
-
-    public Vector3 GetVector3(EBlackboardKey key)
-    {
-        return Get(Vector3Values, key);
-    }
-
-    public bool TryGet(EBlackboardKey key, out Vector3 value, Vector3 defaultValue)
-    {
-        return TryGet(Vector3Values, key, out value, defaultValue);
-    }
-
-    public void Set(EBlackboardKey key, GameObject value)
-    {
-        GameObjectValues[key] = value;
-    }
-
-    public GameObject GetGameObject(EBlackboardKey key)
-    {
-        return Get(GameObjectValues, key);
-    }
-
-    public bool TryGet(EBlackboardKey key, out GameObject value, GameObject defaultValue = null)
-    {
-        return TryGet(GameObjectValues, key, out value, defaultValue);
-    }
-}
-
-public class BlackboardManager : MonoBehaviour
-{
-    public static BlackboardManager Instance { get; private set; } = null;
-
-    Dictionary<MonoBehaviour, Blackboard> IndividualBlackboards = new Dictionary<MonoBehaviour, Blackboard>();
-    Dictionary<int, Blackboard> SharedBlackboards = new Dictionary<int, Blackboard>();
-
-    private void Awake()
-    {
-        if (Instance != null)
+        public bool TryGetGeneric<T>(BlackboardKeyType InKey, out T OutValue, T InDefaultValue)
         {
-            Debug.LogError($"Trying to create second BlackboardManager on {gameObject.name}");
-            Destroy(gameObject);
-            return;
+            if (GenericValues.ContainsKey(InKey))
+            {
+                OutValue = (T)GenericValues[InKey];
+                return true;
+            }
+
+            OutValue = InDefaultValue;
+            return false;
         }
 
-        Instance = this;
+        private T Get<T>(Dictionary<BlackboardKeyType, T> InKeySet, BlackboardKeyType InKey)
+        {
+            if (!InKeySet.ContainsKey(InKey))
+                throw new System.ArgumentException($"Could not find value for {InKey} in {typeof(T).Name}Values");
+
+            return InKeySet[InKey];
+        }
+
+        private bool TryGet<T>(Dictionary<BlackboardKeyType, T> InKeySet, BlackboardKeyType InKey, out T OutValue, T InDefaultValue = default)
+        {
+            if (InKeySet.ContainsKey(InKey))
+            {
+                OutValue = InKeySet[InKey];
+                return true;
+            }
+
+            OutValue = default;
+            return false;
+        }
+
+        public void Set(BlackboardKeyType InKey, int InValue)
+        {
+            IntValues[InKey] = InValue;
+        }
+
+        public int GetInt(BlackboardKeyType InKey)
+        {
+            return Get(IntValues, InKey);
+        }
+
+        public bool TryGet(BlackboardKeyType InKey, out int OutValue, int InDefaultValue = 0)
+        {
+            return TryGet(IntValues, InKey, out OutValue, InDefaultValue);
+        }
+
+        public void Set(BlackboardKeyType InKey, float InValue)
+        {
+            FloatValues[InKey] = InValue;
+        }
+
+        public float GetFloat(BlackboardKeyType InKey)
+        {
+            return Get(FloatValues, InKey);
+        }
+
+        public bool TryGet(BlackboardKeyType InKey, out float OutValue, float InDefaultValue = 0)
+        {
+            return TryGet(FloatValues, InKey, out OutValue, InDefaultValue);
+        }
+
+        public void Set(BlackboardKeyType InKey, bool value)
+        {
+            BoolValues[InKey] = value;
+        }
+
+        public bool GetBool(BlackboardKeyType InKey)
+        {
+            return Get(BoolValues, InKey);
+        }
+
+        public bool TryGet(BlackboardKeyType InKey, out bool OutValue, bool InDefaultValue = false)
+        {
+            return TryGet(BoolValues, InKey, out OutValue, InDefaultValue);
+        }
+
+        public void Set(BlackboardKeyType InKey, string InValue)
+        {
+            StringValues[InKey] = InValue;
+        }
+
+        public string GetString(BlackboardKeyType InKey)
+        {
+            return Get(StringValues, InKey);
+        }
+
+        public bool TryGet(BlackboardKeyType InKey, out string OutValue, string InDefaultValue = "")
+        {
+            return TryGet(StringValues, InKey, out OutValue, InDefaultValue);
+        }
+
+        public void Set(BlackboardKeyType InKey, Vector3 InValue)
+        {
+            Vector3Values[InKey] = InValue;
+        }
+
+        public Vector3 GetVector3(BlackboardKeyType InKey)
+        {
+            return Get(Vector3Values, InKey);
+        }
+
+        public bool TryGet(BlackboardKeyType InKey, out Vector3 OutValue, Vector3 InDefaultValue)
+        {
+            return TryGet(Vector3Values, InKey, out OutValue, InDefaultValue);
+        }
+
+        public void Set<T>(BlackboardKeyType InKey, T InValue) where T : MonoBehaviour
+        {
+            MonoBehaviourValues[InKey] = InValue;
+        }
+
+        public T GetMonoBehaviour<T>(BlackboardKeyType InKey) where T : MonoBehaviour
+        {
+            return Get(MonoBehaviourValues, InKey) as T;
+        }
+
+        public bool TryGet<T>(BlackboardKeyType InKey, out T OutValue, T InDefaultValue = null) where T : MonoBehaviour
+        {
+            MonoBehaviour TempOutValue = null;
+
+            bool bResult = TryGet(MonoBehaviourValues, InKey, out TempOutValue, InDefaultValue);
+
+            OutValue = TempOutValue as T;
+
+            return bResult;
+        }
+
+        public void Set(BlackboardKeyType InKey, GameObject InValue)
+        {
+            GameObjectValues[InKey] = InValue;
+        }
+
+        public GameObject GetGameObject(BlackboardKeyType InKey)
+        {
+            return Get(GameObjectValues, InKey);
+        }
+
+        public bool TryGet(BlackboardKeyType InKey, out GameObject OutValue, GameObject InDefaultValue = null)
+        {
+            return TryGet(GameObjectValues, InKey, out OutValue, InDefaultValue);
+        }
     }
 
-    public Blackboard GetIndividualBlackboard(MonoBehaviour requestor)
+    public class BlackboardManager : Singleton<BlackboardManager>
     {
-        if (!IndividualBlackboards.ContainsKey(requestor))
-            IndividualBlackboards[requestor] = new Blackboard();
+        Dictionary<MonoBehaviour, Blackboard<FastName>> IndividualBlackboards = new();
+        Dictionary<int, Blackboard<FastName>> SharedBlackboards = new();
 
-        return IndividualBlackboards[requestor];
-    }
+        public Blackboard<FastName> GetIndividualBlackboard(MonoBehaviour InRequestor)
+        {
+            if (!IndividualBlackboards.ContainsKey(InRequestor))
+                IndividualBlackboards[InRequestor] = new();
 
-    public Blackboard GetSharedBlackboard(int uniqueID)
-    {
-        if (!SharedBlackboards.ContainsKey(uniqueID))
-            SharedBlackboards[uniqueID] = new Blackboard();
+            return IndividualBlackboards[InRequestor];
+        }
 
-        return SharedBlackboards[uniqueID];
+        public Blackboard<FastName> GetSharedBlackboard(int InUniqueID)
+        {
+            if (!SharedBlackboards.ContainsKey(InUniqueID))
+                SharedBlackboards[InUniqueID] = new();
+
+            return SharedBlackboards[InUniqueID];
+        }
     }
 }
