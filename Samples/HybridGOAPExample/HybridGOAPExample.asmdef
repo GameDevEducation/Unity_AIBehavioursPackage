@@ -1,0 +1,20 @@
+{
+    "name": "HybridGOAPExample",
+    "rootNamespace": "HybridGOAPExample",
+    "references": [
+        "GUID:9240a55a31a208a4484d6530144948de",
+        "GUID:8cf927f10b0f49847824710733632324",
+        "GUID:6f504b0259e61554a8e7af12866de639",
+        "GUID:f65b4dca74581ce4a88fcdc4a04768a8",
+        "GUID:6055be8ebefd69e48b49212b09b47b2f"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
