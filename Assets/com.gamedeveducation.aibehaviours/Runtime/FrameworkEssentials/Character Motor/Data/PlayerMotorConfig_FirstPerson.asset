@@ -1,0 +1,158 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c16ac4e37ab09a2409b642fda03dc2cc, type: 3}
+  m_Name: PlayerMotorConfig_FirstPerson
+  m_EditorClassIdentifier: 
+  Height: 1.8
+  Radius: 0.35
+  GroundedLayerMask:
+    serializedVersion: 2
+    m_Bits: 17
+  GroundedCheckBuffer: 0.2
+  CeilingCheckLayerMask:
+    serializedVersion: 2
+    m_Bits: 1
+  CeilingCheckRangeBuffer: 0.05
+  CeilingCheckRadiusBuffer: 0.05
+  StepCheck_LookAheadRange: 0.05
+  StepCheck_MaxStepHeight: 0.3
+  Material_Default: {fileID: 13400000, guid: f3a406fa5f713fa409d024f9a8a59457, type: 2}
+  Material_Jumping: {fileID: 13400000, guid: 01cd7d9d003e8f143a1f5280e8e09f5c, type: 2}
+  Camera_InvertY: 0
+  Camera_HorizontalSensitivity: 10
+  Camera_VerticalSensitivity: 10
+  Camera_MinPitch: -75
+  Camera_MaxPitch: 75
+  Camera_InitialDiscardTime: 0.1
+  Camera_VerticalOffset: -0.1
+  Headbob_Enable: 1
+  Headbob_MinSpeedToBob: 0.1
+  Headbob_TranslationBlendSpeed: 1
+  Headbob_VTranslationVsSpeedFactor:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 0.25
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  Headbob_HTranslationVsSpeedFactor:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 0.1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  Headbob_PeriodVsSpeedFactor:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 0.2
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  WalkSpeed: 10
+  RunSpeed: 15
+  CanRun: 1
+  IsRunToggle: 1
+  SlopeLimit: 60
+  Acceleration: 1
+  AutoParent: 0
+  AutoParentMode: 0
+  CanCrouch: 1
+  IsCrouchToggle: 1
+  CrouchHeight: 0.9
+  CrouchSpeedMultiplier: 0.5
+  CrouchTransitionTime: 0.25
+  FallAcceleration: 20
+  CoyoteTime: 0.1
+  MinFallSpeedToTakeDamage: 15
+  FallSpeedForMaximumDamage: 50
+  MinimumFallDamagePercentage: 0.05
+  MaximumFallDamagePercentage: 1
+  CanAirControl: 1
+  AirControlMaxSpeed: 10
+  CanJump: 1
+  CanDoubleJump: 1
+  JumpVelocity: 5
+  JumpTime: 0.25
+  SendUIInteractions: 1
+  MaxInteractionDistance: 2
+  FootstepInterval_Walking: 0.4
+  FootstepInterval_Running: 0.2
+  MinAirTimeForLandedSound: 0.2
+  MaxStamina: 100
+  StaminaCost_Jumping: 10
+  StaminaCost_Running: 4
+  StaminaRecoveryRate: 10
+  StaminaRecoveryDelay: 0.5
+  MaxHealth: 100
+  HealthRecoveryRate: 10
+  HealthRecoveryDelay: 5
+  EnableHaptics: 1
+  ImpactHaptics:
+    Effect: {fileID: 11400000, guid: 02fabb5c09f8be0459ac436228679be4, type: 2}
+    MinIntensity: 0.75
+    MaxIntensity: 1
+  DamageHaptics:
+    Effect: {fileID: 11400000, guid: 2af536787aecfdd4d82fbdb9a245cb07, type: 2}
+    MinIntensity: 0.1
+    MaxIntensity: 1
