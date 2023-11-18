@@ -123,6 +123,14 @@ namespace CommonCore
             ++IndentLevel;
         }
 
+        public static void AddSource(IDebuggableObject InObject)
+        {
+            if (Instance == null)
+                return;
+
+            Instance.RegisterSource(InObject);
+        }
+
         public void RegisterSource(IDebuggableObject InObject)
         {
             if (Sources.Contains(InObject))
@@ -135,6 +143,14 @@ namespace CommonCore
                 CurrentSourceIndex = 0;
                 RefreshUI();
             }
+        }
+
+        public static void RemoveSource(IDebuggableObject InObject)
+        {
+            if (Instance == null)
+                return;
+
+            Instance.UnregisterSource(InObject);
         }
 
         public void UnregisterSource(IDebuggableObject InObject)
