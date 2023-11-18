@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace CommonCore
 {
-    public class Blackboard<BlackboardKeyType>
+    public class Blackboard<BlackboardKeyType> : IDebuggable
     {
         Dictionary<BlackboardKeyType, int> IntValues = new();
         Dictionary<BlackboardKeyType, float> FloatValues = new();
@@ -14,6 +14,8 @@ namespace CommonCore
         Dictionary<BlackboardKeyType, GameObject> GameObjectValues = new();
         Dictionary<BlackboardKeyType, MonoBehaviour> MonoBehaviourValues = new();
         Dictionary<BlackboardKeyType, object> GenericValues = new();
+
+        public string DebugDisplayName => "Blackboard";
 
         public void SetGeneric<T>(BlackboardKeyType InKey, T InValue)
         {
@@ -170,6 +172,81 @@ namespace CommonCore
         {
             return TryGet(GameObjectValues, InKey, out OutValue, InDefaultValue);
         }
+
+        public void GatherDebugData(IGameDebugger InDebugger, bool bInIsSelected)
+        {
+            if (!bInIsSelected)
+                return;
+
+            InDebugger.AddSectionHeader("Blackboard");
+
+            InDebugger.PushIndent();
+
+            List<string> DebugEntries = new();
+
+            GenerateDebugEntryStrings(IntValues, DebugEntries);
+            GenerateDebugEntryStrings(FloatValues, DebugEntries);
+            GenerateDebugEntryStrings(BoolValues, DebugEntries);
+            GenerateDebugEntryStrings(StringValues, DebugEntries);
+            GenerateDebugEntryStrings(Vector3Values, DebugEntries);
+            GenerateDebugEntryStrings(GameObjectValues, DebugEntries);
+            GenerateDebugEntryStrings(MonoBehaviourValues, DebugEntries);
+            GenerateDebugEntryStrings(GenericValues, DebugEntries);
+
+            DebugEntries.Sort();
+
+            foreach (var DebugEntry in DebugEntries)
+                InDebugger.AddTextLine(DebugEntry);
+
+            InDebugger.PopIndent();
+        }
+
+        const string DebugEntry_KeyPrefix = "<color=yellow>";
+        const string DebugEntry_KeySuffix = "</color>";
+
+        void GenerateDebugEntryStrings<T>(Dictionary<BlackboardKeyType, T> InDataSet, List<string> InOutDebugEntries)
+        {
+            foreach(var KVP in InDataSet)
+            {
+                if (KVP.Value != null)
+                    InOutDebugEntries.Add($"{DebugEntry_KeyPrefix}{KVP.Key}{DebugEntry_KeySuffix}: {KVP.Value}");
+                else
+                    InOutDebugEntries.Add($"{DebugEntry_KeyPrefix}{KVP.Key}{DebugEntry_KeySuffix}: NULL");
+            }
+        }
+
+        void GenerateDebugEntryStrings(Dictionary<BlackboardKeyType, GameObject> InDataSet, List<string> InOutDebugEntries)
+        {
+            foreach (var KVP in InDataSet)
+            {
+                if (KVP.Value != null)
+                    InOutDebugEntries.Add($"{DebugEntry_KeyPrefix}{KVP.Key}{DebugEntry_KeySuffix}: {KVP.Value}");
+                else
+                    InOutDebugEntries.Add($"{DebugEntry_KeyPrefix}{KVP.Key}{DebugEntry_KeySuffix}: NULL");
+            }
+        }
+
+        void GenerateDebugEntryStrings(Dictionary<BlackboardKeyType, MonoBehaviour> InDataSet, List<string> InOutDebugEntries)
+        {
+            foreach (var KVP in InDataSet)
+            {
+                if (KVP.Value != null)
+                    InOutDebugEntries.Add($"{DebugEntry_KeyPrefix}{KVP.Key}{DebugEntry_KeySuffix}: {KVP.Value}");
+                else
+                    InOutDebugEntries.Add($"{DebugEntry_KeyPrefix}{KVP.Key}{DebugEntry_KeySuffix}: NULL");
+            }
+        }
+
+        void GenerateDebugEntryStrings(Dictionary<BlackboardKeyType, Vector3> InDataSet, List<string> InOutDebugEntries)
+        {
+            foreach (var KVP in InDataSet)
+            {
+                if (KVP.Value != CommonCore.Constants.InvalidVector3Position)
+                    InOutDebugEntries.Add($"{DebugEntry_KeyPrefix}{KVP.Key}{DebugEntry_KeySuffix}: {KVP.Value}");
+                else
+                    InOutDebugEntries.Add($"{DebugEntry_KeyPrefix}{KVP.Key}{DebugEntry_KeySuffix}: INVALID");
+            }
+        }
     }
 
     public class BlackboardManager : Singleton<BlackboardManager>
@@ -177,7 +254,15 @@ namespace CommonCore
         Dictionary<MonoBehaviour, Blackboard<FastName>> IndividualBlackboards = new();
         Dictionary<int, Blackboard<FastName>> SharedBlackboards = new();
 
-        public Blackboard<FastName> GetIndividualBlackboard(MonoBehaviour InRequestor)
+        public static Blackboard<FastName> GetIndividualBlackboard(MonoBehaviour InRequestor)
+        {
+            if (Instance == null)
+                return null;
+
+            return Instance.GetIndividualBlackboardInternal(InRequestor);
+        }
+
+        Blackboard<FastName> GetIndividualBlackboardInternal(MonoBehaviour InRequestor)
         {
             if (!IndividualBlackboards.ContainsKey(InRequestor))
                 IndividualBlackboards[InRequestor] = new();
@@ -185,7 +270,15 @@ namespace CommonCore
             return IndividualBlackboards[InRequestor];
         }
 
-        public Blackboard<FastName> GetSharedBlackboard(int InUniqueID)
+        public static Blackboard<FastName> GetSharedBlackboard(int InUniqueID)
+        {
+            if (Instance == null)
+                return null;
+
+            return Instance.GetSharedBlackboardInternal(InUniqueID);
+        }
+
+        Blackboard<FastName> GetSharedBlackboardInternal(int InUniqueID)
         {
             if (!SharedBlackboards.ContainsKey(InUniqueID))
                 SharedBlackboards[InUniqueID] = new();
