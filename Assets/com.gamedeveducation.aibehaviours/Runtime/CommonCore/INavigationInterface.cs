@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace HybridGOAP
+namespace CommonCore
 {
-    public interface IGOAPNavigationInterface
+    public interface INavigationInterface
     {
         bool SetMoveLocation(GameObject InMover, Vector3 InDestination, float InStoppingDistance);
         bool IsPathfindingOrMoving(GameObject InMover);

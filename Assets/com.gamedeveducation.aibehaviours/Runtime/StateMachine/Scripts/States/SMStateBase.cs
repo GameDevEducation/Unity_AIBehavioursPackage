@@ -75,6 +75,11 @@ namespace StateMachine
             }
         }
 
+        protected GameObject GetOwner(Blackboard<FastName> InBlackboard)        
+        {
+            return InBlackboard.GetGameObject(CommonCore.Names.Self);
+        }
+
         public void GatherDebugData(IGameDebugger InDebugger, bool bInIsSelected)
         {
             InDebugger.AddTextLine($"{DebugDisplayName}");

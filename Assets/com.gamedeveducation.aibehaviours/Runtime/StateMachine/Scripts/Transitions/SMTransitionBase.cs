@@ -7,6 +7,11 @@ namespace StateMachine
 {
     public abstract class SMTransitionBase : ISMTransition
     {
+        protected GameObject GetOwner(Blackboard<FastName> InBlackboard)
+        {
+            return InBlackboard.GetGameObject(CommonCore.Names.Self);
+        }
+
         public ESMTransitionResult Evaluate(ISMState InCurrentState, Blackboard<FastName> InBlackboard)
         {
             return EvaluateInternal(InCurrentState, InBlackboard);

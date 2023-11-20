@@ -10,9 +10,9 @@ namespace HybridGOAP
         protected IGOAPBrain LinkedBrain;
         protected Blackboard<FastName> LinkedBlackboard => LinkedBrain.CurrentBlackboard;
 
-        public int Priority => throw new System.NotImplementedException();
+        public int Priority { get; protected set; } = GoalPriority.DoNotRun;
 
-        public string DebugDisplayName => throw new System.NotImplementedException();
+        public string DebugDisplayName => GetType().Name;
 
         public void BindToBrain(IGOAPBrain InBrain)
         {
