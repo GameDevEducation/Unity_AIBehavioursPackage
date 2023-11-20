@@ -8,7 +8,7 @@ namespace HybridGOAP
     public abstract class GOAPActionBase : MonoBehaviour, IGOAPAction
     {
         protected IGOAPBrain LinkedBrain;
-        protected IGOAPNavigationInterface Navigation;
+        protected INavigationInterface Navigation;
         protected Blackboard<FastName> LinkedBlackboard => LinkedBrain.CurrentBlackboard;
 
         protected System.Type[] SupportedGoalTypes = { };
@@ -20,7 +20,7 @@ namespace HybridGOAP
         public void BindToBrain(IGOAPBrain InBrain)
         {
             LinkedBrain = InBrain;
-            Navigation = GetComponent<IGOAPNavigationInterface>();
+            Navigation = GetComponent<INavigationInterface>();
 
             PopulateSupportedGoalTypes();
             OnInitialise();
