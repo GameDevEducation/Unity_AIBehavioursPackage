@@ -123,16 +123,27 @@ public abstract class BaseAI : MonoBehaviour
             float yawDelta = Mathf.Atan2(localSpaceLookDirection.x, localSpaceLookDirection.z) * Mathf.Rad2Deg;
             float pitchDelta = Mathf.Atan(localSpaceLookDirection.y / localSpaceLookDirection.z) * Mathf.Rad2Deg;
 
+            bool yawValid = Mathf.Abs(yawDelta) <= MaxYawAngle;
+            bool pitchValid = pitchDelta >= MinPitchAngle && pitchDelta <= MaxPitchAngle;
+
             // if the target is within look limits then set it as the desired pitch and yaw
-            if (Mathf.Abs(yawDelta) <= MaxYawAngle && pitchDelta >= MinPitchAngle && pitchDelta <= MaxPitchAngle)
+            if (yawValid && pitchValid)
             {
                 DesiredYawDelta = yawDelta;
                 DesiredPitchDelta = pitchDelta;
             }
             else
             {
-                // return to looking forwards
-                DesiredPitchDelta = DesiredYawDelta = 0f;
+                if (yawValid && !pitchValid)
+                {
+                    DesiredYawDelta = yawDelta;
+                    DesiredPitchDelta = 0;
+                }
+                else
+                {
+                    // return to looking forwards
+                    DesiredPitchDelta = DesiredYawDelta = 0f;
+                }
             }
         }
         else if (PreviousLookTarget != null)

@@ -243,6 +243,10 @@ namespace HybridGOAP
             CurrentBlackboard.Set(CommonCore.Names.CurrentLocation, transform.position);
             CurrentBlackboard.Set(CommonCore.Names.MoveToLocation, CommonCore.Constants.InvalidVector3Position);
 
+            CurrentBlackboard.Set(CommonCore.Names.Target_GameObject, (GameObject)null);
+            CurrentBlackboard.Set(CommonCore.Names.Target_Position, CommonCore.Constants.InvalidVector3Position);
+
+
             ConfigureBlackboard();
 
             // populate all of the actions
