@@ -23,5 +23,8 @@ namespace CommonCore
         public static readonly FastName Awareness_BestTarget = new("Self.Awareness.BestTarget.GameObject");
 
         public static readonly FastName LookAt_GameObject = new("Self.LookAt.GameObject");
+
+        public static readonly FastName Interaction_SmartObject = new("Self.Interaction.SmartObject");
+        public static readonly FastName Interaction_Type = new("Self.Interaction.Type");
     }
 }

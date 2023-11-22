@@ -1,3 +1,4 @@
+using CommonCore;
 using HybridGOAP;
 using System.Collections;
 using System.Collections.Generic;
@@ -19,6 +20,7 @@ namespace HybridGOAPExample
             NavSystem = GetComponent<BaseNavigation>();
         }
 
+        #region Navigation Helpers
         public void FindNearestNavigableLocation(Vector3 InSearchLocation, float InSearchRange, System.Action<Vector3> InCallbackFn)
         {
             if (NavSystem == null)
@@ -71,7 +73,9 @@ namespace HybridGOAPExample
             NavSystem.StopMovement();
             InCallbackFn(true);
         }
+        #endregion
 
+        #region Awareness Helpers
         public void SetDetectedTarget(GameObject InTarget)
         {
             GameObject CurrentAwarenessTarget = null;
@@ -97,7 +101,9 @@ namespace HybridGOAPExample
 
             CurrentBlackboard.Set(CommonCore.Names.Awareness_BestTarget, InTarget);
         }
+        #endregion
 
+        #region Point of Interest (POI) Helpers
         public void PickSuitablePOI(GameObject InQuerier, System.Action<GameObject> InCallbackFn)
         {
             // first priority is our awareness target
@@ -106,6 +112,15 @@ namespace HybridGOAPExample
             if (IsPOIValid(CurrentAwarenessTarget))
             {
                 InCallbackFn(CurrentAwarenessTarget);
+                return;
+            }
+
+            // next priority is our interaction target
+            SmartObject CurrentInteractionSO = null;
+            CurrentBlackboard.TryGet(CommonCore.Names.Interaction_SmartObject, out CurrentInteractionSO, null);
+            if ((CurrentInteractionSO != null) && IsPOIValid(CurrentInteractionSO.gameObject))
+            {
+                InCallbackFn(CurrentInteractionSO.gameObject);
                 return;
             }
 
@@ -134,5 +149,42 @@ namespace HybridGOAPExample
         {
             return InPOI != null;
         }
+        #endregion
+
+        #region Interactable Helpers
+        public void GetUseInteractableDesire(GameObject InQuerier, System.Action<float> InCallbackFn)
+        {
+            InCallbackFn(0.25f);
+        }
+
+        public void SelectRandomInteraction(GameObject InQuerier, System.Action<SmartObject, BaseInteraction> InCallbackFn) 
+        {
+            List<System.Tuple<SmartObject, BaseInteraction>> CandidateInteractions = new();
+
+            // loop through all of the smart objects
+            foreach(var CandidateSO in SmartObjectManager.Instance.RegisteredObjects)
+            {
+                // loop through all of the interactions
+                foreach(var CandidateInteraction in CandidateSO.Interactions)
+                {
+                    if (!CandidateInteraction.CanPerform())
+                        continue;
+
+                    CandidateInteractions.Add(new System.Tuple<SmartObject, BaseInteraction>(CandidateSO, CandidateInteraction));
+                }
+            }
+
+            // no interactions?
+            if (CandidateInteractions.Count == 0)
+            {
+                InCallbackFn(null, null);
+                return;
+            }
+
+            // pick a random interaction
+            var SelectedIndex = CandidateInteractions.Count == 1 ? 0 : Random.Range(0, CandidateInteractions.Count);
+            InCallbackFn(CandidateInteractions[SelectedIndex].Item1, CandidateInteractions[SelectedIndex].Item2);
+        }
+        #endregion
     }
 }

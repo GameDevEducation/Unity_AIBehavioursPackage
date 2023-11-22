@@ -1,0 +1,137 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &3791096237665140272
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2353775970774496992, guid: 8840e73756394e34d9c2a81baf14bb99, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2353775970774496992, guid: 8840e73756394e34d9c2a81baf14bb99, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2353775970774496992, guid: 8840e73756394e34d9c2a81baf14bb99, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2353775970774496992, guid: 8840e73756394e34d9c2a81baf14bb99, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2353775970774496992, guid: 8840e73756394e34d9c2a81baf14bb99, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2353775970774496992, guid: 8840e73756394e34d9c2a81baf14bb99, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2353775970774496992, guid: 8840e73756394e34d9c2a81baf14bb99, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2353775970774496992, guid: 8840e73756394e34d9c2a81baf14bb99, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2353775970774496992, guid: 8840e73756394e34d9c2a81baf14bb99, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2353775970774496992, guid: 8840e73756394e34d9c2a81baf14bb99, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6019449823397602677, guid: 8840e73756394e34d9c2a81baf14bb99, type: 3}
+      propertyPath: m_Name
+      value: HybridGOAP AI - Sims Variant Variant
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 6019449823397602677, guid: 8840e73756394e34d9c2a81baf14bb99, type: 3}
+      insertIndex: 17
+      addedObject: {fileID: 2060027048542525413}
+    - targetCorrespondingSourceObject: {fileID: 6019449823397602677, guid: 8840e73756394e34d9c2a81baf14bb99, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 9073581248007860854}
+  m_SourcePrefab: {fileID: 100100000, guid: 8840e73756394e34d9c2a81baf14bb99, type: 3}
+--- !u!1 &7428067778512247621 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6019449823397602677, guid: 8840e73756394e34d9c2a81baf14bb99, type: 3}
+  m_PrefabInstance: {fileID: 3791096237665140272}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2060027048542525413
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7428067778512247621}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce151c34bcdb4604885d4f3c69b8b18a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnGetUseInteractableDesire:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 8339599853362840029}
+        m_TargetAssemblyTypeName: HybridGOAPExample.GOAPBrainWrapper, HybridGOAPExample
+        m_MethodName: GetUseInteractableDesire
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &9073581248007860854
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7428067778512247621}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7036169e0b6129b4fb92573206479c45, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  NavigationSearchRange: 5
+  StoppingDistance: 0.1
+  OnSelectInteraction:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 8339599853362840029}
+        m_TargetAssemblyTypeName: HybridGOAPExample.GOAPBrainWrapper, HybridGOAPExample
+        m_MethodName: SelectRandomInteraction
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &8339599853362840029 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5125263572712964077, guid: 8840e73756394e34d9c2a81baf14bb99, type: 3}
+  m_PrefabInstance: {fileID: 3791096237665140272}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7428067778512247621}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c7d1055302bd08a4587e62f4c2aa5dcc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
