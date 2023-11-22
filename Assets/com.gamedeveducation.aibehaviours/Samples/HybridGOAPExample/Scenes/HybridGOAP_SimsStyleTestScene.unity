@@ -12146,6 +12146,63 @@ MonoBehaviour:
   _DisplayName: Microwave
   _InteractionMarker: {fileID: 1284542002}
   _LookAtPoint: {fileID: 0}
+--- !u!1001 &1028190886829984871
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1456605754546227408, guid: 6f2d9574a38d298469f4fb0eb1f9eae3, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1456605754546227408, guid: 6f2d9574a38d298469f4fb0eb1f9eae3, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1456605754546227408, guid: 6f2d9574a38d298469f4fb0eb1f9eae3, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1456605754546227408, guid: 6f2d9574a38d298469f4fb0eb1f9eae3, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1456605754546227408, guid: 6f2d9574a38d298469f4fb0eb1f9eae3, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1456605754546227408, guid: 6f2d9574a38d298469f4fb0eb1f9eae3, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1456605754546227408, guid: 6f2d9574a38d298469f4fb0eb1f9eae3, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1456605754546227408, guid: 6f2d9574a38d298469f4fb0eb1f9eae3, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1456605754546227408, guid: 6f2d9574a38d298469f4fb0eb1f9eae3, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1456605754546227408, guid: 6f2d9574a38d298469f4fb0eb1f9eae3, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7428067778512247621, guid: 6f2d9574a38d298469f4fb0eb1f9eae3, type: 3}
+      propertyPath: m_Name
+      value: HybridGOAP AI - Sims Variant
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 6f2d9574a38d298469f4fb0eb1f9eae3, type: 3}
 --- !u!1001 &1877584851253194652
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -13073,3 +13130,4 @@ SceneRoots:
   - {fileID: 968681857}
   - {fileID: 809036735}
   - {fileID: 130269723}
+  - {fileID: 1028190886829984871}
