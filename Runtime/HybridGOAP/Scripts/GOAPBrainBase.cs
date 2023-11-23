@@ -224,6 +224,8 @@ namespace HybridGOAP
 
     public abstract class GOAPBrainBase : MonoBehaviour, IGOAPBrain
     {
+        [SerializeField] float ResourceCapacity = 50.0f;
+
         List<IGOAPAction> AvailableActions = new();
         List<IGOAPGoal> AvailableGoals = new();
 
@@ -241,6 +243,8 @@ namespace HybridGOAP
             CurrentBlackboard.Set(CommonCore.Names.Self, gameObject);
 
             CurrentBlackboard.Set(CommonCore.Names.CurrentLocation, transform.position);
+            CurrentBlackboard.Set(CommonCore.Names.HomeLocation, transform.position);
+
             CurrentBlackboard.Set(CommonCore.Names.MoveToLocation, CommonCore.Constants.InvalidVector3Position);
 
             CurrentBlackboard.Set(CommonCore.Names.Target_GameObject, (GameObject)null);
@@ -252,6 +256,21 @@ namespace HybridGOAP
 
             CurrentBlackboard.Set(CommonCore.Names.Interaction_SmartObject, (SmartObject)null);
             CurrentBlackboard.Set(CommonCore.Names.Interaction_Type, (BaseInteraction)null);
+
+            CurrentBlackboard.SetGeneric(CommonCore.Names.Resource_FocusType, CommonCore.Resources.EType.Unknown);
+            CurrentBlackboard.Set(CommonCore.Names.Resource_FocusSource, (GameObject)null);
+            CurrentBlackboard.Set(CommonCore.Names.Resource_FocusStorage, (GameObject)null);
+
+            // populate the inventory
+            var ResourceNames = System.Enum.GetNames(typeof(CommonCore.Resources.EType));
+            foreach (var ResourceName in ResourceNames)
+            {
+                if (ResourceName == CommonCore.Resources.EType.Unknown.ToString())
+                    continue;
+
+                CurrentBlackboard.Set(new FastName($"Self.Inventory.{ResourceName}.Held"), 0f);
+                CurrentBlackboard.Set(new FastName($"Self.Inventory.{ResourceName}.Capacity"), ResourceCapacity);
+            }
 
             ConfigureBlackboard();
 

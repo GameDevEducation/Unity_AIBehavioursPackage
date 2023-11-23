@@ -1,0 +1,133 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &2246753080147910576
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2353775970774496992, guid: 8840e73756394e34d9c2a81baf14bb99, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2353775970774496992, guid: 8840e73756394e34d9c2a81baf14bb99, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2353775970774496992, guid: 8840e73756394e34d9c2a81baf14bb99, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2353775970774496992, guid: 8840e73756394e34d9c2a81baf14bb99, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2353775970774496992, guid: 8840e73756394e34d9c2a81baf14bb99, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2353775970774496992, guid: 8840e73756394e34d9c2a81baf14bb99, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2353775970774496992, guid: 8840e73756394e34d9c2a81baf14bb99, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2353775970774496992, guid: 8840e73756394e34d9c2a81baf14bb99, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2353775970774496992, guid: 8840e73756394e34d9c2a81baf14bb99, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2353775970774496992, guid: 8840e73756394e34d9c2a81baf14bb99, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6019449823397602677, guid: 8840e73756394e34d9c2a81baf14bb99, type: 3}
+      propertyPath: m_Name
+      value: HybridGOAP AI - Village Variant Variant
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 6019449823397602677, guid: 8840e73756394e34d9c2a81baf14bb99, type: 3}
+      insertIndex: 17
+      addedObject: {fileID: 7798234908584552478}
+    - targetCorrespondingSourceObject: {fileID: 6019449823397602677, guid: 8840e73756394e34d9c2a81baf14bb99, type: 3}
+      insertIndex: 18
+      addedObject: {fileID: 8568830013645527392}
+    - targetCorrespondingSourceObject: {fileID: 6019449823397602677, guid: 8840e73756394e34d9c2a81baf14bb99, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6664668050742713532}
+    - targetCorrespondingSourceObject: {fileID: 6019449823397602677, guid: 8840e73756394e34d9c2a81baf14bb99, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1303322724849502754}
+  m_SourcePrefab: {fileID: 100100000, guid: 8840e73756394e34d9c2a81baf14bb99, type: 3}
+--- !u!1 &5523510724029971141 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6019449823397602677, guid: 8840e73756394e34d9c2a81baf14bb99, type: 3}
+  m_PrefabInstance: {fileID: 2246753080147910576}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &7798234908584552478
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5523510724029971141}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c63a54f4031f6fa498b53a885fdcba4a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &8568830013645527392
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5523510724029971141}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 93bccfb813002a549be4ee92cc556e67, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MissingHomeStartDistance: 50
+  MissingHomePeaksDistance: 100
+  MissingHomeResetDistance: 10
+--- !u!114 &6664668050742713532
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5523510724029971141}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 397a27ae54c5394448d10f7ce896c820, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  NavigationSearchRange: 5
+  StoppingDistance: 0.1
+  GatherSpeed: 5
+  StoreSpeed: 10
+--- !u!114 &1303322724849502754
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5523510724029971141}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0462048c9446fb34d91579cfcf0d86c2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  NavigationSearchRange: 5
+  StoppingDistance: 0.1
