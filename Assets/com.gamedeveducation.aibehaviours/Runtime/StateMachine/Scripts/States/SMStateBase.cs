@@ -82,7 +82,10 @@ namespace StateMachine
 
         public void GatherDebugData(IGameDebugger InDebugger, bool bInIsSelected)
         {
-            InDebugger.AddTextLine($"{DebugDisplayName}");
+            if (bInIsSelected)
+                InDebugger.AddTextLine($"* {DebugDisplayName}");
+            else
+                InDebugger.AddTextLine($"{DebugDisplayName}");
 
             GatherDebugDataInternal(InDebugger, bInIsSelected);
         }

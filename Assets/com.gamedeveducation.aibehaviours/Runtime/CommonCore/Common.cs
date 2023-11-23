@@ -15,6 +15,7 @@ namespace CommonCore
         public static readonly FastName Self = new("Self");
 
         public static readonly FastName CurrentLocation = new("Self.Transform.Position");
+        public static readonly FastName HomeLocation = new("Self.Home.Position");
         public static readonly FastName MoveToLocation = new("Self.Navigation.MoveToLocation");
 
         public static readonly FastName Target_GameObject = new("Self.Target.GameObject");
@@ -26,5 +27,9 @@ namespace CommonCore
 
         public static readonly FastName Interaction_SmartObject = new("Self.Interaction.SmartObject");
         public static readonly FastName Interaction_Type = new("Self.Interaction.Type");
+
+        public static readonly FastName Resource_FocusType = new("Self.Resources.Focus.Type");
+        public static readonly FastName Resource_FocusSource = new("Self.Resources.Focus.Source");
+        public static readonly FastName Resource_FocusStorage = new("Self.Resources.Focus.Storage");
     }
 }
