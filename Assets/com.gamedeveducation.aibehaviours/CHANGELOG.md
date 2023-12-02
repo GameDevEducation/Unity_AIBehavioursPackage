@@ -1,3 +1,8 @@
+## [1.0.3] - 2 December 2023
+ - Add support to the navigation system for using the agent locomotion except in the start/end orienting states
+ - Enable the new behaviour by default
+ - Increase the number of agents spawned in the village to 20
+
 ## [1.0.2] - 2 December 2023
  - Provide a cleaner interface for adding states to the state machine
  - Provide a cleaner interface for adding state status transition and default transitions

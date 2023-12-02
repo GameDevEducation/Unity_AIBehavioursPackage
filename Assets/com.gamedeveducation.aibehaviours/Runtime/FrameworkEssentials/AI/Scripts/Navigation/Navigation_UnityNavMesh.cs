@@ -7,6 +7,8 @@ using UnityEngine.AI;
 [RequireComponent(typeof(AICharacterMotor))]
 public class Navigation_UnityNavMesh : BaseNavigation
 {
+    [SerializeField] bool OverrideAgentLocomotion = false;
+
     NavMeshAgent LinkedAgent;
     AICharacterMotor AIMotor;
 
@@ -18,8 +20,12 @@ public class Navigation_UnityNavMesh : BaseNavigation
         LinkedAgent = GetComponent<NavMeshAgent>();
         AIMotor = GetComponent<AICharacterMotor>();
 
-        LinkedAgent.updatePosition = false;
-        LinkedAgent.updateRotation = false;
+        SetIsAgentControllingLocomotion(!OverrideAgentLocomotion);
+    }
+
+    void SetIsAgentControllingLocomotion(bool bInAgentHasControl)
+    {
+        LinkedAgent.updatePosition = LinkedAgent.updateRotation = bInAgentHasControl;
     }
 
     protected override bool RequestPath()
@@ -58,6 +64,20 @@ public class Navigation_UnityNavMesh : BaseNavigation
 
     protected override void Tick_PathFollowing()
     {
+        if (OverrideAgentLocomotion)
+            Tick_PathFollowing_LocalLocomotionControl();
+        else
+            Tick_PathFollowing_AgentLocomotionControl();
+
+        if (DEBUG_ShowHeading)
+            Debug.DrawLine(transform.position + Vector3.up, LinkedAgent.steeringTarget, Color.green);
+    }
+
+    protected void Tick_PathFollowing_LocalLocomotionControl()
+    {
+        // make sure the agent is not controlling the locomotion
+        SetIsAgentControllingLocomotion(false);
+
         Vector3 targetPosition = CurrentPath[TargetPoint];
 
         // get the 2D vector to the target
@@ -83,15 +103,35 @@ public class Navigation_UnityNavMesh : BaseNavigation
             targetPosition = CurrentPath[TargetPoint];
         }
 
-         AIMotor.SteerTowards(targetPosition, RotationSpeed, DestinationReachedThreshold, MaxMoveSpeed);
+        AIMotor.SteerTowards(targetPosition, RotationSpeed, DestinationReachedThreshold, MaxMoveSpeed);
+    }
 
-        if (DEBUG_ShowHeading)
-            Debug.DrawLine(transform.position + Vector3.up, LinkedAgent.steeringTarget, Color.green);
+    protected void Tick_PathFollowing_AgentLocomotionControl()
+    {
+        // make sure the agent is in control
+        SetIsAgentControllingLocomotion(true);
+
+        if (LinkedAgent.hasPath && LinkedAgent.remainingDistance <= LinkedAgent.stoppingDistance)
+        {
+            AIMotor.Stop();
+
+            // take control back from the agent
+            SetIsAgentControllingLocomotion(false);
+
+            OnReachedDestination();
+            return;
+        }
+    }
+
+    protected override void Tick_OrientingAtStartOfPath()
+    {
+        if ((CurrentPath == null) || (CurrentPath.Length < 2) || AIMotor.LookTowards(CurrentPath[1], RotationSpeed, true))
+            OnFacingPathStart();
     }
 
     protected override void Tick_OrientingAtEndOfPath()
     {
-        if (AIMotor.LookTowards(LookTarget, RotationSpeed))
+        if (AIMotor.LookTowards(LookTarget, RotationSpeed, false))
             OnFacingLookTarget();
     }
 

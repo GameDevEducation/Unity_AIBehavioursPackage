@@ -47,16 +47,22 @@ public class AICharacterMotor : CharacterMotor
         State.Input_Move = Vector2.zero;
     }
 
-    public bool LookTowards(Transform target, float rotationSpeed)
+    public bool LookTowards(Transform target, float rotationSpeed, bool isPreparingToMove)
+    {
+        return LookTowards(target.position, rotationSpeed, isPreparingToMove);
+    }
+
+    public bool LookTowards(Vector3 target, float rotationSpeed, bool isPreparingToMove)
     {
         // get the 2D vector to the target
-        Vector3 vecToTarget = target.position - transform.position;
+        Vector3 vecToTarget = target - transform.position;
         vecToTarget.y = 0f;
         vecToTarget.Normalize();
 
         // are we already looking at the target?
+        float threshold = isPreparingToMove ? MaxAngleToPermitMovement : MaxAngleToTreatAsLookingAt;
         float angleToTarget = Mathf.Acos(Vector3.Dot(vecToTarget, transform.forward)) * Mathf.Rad2Deg;
-        if (angleToTarget <= MaxAngleToTreatAsLookingAt)
+        if (angleToTarget <= threshold)
             return true;
 
         // look towards the target
