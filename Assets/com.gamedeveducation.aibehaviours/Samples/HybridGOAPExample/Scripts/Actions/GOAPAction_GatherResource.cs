@@ -21,26 +21,26 @@ namespace HybridGOAPExample
 
         protected override void ConfigureFSM()
         {
-            var State_SelectResource = LinkedStateMachine.AddState(new SMState_SelectResource(SimpleResourceWrangler.Instance));
-            var State_GetResourceLocation = LinkedStateMachine.AddState(new SMState_CalculateMoveLocation(Navigation, NavigationSearchRange, GetSourceLocation));
-            var State_MoveToResource = LinkedStateMachine.AddState(new SMState_MoveTo(Navigation, StoppingDistance, false, 0f, "SMMoveToSource"));
-            var State_GatherResource = LinkedStateMachine.AddState(new SMState_Gather(GatherSpeed));
+            var State_SelectResource        = AddState(new SMState_SelectResource(SimpleResourceWrangler.Instance));
+            var State_GetResourceLocation   = AddState(new SMState_CalculateMoveLocation(Navigation, NavigationSearchRange, GetSourceLocation));
+            var State_MoveToResource        = AddState(new SMState_MoveTo(Navigation, StoppingDistance, false, 0f, "SMMoveToSource"));
+            var State_GatherResource        = AddState(new SMState_Gather(GatherSpeed));
 
-            var State_SelectStorage = LinkedStateMachine.AddState(new SMState_SelectStorage(SimpleResourceWrangler.Instance));
-            var State_GetStorageLocation = LinkedStateMachine.AddState(new SMState_CalculateMoveLocation(Navigation, NavigationSearchRange, GetStorageLocation));
-            var State_MoveToStorage = LinkedStateMachine.AddState(new SMState_MoveTo(Navigation, StoppingDistance, false, 0f, "SMMoveToStorage"));
-            var State_StoreResource = LinkedStateMachine.AddState(new SMState_Store(StoreSpeed));
+            var State_SelectStorage         = AddState(new SMState_SelectStorage(SimpleResourceWrangler.Instance));
+            var State_GetStorageLocation    = AddState(new SMState_CalculateMoveLocation(Navigation, NavigationSearchRange, GetStorageLocation));
+            var State_MoveToStorage         = AddState(new SMState_MoveTo(Navigation, StoppingDistance, false, 0f, "SMMoveToStorage"));
+            var State_StoreResource         = AddState(new SMState_Store(StoreSpeed));
 
-            State_SelectResource.AddTransition(new SMTransition_StateStatus(ESMStateStatus.Finished), State_GetResourceLocation);
-            State_GetResourceLocation.AddTransition(new SMTransition_StateStatus(ESMStateStatus.Finished), State_MoveToResource);
-            State_MoveToResource.AddTransition(new SMTransition_StateStatus(ESMStateStatus.Finished), State_GatherResource);
-            State_GatherResource.AddTransition(new SMTransition_StateStatus(ESMStateStatus.Finished), State_SelectStorage);
+            State_SelectResource.AddTransition(SMTransition_StateStatus.IfHasFinished(), State_GetResourceLocation);
+            State_GetResourceLocation.AddTransition(SMTransition_StateStatus.IfHasFinished(), State_MoveToResource);
+            State_MoveToResource.AddTransition(SMTransition_StateStatus.IfHasFinished(), State_GatherResource);
+            State_GatherResource.AddTransition(SMTransition_StateStatus.IfHasFinished(), State_SelectStorage);
 
-            State_SelectStorage.AddTransition(new SMTransition_StateStatus(ESMStateStatus.Finished), State_GetStorageLocation);
-            State_GetStorageLocation.AddTransition(new SMTransition_StateStatus(ESMStateStatus.Finished), State_MoveToStorage);
-            State_MoveToStorage.AddTransition(new SMTransition_StateStatus(ESMStateStatus.Finished), State_StoreResource);
+            State_SelectStorage.AddTransition(SMTransition_StateStatus.IfHasFinished(), State_GetStorageLocation);
+            State_GetStorageLocation.AddTransition(SMTransition_StateStatus.IfHasFinished(), State_MoveToStorage);
+            State_MoveToStorage.AddTransition(SMTransition_StateStatus.IfHasFinished(), State_StoreResource);
 
-            LinkedStateMachine.AddDefaultTransitions(InternalState_Finished, InternalState_Failed);
+            AddDefaultTransitions();
         }
 
         protected override ECharacterResources GetRequiredResources()

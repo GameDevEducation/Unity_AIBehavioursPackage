@@ -18,9 +18,9 @@ namespace HybridGOAPExample
 
         protected override void ConfigureFSM()
         {
-            LinkedStateMachine.AddState(new SMState_WaitForTime(MinWaitTime, MaxWaitTime));
+            AddState(new SMState_WaitForTime(MinWaitTime, MaxWaitTime));
 
-            LinkedStateMachine.AddDefaultTransitions(InternalState_Finished, InternalState_Failed);
+            AddDefaultTransitions();
         }
 
         protected override ECharacterResources GetRequiredResources()

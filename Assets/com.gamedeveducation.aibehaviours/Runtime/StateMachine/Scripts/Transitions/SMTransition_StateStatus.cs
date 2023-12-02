@@ -14,7 +14,7 @@ namespace StateMachine
             RequiredStatus = InRequiredStatus;
         }
 
-        public bool Handles(ESMStateStatus InStatusToCheck)
+        public bool HandlesStateStatus(ESMStateStatus InStatusToCheck)
         {
             return RequiredStatus == InStatusToCheck;
         }
@@ -22,6 +22,16 @@ namespace StateMachine
         protected override ESMTransitionResult EvaluateInternal(ISMState InCurrentState, Blackboard<FastName> InBlackboard)
         {
             return InCurrentState.CurrentStatus == RequiredStatus ? ESMTransitionResult.Valid : ESMTransitionResult.Invalid;
+        }
+
+        public static ISMTransition IfHasFinished()
+        {
+            return new SMTransition_StateStatus(ESMStateStatus.Finished);
+        }
+
+        public static ISMTransition IfHasFailed()
+        {
+            return new SMTransition_StateStatus(ESMStateStatus.Failed);
         }
     }
 }

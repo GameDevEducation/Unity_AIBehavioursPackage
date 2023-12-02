@@ -22,9 +22,9 @@ namespace HybridGOAPExample
             ChildStates.Add(new SMState_CalculateMoveLocation(Navigation, NavigationSearchRange, GetTargetLocation, true));
             ChildStates.Add(new SMState_MoveTo(Navigation, StoppingDistance, true));
 
-            LinkedStateMachine.AddState(new SMState_Parallel(ChildStates));
+            AddState(new SMState_Parallel(ChildStates));
 
-            LinkedStateMachine.AddDefaultTransitions(InternalState_Finished, InternalState_Failed);
+            AddDefaultTransitions();
         }
 
         protected override ECharacterResources GetRequiredResources()

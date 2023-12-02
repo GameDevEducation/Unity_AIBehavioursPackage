@@ -23,16 +23,16 @@ namespace HybridGOAPExample
 
         protected override void ConfigureFSM()
         {
-            var State_SelectInteractable = LinkedStateMachine.AddState(new SMState_SelectInteraction(SelectInteractionFn));
-            var State_GetInteractableLocation = LinkedStateMachine.AddState(new SMState_CalculateMoveLocation(Navigation, NavigationSearchRange, GetInteractableLocation));
-            var State_MoveToInteractable = LinkedStateMachine.AddState(new SMState_MoveTo(Navigation, StoppingDistance));
-            var State_UseInteractable = LinkedStateMachine.AddState(new SMState_UseInteractable());
+            var State_SelectInteractable        = AddState(new SMState_SelectInteraction(SelectInteractionFn));
+            var State_GetInteractableLocation   = AddState(new SMState_CalculateMoveLocation(Navigation, NavigationSearchRange, GetInteractableLocation));
+            var State_MoveToInteractable        = AddState(new SMState_MoveTo(Navigation, StoppingDistance));
+            var State_UseInteractable           = AddState(new SMState_UseInteractable());
 
-            State_SelectInteractable.AddTransition(new SMTransition_StateStatus(ESMStateStatus.Finished), State_GetInteractableLocation);
-            State_GetInteractableLocation.AddTransition(new SMTransition_StateStatus(ESMStateStatus.Finished), State_MoveToInteractable);
-            State_MoveToInteractable.AddTransition(new SMTransition_StateStatus(ESMStateStatus.Finished), State_UseInteractable);
+            State_SelectInteractable.AddTransition(SMTransition_StateStatus.IfHasFinished(), State_GetInteractableLocation);
+            State_GetInteractableLocation.AddTransition(SMTransition_StateStatus.IfHasFinished(), State_MoveToInteractable);
+            State_MoveToInteractable.AddTransition(SMTransition_StateStatus.IfHasFinished(), State_UseInteractable);
 
-            LinkedStateMachine.AddDefaultTransitions(InternalState_Finished, InternalState_Failed);
+            AddDefaultTransitions();
         }
 
         protected override ECharacterResources GetRequiredResources()

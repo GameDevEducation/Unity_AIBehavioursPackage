@@ -24,14 +24,14 @@ namespace HybridGOAPExample
 
         protected override void ConfigureFSM()
         {
-            var State_PickLocation = LinkedStateMachine.AddState(new SMState_CalculateMoveLocation(Navigation, NavigationSearchRange, GetWanderLocation));
-            var State_MoveToLocation = LinkedStateMachine.AddState(new SMState_MoveTo(Navigation, StoppingDistance));
-            var State_Wait = LinkedStateMachine.AddState(new SMState_WaitForTime(MinWaitTime, MaxWaitTime));
+            var State_PickLocation      = AddState(new SMState_CalculateMoveLocation(Navigation, NavigationSearchRange, GetWanderLocation));
+            var State_MoveToLocation    = AddState(new SMState_MoveTo(Navigation, StoppingDistance));
+            var State_Wait              = AddState(new SMState_WaitForTime(MinWaitTime, MaxWaitTime));
 
-            State_PickLocation.AddTransition(new SMTransition_StateStatus(ESMStateStatus.Finished), State_MoveToLocation);
+            State_PickLocation.AddTransition(SMTransition_StateStatus.IfHasFinished(), State_MoveToLocation);
             State_MoveToLocation.AddTransition(new SMTransition_FinishedMove(Navigation), State_Wait);
 
-            LinkedStateMachine.AddDefaultTransitions(InternalState_Finished, InternalState_Failed);
+            AddDefaultTransitions();
         }
 
         protected override ECharacterResources GetRequiredResources()

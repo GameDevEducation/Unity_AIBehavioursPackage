@@ -24,9 +24,9 @@ namespace HybridGOAPExample
             ChildStates.Add(new SMState_SelectPOI(PickPOIFn));
             ChildStates.Add(new SMState_LookAtPOI(SetPOIFn));
 
-            LinkedStateMachine.AddState(new SMState_Parallel(ChildStates));
+            AddState(new SMState_Parallel(ChildStates));
 
-            LinkedStateMachine.AddDefaultTransitions(InternalState_Finished, InternalState_Failed);
+            AddDefaultTransitions();
         }
 
         protected override ECharacterResources GetRequiredResources()
