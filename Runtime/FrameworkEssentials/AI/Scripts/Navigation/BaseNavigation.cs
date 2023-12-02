@@ -8,8 +8,9 @@ public abstract class BaseNavigation : MonoBehaviour
     {
         Idle                    = 0,
         FindingPath             = 1,
-        FollowingPath           = 2,
-        OrientingAtEndOfPath    = 3,
+        OrientingAtStartOfPath  = 2,
+        FollowingPath           = 3,
+        OrientingAtEndOfPath    = 4,
 
         Failed_NoPathExists     = 100
     }
@@ -31,7 +32,7 @@ public abstract class BaseNavigation : MonoBehaviour
     public EState State { get; private set; } = EState.Idle;
     public Transform LookTarget { get; private set; } = null;
 
-    public bool IsFindingOrFollowingPath => State == EState.FindingPath || State == EState.FollowingPath;
+    public bool IsFindingOrFollowingPath => State == EState.FindingPath || State == EState.OrientingAtStartOfPath || State == EState.FollowingPath;
     public bool HasLookTarget => LookTarget != null;
     public bool IsAtDestination
     {
@@ -61,6 +62,8 @@ public abstract class BaseNavigation : MonoBehaviour
 
         if (State == EState.FindingPath)
             Tick_Pathfinding();
+        if (State == EState.OrientingAtStartOfPath)
+            Tick_OrientingAtStartOfPath();
         if (State == EState.OrientingAtEndOfPath)
             Tick_OrientingAtEndOfPath();
 
@@ -130,12 +133,17 @@ public abstract class BaseNavigation : MonoBehaviour
 
     protected virtual void OnPathFound()
     {
-        State = EState.FollowingPath;
+        State = EState.OrientingAtStartOfPath;
     }
 
     protected virtual void OnFailedToFindPath()
     {
         State = EState.Failed_NoPathExists;
+    }
+
+    protected virtual void OnFacingPathStart()
+    {
+        State = EState.FollowingPath;
     }
 
     protected virtual void OnReachedDestination()
@@ -151,6 +159,7 @@ public abstract class BaseNavigation : MonoBehaviour
     protected abstract void Tick_Default();
     protected abstract void Tick_Pathfinding();
     protected abstract void Tick_PathFollowing();
+    protected abstract void Tick_OrientingAtStartOfPath();
     protected abstract void Tick_OrientingAtEndOfPath();
     protected abstract void Tick_Animation();
 }

@@ -1814,6 +1814,7 @@ MonoBehaviour:
   DEBUG_UseMoveTarget: 0
   DEBUG_MoveTarget: {fileID: 0}
   DEBUG_ShowHeading: 0
+  OverrideAgentLocomotion: 0
 --- !u!114 &4245308126841523975
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2074,6 +2075,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7d1055302bd08a4587e62f4c2aa5dcc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ResourceCapacity: 50
 --- !u!114 &635871724974949261
 MonoBehaviour:
   m_ObjectHideFlags: 0
