@@ -3,6 +3,7 @@ using StateMachine;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEditor.VersionControl.Asset;
 
 namespace HybridGOAP
 {
@@ -100,5 +101,16 @@ namespace HybridGOAP
         protected virtual void OnStateMachineCompleted_Failed() { }
         protected virtual void OnStateMachineCompleted_Finished() { }
         protected virtual void OnStateMachineReset() { }
+
+        protected ISMState AddState(ISMState InState)
+        {
+            return LinkedStateMachine.AddState(InState);
+        }
+
+        protected void AddDefaultTransitions(ISMState InFinishedState = null, ISMState InFailedState = null)
+        {
+            LinkedStateMachine.AddDefaultTransitions(InFinishedState == null ? InternalState_Finished : InFinishedState,
+                                                     InFailedState == null ? InternalState_Failed : InFailedState);
+        }
     }
 }

@@ -31,22 +31,20 @@ namespace StateMachine
 
             foreach(var Entry in Transitions)
             {
-                SMTransition_StateStatus StateTest = Entry.Transition as SMTransition_StateStatus;
+                if (Entry.Transition == null)
+                    continue;
 
-                if (StateTest != null) 
-                {
-                    bFinishedHandled |= StateTest.Handles(ESMStateStatus.Finished);
-                    bFailedHandled |= StateTest.Handles(ESMStateStatus.Failed);
-                }
+                bFinishedHandled |= Entry.Transition.HandlesStateStatus(ESMStateStatus.Finished);
+                bFailedHandled |= Entry.Transition.HandlesStateStatus(ESMStateStatus.Failed);
 
                 if (bFinishedHandled && bFailedHandled)
                     return;
             }
 
             if (!bFinishedHandled)
-                AddTransition(new SMTransition_StateStatus(ESMStateStatus.Finished), InFinishedState);
+                AddTransition(SMTransition_StateStatus.IfHasFinished(), InFinishedState);
             if (!bFailedHandled)
-                AddTransition(new SMTransition_StateStatus(ESMStateStatus.Failed), InFailedState);
+                AddTransition(SMTransition_StateStatus.IfHasFailed(), InFailedState);
         }
 
         public ISMState AddTransition(ISMTransition InTransition, ISMState InNewState)
