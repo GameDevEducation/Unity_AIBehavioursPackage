@@ -1,3 +1,6 @@
+## [1.0.4] - 19 December 2023
+ - Fix unintended include of Visual Scripting
+
 ## [1.0.3] - 2 December 2023
  - Add support to the navigation system for using the agent locomotion except in the start/end orienting states
  - Enable the new behaviour by default
