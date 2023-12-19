@@ -1,11 +1,10 @@
 {
   "name": "com.gamedeveducation.aibehaviours",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "displayName": "GameDev Education Package: AI Behaviours",
   "description": "This package provides an AI infrastructure including movement, sensors an behaviours.",
   "unity": "2022.3",
   "dependencies": {
-    "com.unity.textmeshpro": "3.0.6",
     "com.unity.cinemachine": "2.9.7",
     "com.unity.ai.navigation": "1.1.5",
     "com.unity.inputsystem": "1.7.0",

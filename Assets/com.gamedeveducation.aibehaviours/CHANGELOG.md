@@ -1,3 +1,6 @@
+## [1.0.5] - 19 December 2023
+ - Remove TextMesh Pro dependency (needs manual install for pre 2023.2)
+
 ## [1.0.4] - 19 December 2023
  - Fix unintended include of Visual Scripting
 
