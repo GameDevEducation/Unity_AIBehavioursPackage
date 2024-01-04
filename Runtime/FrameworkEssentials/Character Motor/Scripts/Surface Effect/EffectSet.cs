@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -11,10 +10,10 @@ public enum EEffectableParameter
 {
     Unknown = 0,
 
-    Speed               = 1,
-    CameraSensitivity   = 2,
-    JumpVelocity        = 3,
-    JumpTime            = 4
+    Speed = 1,
+    CameraSensitivity = 2,
+    JumpVelocity = 3,
+    JumpTime = 4
 }
 
 public enum EEffectType
@@ -52,7 +51,7 @@ public class EffectSet : ScriptableObject
 
     public float Effect(float currentValue, EEffectableParameter parameter)
     {
-        foreach(EffectSetEntry entry in Effects)
+        foreach (EffectSetEntry entry in Effects)
         {
             if (entry.Parameter != parameter)
                 continue;

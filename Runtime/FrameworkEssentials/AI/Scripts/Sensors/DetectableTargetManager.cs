@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -23,13 +22,13 @@ public class DetectableTargetManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     public void Register(DetectableTarget target)
@@ -37,7 +36,7 @@ public class DetectableTargetManager : MonoBehaviour
         AllTargets.Add(target);
     }
 
-    public void Deregister(DetectableTarget target) 
+    public void Deregister(DetectableTarget target)
     {
         AllTargets.Remove(target);
     }

@@ -1,7 +1,5 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 
 namespace CommonCore
 {
@@ -21,7 +19,7 @@ namespace CommonCore
             NameID = NameManager.CreateOrRetrieveID(InName);
         }
 
-        public override string ToString() 
+        public override string ToString()
         {
             if (this == None)
                 return "## None ##";
@@ -60,7 +58,7 @@ namespace CommonCore
             return !(InLeft == InRight);
         }
 
-        public static implicit operator bool(FastName InOther) 
+        public static implicit operator bool(FastName InOther)
         {
             return InOther != None;
         }
@@ -90,12 +88,12 @@ namespace CommonCore
 
         internal UInt32 CreateOrRetrieveIDInternal(string InName)
         {
-            lock (_NameIDsLock) 
+            lock (_NameIDsLock)
             {
                 // does this name already exist?
                 UInt32 FoundNameID = 0;
-                foreach(var KVP in NameIDs) 
-                { 
+                foreach (var KVP in NameIDs)
+                {
                     if (KVP.Value == InName)
                     {
                         FoundNameID = KVP.Key;
@@ -116,9 +114,9 @@ namespace CommonCore
             }
         }
 
-        internal string RetrieveNameFromIDInternal(UInt32 NameID) 
-        { 
-            lock(_NameIDsLock) 
+        internal string RetrieveNameFromIDInternal(UInt32 NameID)
+        {
+            lock (_NameIDsLock)
             {
                 string FoundName = null;
 

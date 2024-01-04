@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class GravitySource_Spherical : GravitySource
@@ -38,7 +36,7 @@ public class GravitySource_Spherical : GravitySource
                 return (transform.position - position).normalized * GravityStrength;
             else
             {
-                float altitudeFactor = Mathf.InverseLerp(AltitudeForMaxGravity, AltitudeForNoGravity, altitude);                
+                float altitudeFactor = Mathf.InverseLerp(AltitudeForMaxGravity, AltitudeForNoGravity, altitude);
                 return (transform.position - position).normalized * Mathf.Lerp(GravityStrength, 0f, altitudeFactor);
             }
         }

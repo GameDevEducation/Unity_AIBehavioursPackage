@@ -1,3 +1,8 @@
+## [1.0.6] - 4 January 2023
+ - Fix GOAPGoal_GatherResource failing on shutdown
+ - Run a code cleanup to remove unused usings and enforce consistency
+ - Add all sample scenes to the build
+
 ## [1.0.5] - 19 December 2023
  - Remove TextMesh Pro dependency (needs manual install for pre 2023.2)
 

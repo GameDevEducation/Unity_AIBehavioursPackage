@@ -1,8 +1,5 @@
 using CommonCore;
 using StateMachine;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 
 namespace HybridGOAPExample
 {
@@ -15,7 +12,7 @@ namespace HybridGOAPExample
         protected override ESMStateStatus OnEnterInternal(Blackboard<FastName> InBlackboard)
         {
             bHasFinishedInteraction = false;
-            
+
             SmartObject TargetSO = null;
             InBlackboard.TryGet(CommonCore.Names.Interaction_SmartObject, out TargetSO, null);
             if (TargetSO == null)

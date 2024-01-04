@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -35,7 +33,7 @@ public class Navigation_UnityNavMesh : BaseNavigation
         LinkedAgent.stoppingDistance = DestinationReachedThreshold;
 
         LinkedAgent.SetDestination(Destination);
-        
+
         OnBeganPathFinding();
 
         return true;
@@ -50,7 +48,7 @@ public class Navigation_UnityNavMesh : BaseNavigation
     {
         // no pathfinding in progress?
         if (!LinkedAgent.pathPending)
-        {           
+        {
             if (LinkedAgent.pathStatus == NavMeshPathStatus.PathComplete)
             {
                 CurrentPath = LinkedAgent.path.corners;
