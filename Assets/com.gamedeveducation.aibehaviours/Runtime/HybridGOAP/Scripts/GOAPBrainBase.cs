@@ -1,5 +1,4 @@
 using CommonCore;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -90,8 +89,8 @@ namespace HybridGOAP
         {
             get
             {
-                foreach(var Element in Elements) 
-                { 
+                foreach (var Element in Elements)
+                {
                     if (!Element.IsValid)
                         return false;
                 }
@@ -137,10 +136,10 @@ namespace HybridGOAP
         {
             Elements.Add(InElement);
 
-            CumulativePriority   = InElement.Priority + (Elements.Count == 1 ? 0 : CumulativePriority);
-            CumulativeCost       = InElement.Cost + (Elements.Count == 1 ? 0 : CumulativeCost);
-            ResourcesUsed       |= InElement.ResourcesUsed;
-            ResourcesAvailable  &= ~InElement.ResourcesUsed;
+            CumulativePriority = InElement.Priority + (Elements.Count == 1 ? 0 : CumulativePriority);
+            CumulativeCost = InElement.Cost + (Elements.Count == 1 ? 0 : CumulativeCost);
+            ResourcesUsed |= InElement.ResourcesUsed;
+            ResourcesAvailable &= ~InElement.ResourcesUsed;
         }
 
         public void CopyFrom(GOAPPlan InPlan)
@@ -165,7 +164,7 @@ namespace HybridGOAP
         public static void Migrate(GOAPPlan InCurrentPlan, GOAPPlan InNewPlan)
         {
             // are there any elements that are fully stopping or continuing
-            foreach(var Element in InCurrentPlan.Elements)
+            foreach (var Element in InCurrentPlan.Elements)
             {
                 // element is not continuing?
                 if (!InNewPlan.Elements.Contains(Element))
@@ -175,7 +174,7 @@ namespace HybridGOAP
             }
 
             // are there any elements that are starting?
-            foreach(var Element in InNewPlan.Elements)
+            foreach (var Element in InNewPlan.Elements)
             {
                 // element is starting?
                 if (!InCurrentPlan.Elements.Contains(Element))
@@ -192,7 +191,7 @@ namespace HybridGOAP
         {
             if (InOther != null)
             {
-                if (Elements.Count == InOther.Elements.Count) 
+                if (Elements.Count == InOther.Elements.Count)
                 {
                     for (int Index = 0; Index < Elements.Count; ++Index)
                     {
@@ -276,12 +275,12 @@ namespace HybridGOAP
 
             // populate all of the actions
             AvailableActions.AddRange(GetComponents<IGOAPAction>());
-            foreach(var Action in AvailableActions)
+            foreach (var Action in AvailableActions)
                 Action.BindToBrain(this);
 
             // populate all of the goals
             AvailableGoals.AddRange(GetComponents<IGOAPGoal>());
-            foreach(var Goal in AvailableGoals)
+            foreach (var Goal in AvailableGoals)
                 Goal.BindToBrain(this);
 
             ConfigureBrain();
@@ -308,7 +307,7 @@ namespace HybridGOAP
 
             CurrentBlackboard.GatherDebugData(InDebugger, true);
 
-            foreach(var Element in ActivePlan.Elements)
+            foreach (var Element in ActivePlan.Elements)
             {
                 Element.Goal.GatherDebugData(InDebugger, true);
 
@@ -317,7 +316,7 @@ namespace HybridGOAP
                 InDebugger.PopIndent();
             }
 
-            foreach(var Goal in AvailableGoals)
+            foreach (var Goal in AvailableGoals)
             {
                 if (ActivePlan.ContainsGoal(Goal))
                     continue;
@@ -331,7 +330,7 @@ namespace HybridGOAP
             OnPreTickBrain(InDeltaTime);
 
             // prepare for planning
-            foreach(var Goal in AvailableGoals)
+            foreach (var Goal in AvailableGoals)
                 Goal.PrepareForPlanning();
 
             // sort the goals in priority
@@ -420,8 +419,8 @@ namespace HybridGOAP
                 ActivePlan.CopyFrom(CandidatePlan);
                 ActivePlan.Start();
             }
-            else if (ActivePlan.IsValid && CandidatePlan.IsValid) 
-            { 
+            else if (ActivePlan.IsValid && CandidatePlan.IsValid)
+            {
                 // Scenario 2: Identical plans
                 if (ActivePlan == CandidatePlan)
                 {
@@ -430,13 +429,13 @@ namespace HybridGOAP
                 else
                 {
                     // New plan is more important?
-                    if (CandidatePlan.BasePriority > ActivePlan.BasePriority) 
+                    if (CandidatePlan.BasePriority > ActivePlan.BasePriority)
                     {
                         GOAPPlan.Migrate(ActivePlan, CandidatePlan);
                         ActivePlan.CopyFrom(CandidatePlan);
                     } // same base priority but higher cumulative priority
                     else if ((CandidatePlan.BasePriority == ActivePlan.BasePriority) &&
-                             (CandidatePlan.CumulativePriority > ActivePlan.CumulativePriority)) 
+                             (CandidatePlan.CumulativePriority > ActivePlan.CumulativePriority))
                     {
                         GOAPPlan.Migrate(ActivePlan, CandidatePlan);
                         ActivePlan.CopyFrom(CandidatePlan);

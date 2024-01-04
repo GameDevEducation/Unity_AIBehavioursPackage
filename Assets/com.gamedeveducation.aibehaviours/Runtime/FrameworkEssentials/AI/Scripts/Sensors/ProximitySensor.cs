@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(BaseAI))]
@@ -10,7 +8,7 @@ public class ProximitySensor : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        LinkedAI = GetComponent<BaseAI>();    
+        LinkedAI = GetComponent<BaseAI>();
     }
 
     // Update is called once per frame

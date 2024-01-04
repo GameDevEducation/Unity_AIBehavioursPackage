@@ -1,9 +1,6 @@
-using System.Collections;
 using System.Collections.Generic;
-using System.Net.Mail;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.EventSystems;
 
 [RequireComponent(typeof(Rigidbody))]
 public class CharacterMotor : MonoBehaviour, IDamageable
@@ -96,11 +93,11 @@ public class CharacterMotor : MonoBehaviour, IDamageable
         {
             // tick the effects and store if any need to be cleaned up
             List<IParameterEffector> toCleanup = new List<IParameterEffector>();
-            foreach(var kvp in ActiveEffects)
+            foreach (var kvp in ActiveEffects)
             {
                 var effectList = kvp.Value;
 
-                foreach(var effect in effectList)
+                foreach (var effect in effectList)
                 {
                     if (effect.Tick(deltaTime))
                         toCleanup.Add(effect);
@@ -108,7 +105,7 @@ public class CharacterMotor : MonoBehaviour, IDamageable
             }
 
             // perform cleanup
-            foreach(var effect in toCleanup)
+            foreach (var effect in toCleanup)
             {
                 ActiveEffects[effect.GetEffectedParameter()].Remove(effect);
             }
@@ -119,7 +116,7 @@ public class CharacterMotor : MonoBehaviour, IDamageable
 
         void CacheEffectMultipliers()
         {
-            foreach(var rawEnumValue in System.Enum.GetValues(typeof(EParameter)))
+            foreach (var rawEnumValue in System.Enum.GetValues(typeof(EParameter)))
             {
                 EParameter parameter = (EParameter)rawEnumValue;
                 CachedMultipliers[parameter] = 1f;
@@ -127,7 +124,7 @@ public class CharacterMotor : MonoBehaviour, IDamageable
                 if (!ActiveEffects.ContainsKey(parameter))
                     continue;
 
-                foreach(var effector in ActiveEffects[parameter])
+                foreach (var effector in ActiveEffects[parameter])
                 {
                     CachedMultipliers[parameter] = effector.Effect(CachedMultipliers[parameter]);
                 }
@@ -398,11 +395,11 @@ public class CharacterMotor : MonoBehaviour, IDamageable
         if (impactSpeed >= Config.MinFallSpeedToTakeDamage)
         {
             float speedProportion = Mathf.InverseLerp(Config.MinFallSpeedToTakeDamage,
-                                                        Config.FallSpeedForMaximumDamage, 
+                                                        Config.FallSpeedForMaximumDamage,
                                                         impactSpeed);
 
             float damagePercentage = Mathf.Lerp(Config.MinimumFallDamagePercentage,
-                                                Config.MaximumFallDamagePercentage, 
+                                                Config.MaximumFallDamagePercentage,
                                                 speedProportion);
 
             float actualDamageToApply = Config.MaxHealth * damagePercentage;

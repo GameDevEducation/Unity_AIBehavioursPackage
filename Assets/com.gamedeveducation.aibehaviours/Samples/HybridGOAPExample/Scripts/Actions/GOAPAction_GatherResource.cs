@@ -1,7 +1,5 @@
 using HybridGOAP;
 using StateMachine;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace HybridGOAPExample
@@ -21,15 +19,15 @@ namespace HybridGOAPExample
 
         protected override void ConfigureFSM()
         {
-            var State_SelectResource        = AddState(new SMState_SelectResource(SimpleResourceWrangler.Instance));
-            var State_GetResourceLocation   = AddState(new SMState_CalculateMoveLocation(Navigation, NavigationSearchRange, GetSourceLocation));
-            var State_MoveToResource        = AddState(new SMState_MoveTo(Navigation, StoppingDistance, false, 0f, "SMMoveToSource"));
-            var State_GatherResource        = AddState(new SMState_Gather(GatherSpeed));
+            var State_SelectResource = AddState(new SMState_SelectResource(SimpleResourceWrangler.Instance));
+            var State_GetResourceLocation = AddState(new SMState_CalculateMoveLocation(Navigation, NavigationSearchRange, GetSourceLocation));
+            var State_MoveToResource = AddState(new SMState_MoveTo(Navigation, StoppingDistance, false, 0f, "SMMoveToSource"));
+            var State_GatherResource = AddState(new SMState_Gather(GatherSpeed));
 
-            var State_SelectStorage         = AddState(new SMState_SelectStorage(SimpleResourceWrangler.Instance));
-            var State_GetStorageLocation    = AddState(new SMState_CalculateMoveLocation(Navigation, NavigationSearchRange, GetStorageLocation));
-            var State_MoveToStorage         = AddState(new SMState_MoveTo(Navigation, StoppingDistance, false, 0f, "SMMoveToStorage"));
-            var State_StoreResource         = AddState(new SMState_Store(StoreSpeed));
+            var State_SelectStorage = AddState(new SMState_SelectStorage(SimpleResourceWrangler.Instance));
+            var State_GetStorageLocation = AddState(new SMState_CalculateMoveLocation(Navigation, NavigationSearchRange, GetStorageLocation));
+            var State_MoveToStorage = AddState(new SMState_MoveTo(Navigation, StoppingDistance, false, 0f, "SMMoveToStorage"));
+            var State_StoreResource = AddState(new SMState_Store(StoreSpeed));
 
             State_SelectResource.AddTransition(SMTransition_StateStatus.IfHasFinished(), State_GetResourceLocation);
             State_GetResourceLocation.AddTransition(SMTransition_StateStatus.IfHasFinished(), State_MoveToResource);
@@ -60,7 +58,7 @@ namespace HybridGOAPExample
             // attempt to retrieve the source
             GameObject SourceGO = null;
             LinkedBlackboard.TryGet(CommonCore.Names.Resource_FocusSource, out SourceGO, null);
-            if (SourceGO != null) 
+            if (SourceGO != null)
                 SourceLocation = SourceGO.transform.position;
 
             return SourceLocation;

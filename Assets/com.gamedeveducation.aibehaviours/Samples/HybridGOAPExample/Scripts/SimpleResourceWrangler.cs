@@ -1,5 +1,4 @@
 using CommonCore;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -61,7 +60,7 @@ namespace HybridGOAPExample
 
             // tally how much we have stored
             Dictionary<CommonCore.Resources.EType, float> ResourceTallies = new();
-            foreach(ResourceContainer Container in AllContainers) 
+            foreach (ResourceContainer Container in AllContainers)
             {
                 if (Container == null)
                     continue;
@@ -76,7 +75,7 @@ namespace HybridGOAPExample
 
             // figure out the best resource to focus on
             float LowestAmountStored = float.MaxValue;
-            foreach(var KVP in ResourceTallies)
+            foreach (var KVP in ResourceTallies)
             {
                 if (KVP.Value < LowestAmountStored)
                 {
@@ -105,7 +104,7 @@ namespace HybridGOAPExample
 
             // build a list of candidate sources
             List<GameObject> CandidateSources = new();
-            foreach(var Source in AllSources)
+            foreach (var Source in AllSources)
             {
                 if (Source == null)
                     continue;

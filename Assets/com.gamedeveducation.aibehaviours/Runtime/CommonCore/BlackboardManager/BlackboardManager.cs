@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -206,7 +205,7 @@ namespace CommonCore
 
         void GenerateDebugEntryStrings<T>(Dictionary<BlackboardKeyType, T> InDataSet, List<string> InOutDebugEntries)
         {
-            foreach(var KVP in InDataSet)
+            foreach (var KVP in InDataSet)
             {
                 if (KVP.Value != null)
                     InOutDebugEntries.Add($"{DebugEntry_KeyPrefix}{KVP.Key}{DebugEntry_KeySuffix}: {KVP.Value}");
