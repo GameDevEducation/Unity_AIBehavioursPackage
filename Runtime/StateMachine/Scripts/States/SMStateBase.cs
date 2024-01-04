@@ -1,5 +1,4 @@
 using CommonCore;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -29,7 +28,7 @@ namespace StateMachine
             bool bFinishedHandled = false;
             bool bFailedHandled = false;
 
-            foreach(var Entry in Transitions)
+            foreach (var Entry in Transitions)
             {
                 if (Entry.Transition == null)
                     continue;
@@ -63,7 +62,7 @@ namespace StateMachine
         {
             OutNextState = null;
 
-            foreach(var Entry in Transitions)
+            foreach (var Entry in Transitions)
             {
                 if (Entry.Transition.Evaluate(this, InBlackboard) == ESMTransitionResult.Valid)
                 {
@@ -73,7 +72,7 @@ namespace StateMachine
             }
         }
 
-        protected GameObject GetOwner(Blackboard<FastName> InBlackboard)        
+        protected GameObject GetOwner(Blackboard<FastName> InBlackboard)
         {
             return InBlackboard.GetGameObject(CommonCore.Names.Self);
         }

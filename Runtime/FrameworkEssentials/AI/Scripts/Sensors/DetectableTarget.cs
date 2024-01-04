@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class DetectableTarget : MonoBehaviour
@@ -13,7 +11,7 @@ public class DetectableTarget : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     void OnDestroy()

@@ -1,18 +1,16 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public abstract class BaseNavigation : MonoBehaviour
 {
     public enum EState
     {
-        Idle                    = 0,
-        FindingPath             = 1,
-        OrientingAtStartOfPath  = 2,
-        FollowingPath           = 3,
-        OrientingAtEndOfPath    = 4,
+        Idle = 0,
+        FindingPath = 1,
+        OrientingAtStartOfPath = 2,
+        FollowingPath = 3,
+        OrientingAtEndOfPath = 4,
 
-        Failed_NoPathExists     = 100
+        Failed_NoPathExists = 100
     }
 
     [Header("Path Following")]
@@ -98,7 +96,7 @@ public abstract class BaseNavigation : MonoBehaviour
         destinationDelta.y = 0f;
         if (IsFindingOrFollowingPath && (destinationDelta.magnitude <= DestinationReachedThreshold))
             return true;
-        
+
         // are we already near the destination
         destinationDelta = newDestination - transform.position;
         destinationDelta.y = 0f;

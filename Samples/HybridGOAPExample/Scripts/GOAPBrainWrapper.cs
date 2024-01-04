@@ -1,9 +1,7 @@
 using CommonCore;
 using HybridGOAP;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Events;
 
 namespace HybridGOAPExample
 {
@@ -129,7 +127,7 @@ namespace HybridGOAPExample
             CurrentBlackboard.TryGet(CommonCore.Names.Target_GameObject, out CurrentTarget, null);
             if (IsPOIValid(CurrentTarget))
             {
-                InCallbackFn(CurrentTarget); 
+                InCallbackFn(CurrentTarget);
                 return;
             }
 
@@ -157,15 +155,15 @@ namespace HybridGOAPExample
             InCallbackFn(0.25f);
         }
 
-        public void SelectRandomInteraction(GameObject InQuerier, System.Action<SmartObject, BaseInteraction> InCallbackFn) 
+        public void SelectRandomInteraction(GameObject InQuerier, System.Action<SmartObject, BaseInteraction> InCallbackFn)
         {
             List<System.Tuple<SmartObject, BaseInteraction>> CandidateInteractions = new();
 
             // loop through all of the smart objects
-            foreach(var CandidateSO in SmartObjectManager.Instance.RegisteredObjects)
+            foreach (var CandidateSO in SmartObjectManager.Instance.RegisteredObjects)
             {
                 // loop through all of the interactions
-                foreach(var CandidateInteraction in CandidateSO.Interactions)
+                foreach (var CandidateInteraction in CandidateSO.Interactions)
                 {
                     if (!CandidateInteraction.CanPerform())
                         continue;

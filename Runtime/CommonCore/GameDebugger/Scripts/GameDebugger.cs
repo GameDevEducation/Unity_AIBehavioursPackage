@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
@@ -24,7 +23,7 @@ namespace CommonCore
             RefreshUI();
         }
 
-        void Update() 
+        void Update()
         {
             RefreshUI();
         }
@@ -39,7 +38,7 @@ namespace CommonCore
             RefreshUI();
         }
 
-        public void UI_OnSelectNext() 
+        public void UI_OnSelectNext()
         {
             if (Sources.Count == 0)
                 return;
@@ -52,10 +51,10 @@ namespace CommonCore
         void RefreshUI()
         {
             // remove any nulls
-            for (int Index = Sources.Count - 1; Index >= 0; Index--) 
-            { 
-                if (Sources[Index] == null) 
-                { 
+            for (int Index = Sources.Count - 1; Index >= 0; Index--)
+            {
+                if (Sources[Index] == null)
+                {
                     Sources.RemoveAt(Index);
 
                     if (Index == CurrentSourceIndex)
@@ -78,7 +77,7 @@ namespace CommonCore
             // gather the debug data
             var PrimarySource = CurrentSource;
             DebugTextBuilder.Clear();
-            foreach (var Source in Sources) 
+            foreach (var Source in Sources)
             {
                 Source.GatherDebugData(this, Source == PrimarySource);
             }

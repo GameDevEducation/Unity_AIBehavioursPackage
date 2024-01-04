@@ -1,7 +1,5 @@
 using CommonCore;
 using StateMachine;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace HybridGOAPExample
@@ -43,7 +41,7 @@ namespace HybridGOAPExample
                 FocusSource = InSource;
             });
 
-            if (FocusSource == null) 
+            if (FocusSource == null)
                 return ESMStateStatus.Failed;
 
             InBlackboard.SetGeneric(CommonCore.Names.Resource_FocusType, FocusType);
