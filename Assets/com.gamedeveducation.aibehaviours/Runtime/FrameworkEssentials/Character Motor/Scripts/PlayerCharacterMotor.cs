@@ -1,10 +1,8 @@
-using System.Collections;
+using Cinemachine;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem;
 using UnityEngine.EventSystems;
-using UnityEngine.Events;
-using Cinemachine;
+using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(Rigidbody))]
 public class PlayerCharacterMotor : CharacterMotor
@@ -131,7 +129,7 @@ public class PlayerCharacterMotor : CharacterMotor
         }
         else
         {
-            CameraTransform.localPosition = Vector3.up * CameraBoom_DefaultHeight - 
+            CameraTransform.localPosition = Vector3.up * CameraBoom_DefaultHeight -
                                             Vector3.forward * CameraBoomLength;
             LinkedCamera.LookAt = transform;
 
@@ -266,7 +264,7 @@ public class PlayerCharacterMotor : CharacterMotor
         }
         else
         {
-            if (!Mathf.Approximately(State.LastRequestedVelocity.sqrMagnitude, 0f)) 
+            if (!Mathf.Approximately(State.LastRequestedVelocity.sqrMagnitude, 0f))
             {
                 transform.rotation = Quaternion.LookRotation(State.LastRequestedVelocity, State.UpVector);
             }

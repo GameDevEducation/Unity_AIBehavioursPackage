@@ -1,6 +1,4 @@
 using CommonCore;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace StateMachine
@@ -17,7 +15,7 @@ namespace StateMachine
 
         public SMState_CalculateMoveLocation(INavigationInterface InNavInterface, float InSearchRange, System.Func<Vector3> InGetSearchLocationFn, bool bInContinuousMode = false, float InRecalculateThreshold = 0.1f, string InCustomName = null) :
             base(InCustomName)
-        { 
+        {
             Navigation = InNavInterface;
             SearchRange = InSearchRange;
             GetSearchLocationFn = InGetSearchLocationFn;

@@ -1,7 +1,5 @@
 using CommonCore;
-using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 
 namespace StateMachine
 {
@@ -21,8 +19,8 @@ namespace StateMachine
                 return ESMStateStatus.Failed;
 
             bool bAllFinished = true;
-            foreach(var Child in ChildStates) 
-            { 
+            foreach (var Child in ChildStates)
+            {
                 var Result = Child.OnEnter(InBlackboard);
 
                 if (Result == ESMStateStatus.Failed)
@@ -70,7 +68,7 @@ namespace StateMachine
 
             InDebugger.PushIndent();
 
-            foreach(var Child in ChildStates)
+            foreach (var Child in ChildStates)
             {
                 Child.GatherDebugData(InDebugger, bInIsSelected);
             }

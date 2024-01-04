@@ -1,7 +1,5 @@
 using CommonCore;
-using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 
 namespace StateMachine
 {
@@ -32,7 +30,7 @@ namespace StateMachine
 
         public void AddDefaultTransitions(ISMState InFinishedState, ISMState InFailedState)
         {
-            foreach (var State in States) 
+            foreach (var State in States)
             {
                 if ((State == InFinishedState) || (State == InFailedState))
                     continue;
@@ -94,7 +92,7 @@ namespace StateMachine
 
             InDebugger.AddSectionHeader($"{DebugDisplayName}");
 
-            foreach(var State in States)
+            foreach (var State in States)
             {
                 InDebugger.PushIndent();
 

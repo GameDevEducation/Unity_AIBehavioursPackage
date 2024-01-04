@@ -1,8 +1,5 @@
 using HybridGOAP;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Events;
 
 namespace HybridGOAPExample
 {
@@ -10,6 +7,12 @@ namespace HybridGOAPExample
     {
         public override void PrepareForPlanning()
         {
+            if (SimpleResourceWrangler.Instance == null)
+            {
+                Priority = GoalPriority.DoNotRun;
+                return;
+            }
+
             float DesireToGather = float.MinValue;
             SimpleResourceWrangler.Instance.GetGatherResourceDesire(Self, (float InDesire) =>
             {

@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -51,7 +50,7 @@ public class HearingManager : MonoBehaviour
     public void OnSoundEmitted(GameObject source, Vector3 location, EHeardSoundCategory category, float intensity)
     {
         // notify all sensors
-        foreach(var sensor in AllSensors)
+        foreach (var sensor in AllSensors)
         {
             sensor.OnHeardSound(source, location, category, intensity);
         }

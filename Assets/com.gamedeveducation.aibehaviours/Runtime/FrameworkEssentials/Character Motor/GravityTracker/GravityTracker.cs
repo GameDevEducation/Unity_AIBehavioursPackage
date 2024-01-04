@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class GravityTracker : MonoBehaviour
@@ -22,7 +20,7 @@ public class GravityTracker : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
@@ -52,7 +50,7 @@ public class GravityTracker : MonoBehaviour
     {
         GravityVector = Vector3.zero;
 
-        foreach(var source in GravityManager.Instance.AllSources)
+        foreach (var source in GravityManager.Instance.AllSources)
         {
             GravityVector += source.GetGravityFor(transform.position);
         }

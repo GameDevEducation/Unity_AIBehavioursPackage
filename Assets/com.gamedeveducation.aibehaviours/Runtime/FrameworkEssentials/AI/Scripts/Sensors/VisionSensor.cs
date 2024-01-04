@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(BaseAI))]
@@ -41,7 +39,7 @@ public class VisionSensor : MonoBehaviour
 
             // raycast to target passes?
             RaycastHit hitResult;
-            if (Physics.Raycast(LinkedAI.EyeLocation, vectorToTarget, out hitResult, 
+            if (Physics.Raycast(LinkedAI.EyeLocation, vectorToTarget, out hitResult,
                                 LinkedAI.VisionConeRange, DetectionMask, QueryTriggerInteraction.Collide))
             {
                 if (hitResult.collider.GetComponentInParent<DetectableTarget>() == candidateTarget)

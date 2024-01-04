@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -71,7 +69,7 @@ public class MovementMode_Ground : MonoBehaviour, IMovementMode
     }
 
     public RaycastHit FixedUpdate_GroundedCheck()
-    { 
+    {
         bool wasGrounded = State.IsGrounded;
         bool wasRunning = State.IsRunning;
 
@@ -101,7 +99,7 @@ public class MovementMode_Ground : MonoBehaviour, IMovementMode
         State.LinkedRB.drag = OriginalDrag;
         TimeSinceLastFootstepAudio = 0f;
         CoyoteTimeRemaining = 0f;
-       
+
         OnHitGround.Invoke(State.LinkedRB.position, State.LastRequestedVelocity.magnitude);
     }
 
@@ -185,7 +183,7 @@ public class MovementMode_Ground : MonoBehaviour, IMovementMode
         Vector3 sideVector = Vector3.ProjectOnPlane(State.MovementFrameTransform.right, State.UpVector).normalized;
 
         // calculate our movement input
-        Vector3 movementVector = forwardVector * State.Input_Move.y + 
+        Vector3 movementVector = forwardVector * State.Input_Move.y +
                                  sideVector * State.Input_Move.x;
         movementVector *= CurrentMaxSpeed;
 

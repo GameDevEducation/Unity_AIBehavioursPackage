@@ -1,7 +1,5 @@
 using HybridGOAP;
 using StateMachine;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace HybridGOAPExample
@@ -18,8 +16,8 @@ namespace HybridGOAPExample
 
         protected override void ConfigureFSM()
         {
-            var State_GetHomeLocation   = AddState(new SMState_CalculateMoveLocation(Navigation, NavigationSearchRange, GetHomeLocation));
-            var State_MoveToLocation    = AddState(new SMState_MoveTo(Navigation, StoppingDistance));
+            var State_GetHomeLocation = AddState(new SMState_CalculateMoveLocation(Navigation, NavigationSearchRange, GetHomeLocation));
+            var State_MoveToLocation = AddState(new SMState_MoveTo(Navigation, StoppingDistance));
 
             State_GetHomeLocation.AddTransition(SMTransition_StateStatus.IfHasFinished(), State_MoveToLocation);
 

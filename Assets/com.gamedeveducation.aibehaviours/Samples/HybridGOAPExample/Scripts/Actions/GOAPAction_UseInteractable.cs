@@ -1,9 +1,6 @@
 using CommonCore;
 using HybridGOAP;
 using StateMachine;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -23,10 +20,10 @@ namespace HybridGOAPExample
 
         protected override void ConfigureFSM()
         {
-            var State_SelectInteractable        = AddState(new SMState_SelectInteraction(SelectInteractionFn));
-            var State_GetInteractableLocation   = AddState(new SMState_CalculateMoveLocation(Navigation, NavigationSearchRange, GetInteractableLocation));
-            var State_MoveToInteractable        = AddState(new SMState_MoveTo(Navigation, StoppingDistance));
-            var State_UseInteractable           = AddState(new SMState_UseInteractable());
+            var State_SelectInteractable = AddState(new SMState_SelectInteraction(SelectInteractionFn));
+            var State_GetInteractableLocation = AddState(new SMState_CalculateMoveLocation(Navigation, NavigationSearchRange, GetInteractableLocation));
+            var State_MoveToInteractable = AddState(new SMState_MoveTo(Navigation, StoppingDistance));
+            var State_UseInteractable = AddState(new SMState_UseInteractable());
 
             State_SelectInteractable.AddTransition(SMTransition_StateStatus.IfHasFinished(), State_GetInteractableLocation);
             State_GetInteractableLocation.AddTransition(SMTransition_StateStatus.IfHasFinished(), State_MoveToInteractable);
@@ -52,7 +49,7 @@ namespace HybridGOAPExample
             // attempt to get the smart object
             SmartObject InteractableSO = null;
             LinkedBlackboard.TryGet(CommonCore.Names.Interaction_SmartObject, out InteractableSO, null);
-            if (InteractableSO != null) 
+            if (InteractableSO != null)
             {
                 InteractableLocation = InteractableSO.InteractionPoint;
             }
