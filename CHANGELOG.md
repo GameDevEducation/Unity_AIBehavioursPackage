@@ -1,3 +1,6 @@
+## [2.1.0] - 7 January 2023
+ - Add SerializableType (a version of System.Type) that can be serialized and used in the inspector
+
 ## [2.0.1] - 6 January 2023
  - Switch Name Manager over to Standalone Singleton and enable bootstrapping of it
  - Make the Blackboard Manager a locatable service and enable registering of it
