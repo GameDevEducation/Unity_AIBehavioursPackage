@@ -1,6 +1,7 @@
 using UnityEngine;
+using CommonCore;
 
-public abstract class BaseNavigation : MonoBehaviour
+public abstract class BaseNavigation : MonoBehaviour, INavigationInterface
 {
     public enum EState
     {
@@ -44,6 +45,11 @@ public abstract class BaseNavigation : MonoBehaviour
 
             return vecToDestination.magnitude <= DestinationReachedThreshold;
         }
+    }
+
+    void Awake()
+    {
+        ServiceLocator.RegisterService<INavigationInterface>(this, gameObject);
     }
 
     // Start is called before the first frame update
@@ -160,4 +166,45 @@ public abstract class BaseNavigation : MonoBehaviour
     protected abstract void Tick_OrientingAtStartOfPath();
     protected abstract void Tick_OrientingAtEndOfPath();
     protected abstract void Tick_Animation();
+
+    #region INavigationInterface Interfaces
+
+    public bool SetMoveLocation(GameObject InMover, Vector3 InDestination, float InStoppingDistance)
+    {
+        if (SetDestination(InDestination))
+        {
+            SetDestinationReachedThreshold(InStoppingDistance);
+            return true;
+        }
+
+        return false;
+    }
+
+    public bool IsPathfindingOrMoving(GameObject InMover)
+    {
+        return IsFindingOrFollowingPath;
+    }
+
+    public bool HasReachedDestination(GameObject InMover)
+    {
+        return IsAtDestination;
+    }
+
+    public bool StopMoving(GameObject InMover)
+    {
+        StopMovement();
+        return true;
+    }
+
+    public Vector3 FindNearestNavigableLocation(GameObject InMover, Vector3 InSearchPoint, float InSearchRange)
+    {
+        Vector3 FoundPosition = CommonCore.Constants.InvalidVector3Position;
+
+        if (FindNearestPoint(InSearchPoint, InSearchRange, out FoundPosition))
+            return FoundPosition;
+
+        return CommonCore.Constants.InvalidVector3Position;
+    }
+
+    #endregion
 }

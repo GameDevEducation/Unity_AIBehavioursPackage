@@ -248,7 +248,7 @@ namespace CommonCore
         }
     }
 
-    public class BlackboardManager : Singleton<BlackboardManager>
+    public class BlackboardManager : MonoBehaviourSingleton<BlackboardManager>
     {
         Dictionary<MonoBehaviour, Blackboard<FastName>> IndividualBlackboards = new();
         Dictionary<int, Blackboard<FastName>> SharedBlackboards = new();

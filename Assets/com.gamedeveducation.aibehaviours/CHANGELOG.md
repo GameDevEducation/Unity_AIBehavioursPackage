@@ -1,3 +1,8 @@
+## [2.0.0] - 6 January 2023
+ - Added Service Locator and Standalone Singleton
+ - Removed GOAP Navigation Interface (replaced by service lookup)
+ - Renamed Singleton to MonoBehaviourSingleton
+
 ## [1.0.6] - 4 January 2023
  - Fix GOAPGoal_GatherResource failing on shutdown
  - Run a code cleanup to remove unused usings and enforce consistency

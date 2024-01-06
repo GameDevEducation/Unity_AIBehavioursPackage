@@ -15,7 +15,7 @@ namespace StateMachine
         {
             var Self = GetOwner(InBlackboard);
 
-            return Navigation.IsAtDestination(Self) ? ESMTransitionResult.Valid : ESMTransitionResult.Invalid;
+            return Navigation.HasReachedDestination(Self) ? ESMTransitionResult.Valid : ESMTransitionResult.Invalid;
         }
     }
 }
