@@ -32,9 +32,11 @@ namespace HybridGOAP
 
         public bool CanSatisfy(IGOAPGoal InGoal)
         {
+            // cannot satisfy the goal until we have a navigation interface
             if (Navigation == null)
                 return false;
 
+            // bail out if the action is not able to run
             if (!CanActionRun())
                 return false;
 
