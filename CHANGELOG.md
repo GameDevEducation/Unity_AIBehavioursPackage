@@ -1,3 +1,8 @@
+## [2.0.1] - 6 January 2023
+ - Switch Name Manager over to Standalone Singleton and enable bootstrapping of it
+ - Make the Blackboard Manager a locatable service and enable registering of it
+ - Minor commenting additions in GOAPActionBase
+
 ## [2.0.0] - 6 January 2023
  - Added Service Locator and Standalone Singleton
  - Removed GOAP Navigation Interface (replaced by service lookup)

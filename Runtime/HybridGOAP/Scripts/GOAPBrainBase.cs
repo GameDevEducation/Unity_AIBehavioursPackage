@@ -286,6 +286,8 @@ namespace HybridGOAP
             ConfigureBrain();
 
             GameDebugger.AddSource(this);
+
+            ServiceLocator.RegisterService(CurrentBlackboard, gameObject);
         }
 
         void OnDestroy()

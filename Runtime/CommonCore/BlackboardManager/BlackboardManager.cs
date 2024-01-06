@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace CommonCore
 {
-    public class Blackboard<BlackboardKeyType> : IDebuggable
+    public class Blackboard<BlackboardKeyType> : IDebuggable, ILocatableService
     {
         Dictionary<BlackboardKeyType, int> IntValues = new();
         Dictionary<BlackboardKeyType, float> FloatValues = new();

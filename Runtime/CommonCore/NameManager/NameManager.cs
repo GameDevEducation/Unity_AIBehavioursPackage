@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using UnityEngine;
 
 namespace CommonCore
 {
@@ -64,11 +65,29 @@ namespace CommonCore
         }
     }
 
-    public class NameManager : MonoBehaviourSingleton<NameManager>
+    public class NameManager : StandaloneSingleton<NameManager>
     {
         UInt32 NextNameID = 1;
-        Dictionary<UInt32, string> NameIDs = new();
+        Dictionary<UInt32, string> NameIDs = null;
         static object _NameIDsLock = new object();
+
+        protected override void OnInitialise()
+        {
+            base.OnInitialise();
+
+            NameIDs = new();
+            NextNameID = 1;
+        }
+
+#if UNITY_EDITOR
+        protected override void OnPlayInEditorStopped()
+        {
+            base.OnPlayInEditorStopped();
+
+            NameIDs = null;
+            NextNameID = 0;
+        }
+#endif // UNITY_EDITOR
 
         internal static uint CreateOrRetrieveID(string InName)
         {
@@ -124,6 +143,18 @@ namespace CommonCore
                     return FoundName;
 
                 return "## Missing ID ##";
+            }
+        }
+    }
+
+    public static class NameManagerBootstrapper
+    {
+        [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterAssembliesLoaded)]
+        public static void Initialise()
+        {
+            if (NameManager.Instance != null)
+            {
+                NameManager.Instance.OnBootstrapped();
             }
         }
     }
