@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace HybridGOAPExample
 {
-    public class SimpleResourceWrangler : Singleton<SimpleResourceWrangler>, IResourceQueryInterface
+    public class SimpleResourceWrangler : MonoBehaviourSingleton<SimpleResourceWrangler>, IResourceQueryInterface
     {
         [SerializeField] List<ResourceContainer> AllContainers = new();
         [SerializeField] List<ResourceSource> AllSources = new();

@@ -64,7 +64,7 @@ namespace CommonCore
         }
     }
 
-    public class NameManager : Singleton<NameManager>
+    public class NameManager : MonoBehaviourSingleton<NameManager>
     {
         UInt32 NextNameID = 1;
         Dictionary<UInt32, string> NameIDs = new();

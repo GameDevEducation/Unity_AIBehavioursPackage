@@ -70,7 +70,7 @@ namespace StateMachine
 
             if (Navigation.IsPathfindingOrMoving(Self))
                 return ESMStateStatus.Running;
-            else if (Navigation.IsAtDestination(Self))
+            else if (Navigation.HasReachedDestination(Self))
                 return bContinuousMode ? ESMStateStatus.Running : ESMStateStatus.Finished;
 
             return ESMStateStatus.Failed;

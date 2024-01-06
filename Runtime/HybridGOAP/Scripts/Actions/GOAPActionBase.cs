@@ -20,7 +20,11 @@ namespace HybridGOAP
         public void BindToBrain(IGOAPBrain InBrain)
         {
             LinkedBrain = InBrain;
-            Navigation = GetComponent<INavigationInterface>();
+
+            ServiceLocator.AsyncLocateService<INavigationInterface>((ILocatableService InService) =>
+            {
+                Navigation = InService as INavigationInterface;
+            }, gameObject, EServiceSearchMode.LocalOnly);
 
             PopulateSupportedGoalTypes();
             OnInitialise();
@@ -28,6 +32,12 @@ namespace HybridGOAP
 
         public bool CanSatisfy(IGOAPGoal InGoal)
         {
+            if (Navigation == null)
+                return false;
+
+            if (!CanActionRun())
+                return false;
+
             foreach (var GoalType in SupportedGoalTypes)
             {
                 if (InGoal.GetType() == GoalType)
@@ -79,5 +89,6 @@ namespace HybridGOAP
         protected abstract void OnTickAction(float InDeltaTime);
 
         protected virtual void GatherDebugDataInternal(IGameDebugger InDebugger, bool bInIsSelected) { }
+        protected virtual bool CanActionRun() { return true; }
     }
 }

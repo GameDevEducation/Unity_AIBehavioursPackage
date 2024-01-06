@@ -1,11 +1,15 @@
 using UnityEngine;
 
+#if UNITY_EDITOR
+using UnityEditor;
+#endif // UNITY_EDITOR
+
 // This is heavily based on the implementation here:
 // https://gamedev.stackexchange.com/a/151547 - Cosmic Giant
 
 namespace CommonCore
 {
-    public abstract class Singleton<T> : Singleton where T : MonoBehaviour
+    public abstract class MonoBehaviourSingleton<T> : MonoBehaviourSingleton where T : MonoBehaviour
     {
         static T _Instance = null;
         static bool _bInitialising = false;
@@ -57,7 +61,7 @@ namespace CommonCore
             }
         }
 
-        static void ConstructIfNeeded(Singleton<T> InInstance)
+        static void ConstructIfNeeded(MonoBehaviourSingleton<T> InInstance)
         {
             lock (_InstanceLock)
             {
@@ -85,11 +89,32 @@ namespace CommonCore
         {
             DontDestroyOnLoad(gameObject);
         }
+
+#if UNITY_EDITOR
+        void OnEnable()
+        {
+            EditorApplication.playModeStateChanged += OnPlayModeChanged;
+        }
+
+        void OnDisable()
+        {
+            EditorApplication.playModeStateChanged -= OnPlayModeChanged;
+        }
+
+        void OnPlayModeChanged(PlayModeStateChange InChange)
+        {
+            if ((InChange == PlayModeStateChange.ExitingPlayMode) && (_Instance != null))
+            {
+                bIsQuitting = true;
+                DestroyImmediate(gameObject);
+            }
+        }
+#endif // UNITY_EDITOR
     }
 
-    public abstract class Singleton : MonoBehaviour
+    public abstract class MonoBehaviourSingleton : MonoBehaviour
     {
-        protected static bool bIsQuitting { get; private set; } = false;
+        protected static bool bIsQuitting { get; set; } = false;
 
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
         static void OnBeforeSceneLoad()
@@ -101,5 +126,7 @@ namespace CommonCore
         {
             bIsQuitting = true;
         }
+
+        public virtual void OnBootstrapped() { }
     }
 }
