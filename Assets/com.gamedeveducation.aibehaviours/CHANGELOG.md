@@ -1,3 +1,6 @@
+## [2.2.0] - 7 January 2023
+ - Work in progress implementation for Perception System (not yet in use)
+
 ## [2.1.0] - 7 January 2023
  - Add SerializableType (a version of System.Type) that can be serialized and used in the inspector
 
