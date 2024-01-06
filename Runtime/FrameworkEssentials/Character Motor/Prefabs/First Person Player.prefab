@@ -44,6 +44,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
+  m_Resource: {fileID: 0}
   m_PlayOnAwake: 0
   m_Volume: 0.4
   m_Pitch: 1
@@ -302,6 +303,7 @@ GameObject:
   - component: {fileID: 4308623563077746149}
   - component: {fileID: 3209412252057004078}
   - component: {fileID: 5115454356452449724}
+  - component: {fileID: -1596915106774740070}
   m_Layer: 6
   m_Name: First Person Player
   m_TagString: Player
@@ -351,6 +353,8 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -588,3 +592,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0dc06e88ac326c4f8c2c6ef550cace2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &-1596915106774740070
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4308623563077746146}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a50f97b3a9e800a4098ca9bca94dc462, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <Definition>k__BackingField: {fileID: 11400000, guid: 8510745b749d41b44b9f8a3f3f79a0a0, type: 2}
