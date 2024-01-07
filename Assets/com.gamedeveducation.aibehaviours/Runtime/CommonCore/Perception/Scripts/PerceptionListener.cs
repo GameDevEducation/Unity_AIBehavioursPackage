@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
@@ -48,7 +47,7 @@ namespace CommonCore
                 foreach (var Config in SupportedSensors)
                 {
                     LinkedPerceptionManager.RegisterListener(this, Config);
-                }                
+                }
             });
 
             if (UpdateBlackboard)
@@ -68,7 +67,7 @@ namespace CommonCore
             if (LinkedPerceptionManager != null)
             {
                 LinkedPerceptionManager.DeregisterListener(this);
-            }            
+            }
         }
 
         public bool CanDetect(IPerceivable InPerceivable)
@@ -138,7 +137,7 @@ namespace CommonCore
 
             if (UpdateBlackboard && (LinkedBlackboard != null))
             {
-                LinkedBlackboard.Set(CommonCore.Names.Awareness_PreviousBestTarget, 
+                LinkedBlackboard.Set(CommonCore.Names.Awareness_PreviousBestTarget,
                                      PreviousBestPerceivable != null ? PreviousBestPerceivable.Owner : (GameObject)null);
 
                 LinkedBlackboard.Set(CommonCore.Names.Awareness_BestTarget,

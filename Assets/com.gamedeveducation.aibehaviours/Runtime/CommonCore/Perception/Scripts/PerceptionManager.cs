@@ -1,8 +1,6 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 namespace CommonCore
 {
@@ -38,7 +36,7 @@ namespace CommonCore
         protected void Update()
         {
             // Stage 1: Tick any active sensors
-            foreach(var SensorKVP in ActiveSensors)
+            foreach (var SensorKVP in ActiveSensors)
             {
                 var Sensor = SensorKVP.Key;
                 var ListenerEntries = SensorKVP.Value;
@@ -65,7 +63,7 @@ namespace CommonCore
                 IPerceivable BestPerceivable = null;
                 DetectionData BestDetection = null;
 
-                foreach(var DetectionDataKVP in DetectionEntries)
+                foreach (var DetectionDataKVP in DetectionEntries)
                 {
                     var Perceivable = DetectionDataKVP.Key;
                     var Data = DetectionDataKVP.Value;
@@ -93,14 +91,14 @@ namespace CommonCore
                 // need to notify listener about the target
                 if (BestPerceivable != null)
                 {
-                    Listener.OnNotifyBestPerceivable(BestPerceivable, 
-                                                     BestDetection.DetectionStrength, 
-                                                     BestDetection.LastDetectionTime, 
+                    Listener.OnNotifyBestPerceivable(BestPerceivable,
+                                                     BestDetection.DetectionStrength,
+                                                     BestDetection.LastDetectionTime,
                                                      BestDetection.LastDetectionLocation);
                 }
 
                 // are there entries to remove?
-                foreach(var Perceivable in PerceivablesToRemove)
+                foreach (var Perceivable in PerceivablesToRemove)
                 {
                     Listener.OnNotifyLostPerceivable(Perceivable);
                     DetectionEntries.Remove(Perceivable);
@@ -113,14 +111,14 @@ namespace CommonCore
             }
 
             // cleanup any listeners
-            foreach(var Listener in ListenersToRemove)
+            foreach (var Listener in ListenersToRemove)
                 AllDetectionData.Remove(Listener);
         }
 
         public void RegisterListener(IPerceptionListener InListener, SensorConfigBase InSensorConfig)
         {
             // is this sensor already present?
-            foreach(var SensorKVP in ActiveSensors)
+            foreach (var SensorKVP in ActiveSensors)
             {
                 var Sensor = SensorKVP.Key;
 
@@ -128,7 +126,7 @@ namespace CommonCore
                 if (Sensor.GetType() == InSensorConfig.GetSupportedSensorType())
                 {
                     // is there a double registration?
-                    foreach(var Entry in SensorKVP.Value)
+                    foreach (var Entry in SensorKVP.Value)
                     {
                         if (Entry.Listener == InListener)
                         {
@@ -152,7 +150,7 @@ namespace CommonCore
 
         public void DeregisterListener(IPerceptionListener InListener)
         {
-            foreach(var SensorKVP in ActiveSensors)
+            foreach (var SensorKVP in ActiveSensors)
             {
                 var Sensor = SensorKVP.Key;
                 var ListenerEntries = SensorKVP.Value;
@@ -162,7 +160,7 @@ namespace CommonCore
                 {
                     var Entry = ListenerEntries[Index];
 
-                    if (Entry.Listener == InListener) 
+                    if (Entry.Listener == InListener)
                     {
                         Sensor.DeregisterListener(InListener);
                         ListenerEntries.RemoveAt(Index);
@@ -174,7 +172,7 @@ namespace CommonCore
 
         public void RegisterPerceivable(IPerceivable InPerceivable)
         {
-            foreach(var Sensor in ActiveSensors.Keys)
+            foreach (var Sensor in ActiveSensors.Keys)
             {
                 if (!InPerceivable.IsPerceivableBy(Sensor.GetType()))
                     continue;
@@ -201,7 +199,7 @@ namespace CommonCore
 
         public void DeregisterPerceivable(IPerceivable InPerceivable)
         {
-            foreach(var PerceivableKVP in ActivePerceivables)
+            foreach (var PerceivableKVP in ActivePerceivables)
             {
                 if (PerceivableKVP.Value.Remove(InPerceivable))
                     PerceivableKVP.Key.DeregisterPerceivable(InPerceivable);
@@ -228,7 +226,7 @@ namespace CommonCore
 
         public void InjectDetection(IPerceivable InPerceivable, Type InSensorType, float InStrength)
         {
-            foreach(var SensorKVP in ActiveSensors)
+            foreach (var SensorKVP in ActiveSensors)
             {
                 var Sensor = SensorKVP.Key;
 
@@ -271,8 +269,8 @@ namespace CommonCore
     public static class PerceptionManagerBootstrapper
     {
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]
-        public static void Initialize() 
-        { 
+        public static void Initialize()
+        {
             if (PerceptionManager.Instance != null)
                 PerceptionManager.Instance.OnBootstrapped();
         }
