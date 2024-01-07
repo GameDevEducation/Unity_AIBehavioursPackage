@@ -1716,10 +1716,6 @@ GameObject:
   - component: {fileID: 1197245272745120396}
   - component: {fileID: 2204154440339505643}
   - component: {fileID: 8479922552009501162}
-  - component: {fileID: 4661795960290054494}
-  - component: {fileID: 304959192736432465}
-  - component: {fileID: 8240695049137312008}
-  - component: {fileID: 3293350479102953761}
   - component: {fileID: 5125263572712964077}
   - component: {fileID: 4826517113763808603}
   - component: {fileID: 2625799256035024170}
@@ -1728,6 +1724,7 @@ GameObject:
   - component: {fileID: 1147255772494485841}
   - component: {fileID: 5513608314689191707}
   - component: {fileID: 4336320954358026725}
+  - component: {fileID: 4487270657594231052}
   m_Layer: 0
   m_Name: HybridGOAP AI
   m_TagString: Character
@@ -1962,113 +1959,6 @@ MonoBehaviour:
   DEBUG_LookTargetToSet: {fileID: 0}
   DEBUG_UpdateLookTarget: 0
   <DEBUG_ShowSensorBounds>k__BackingField: 0
---- !u!114 &4661795960290054494
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6019449823397602677}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1fe7713f4d9d7804dbd331471b182d7e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  VisionSensitivity:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 0.5
-      value: 1
-      inSlope: -0.025858674
-      outSlope: -0.025858674
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.13170397
-    - serializedVersion: 3
-      time: 1
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  VisionMinimumAwareness: 1
-  VisionAwarenessBuildRate: 10
-  HearingMinimumAwareness: 0
-  HearingAwarenessBuildRate: 0.5
-  ProximityMinimumAwareness: 0
-  ProximityAwarenessBuildRate: 1
-  AwarenessDecayDelay: 0.1
-  AwarenessDecayRate: 0.1
-  OnBestTargetChanged:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 5125263572712964077}
-        m_TargetAssemblyTypeName: HybridGOAPExample.GOAPBrainWrapper, HybridGOAPExample
-        m_MethodName: SetDetectedTarget
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
---- !u!114 &304959192736432465
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6019449823397602677}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 98ea346f8c9d31b41bcdca69001ba32f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  DetectionMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
---- !u!114 &8240695049137312008
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6019449823397602677}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d3d6e474c79fa36448fc2d397c60bd68, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &3293350479102953761
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6019449823397602677}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 71cbd88f004b6ee4da592f9f788cf286, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &5125263572712964077
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2205,6 +2095,31 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <Definition>k__BackingField: {fileID: 11400000, guid: 3a6ff226635752941af404deb71e517e, type: 2}
+--- !u!114 &4487270657594231052
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6019449823397602677}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 79744c6b97868524b9e5a4db027f832a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SensorOrigin: {fileID: 4269657149802518541}
+  SupportedSensors:
+  - {fileID: 11400000, guid: f5023b714ab557140999491acea8c74c, type: 2}
+  - {fileID: 11400000, guid: f3604429eb4d2e549ae346d9400b8a1b, type: 2}
+  - {fileID: 11400000, guid: 821a473fdc7ed6647bef65f0d2eda82f, type: 2}
+  SupportedRelationships: 02000000
+  AcquisitionThreshold: 0.6
+  LossThreshold: 0.3
+  UpdateBlackboard: 1
+  SendEvents: 0
+  OnFocusChanged:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &6166324327413192873
 GameObject:
   m_ObjectHideFlags: 0

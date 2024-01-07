@@ -249,6 +249,7 @@ namespace HybridGOAP
             CurrentBlackboard.Set(CommonCore.Names.Target_GameObject, (GameObject)null);
             CurrentBlackboard.Set(CommonCore.Names.Target_Position, CommonCore.Constants.InvalidVector3Position);
 
+            CurrentBlackboard.Set(CommonCore.Names.Awareness_PreviousBestTarget, (GameObject)null);
             CurrentBlackboard.Set(CommonCore.Names.Awareness_BestTarget, (GameObject)null);
 
             CurrentBlackboard.Set(CommonCore.Names.LookAt_GameObject, (GameObject)null);
