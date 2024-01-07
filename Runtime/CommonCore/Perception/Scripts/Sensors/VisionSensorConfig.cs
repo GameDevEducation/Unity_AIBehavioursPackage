@@ -1,6 +1,4 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace CommonCore
@@ -11,7 +9,7 @@ namespace CommonCore
         [field: SerializeField] public LayerMask LayersToCheck { get; protected set; } = ~0;
         [field: SerializeField] public float VisionConeAngle { get; protected set; } = 60f;
         [field: SerializeField] public float VisionConeRange { get; protected set; } = 30f;
-        
+
         [field: SerializeField] public AnimationCurve Sensitivity { get; protected set; }
         [field: SerializeField] public float DetectionMultiplier { get; protected set; } = 10.0f;
 

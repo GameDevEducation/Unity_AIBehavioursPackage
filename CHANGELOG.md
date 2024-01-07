@@ -1,3 +1,6 @@
+## [3.0.1] - 7 January 2023
+ - Code cleanup pass
+	- 
 ## [3.0.0] - 7 January 2023
  - Added remaining components for the new perception system
  - Removed legacy perception system

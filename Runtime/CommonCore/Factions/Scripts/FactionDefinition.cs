@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -24,7 +23,7 @@ namespace CommonCore
 
             public FactionStanding(FactionStanding InOther)
             {
-                OtherFaction = InOther.OtherFaction; 
+                OtherFaction = InOther.OtherFaction;
                 Relationship = InOther.Relationship;
             }
         }

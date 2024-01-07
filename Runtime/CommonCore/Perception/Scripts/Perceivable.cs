@@ -1,5 +1,4 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -40,7 +39,7 @@ namespace CommonCore
             }, gameObject, EServiceSearchMode.LocalOnly);
 
             ServiceLocator.AsyncLocateService<IPerceptionManager>((ILocatableService InService) =>
-            { 
+            {
                 LinkedPerceptionManager = InService as IPerceptionManager;
 
                 LinkedPerceptionManager.RegisterPerceivable(this);
@@ -60,7 +59,7 @@ namespace CommonCore
             if ((DetectableBy == null) || (DetectableBy.Count == 0))
                 return true;
 
-            foreach(var SupportedType in DetectableBy)
+            foreach (var SupportedType in DetectableBy)
             {
                 if (InSensorType == SupportedType.Type)
                     return true;

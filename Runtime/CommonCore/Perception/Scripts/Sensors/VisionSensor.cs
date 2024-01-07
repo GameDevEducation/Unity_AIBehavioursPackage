@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -29,12 +28,12 @@ namespace CommonCore
         {
             base.RegisterListener(InListener, InSensorConfig);
 
-            if (!Listeners.Contains(InListener)) 
-            { 
+            if (!Listeners.Contains(InListener))
+            {
                 Listeners.Add(InListener);
                 ListenerConfigs[InListener] = InSensorConfig;
 
-                foreach(var Perceivable in Perceivables) 
+                foreach (var Perceivable in Perceivables)
                 {
                     if (!IsQueryPotentiallyRelevant(InListener, Perceivable))
                         continue;
@@ -61,7 +60,7 @@ namespace CommonCore
                 Perceivables.Add(InPerceivable);
 
                 // update the vision queries
-                foreach(var Listener in Listeners)
+                foreach (var Listener in Listeners)
                 {
                     if (!IsQueryPotentiallyRelevant(Listener, InPerceivable))
                         continue;
@@ -82,7 +81,7 @@ namespace CommonCore
         {
             base.Tick(InDeltaTime, InListenerEntries, InPerceivables, InManager);
 
-            foreach(var Query in Queries)
+            foreach (var Query in Queries)
             {
                 var Listener = Query.Listener;
                 var Perceivable = Query.Perceivable;

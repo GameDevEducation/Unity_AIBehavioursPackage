@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -57,7 +56,7 @@ namespace CommonCore
             }
 
             // in full detection range?
-            if (DistanceSq <= (InConfig.SoundFallOffStart * InConfig.SoundFallOffStart)) 
+            if (DistanceSq <= (InConfig.SoundFallOffStart * InConfig.SoundFallOffStart))
                 Strength = 1.0f;
             else // we are in the partial detection range
             {

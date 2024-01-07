@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 #if UNITY_EDITOR
@@ -47,7 +45,7 @@ namespace CommonCore
                 }
                 else if (_Instance != null && !_bInitialising)
                 {
-                    Debug.LogError($"Found duplicate {typeof(T)}");                    
+                    Debug.LogError($"Found duplicate {typeof(T)}");
                 }
             }
         }

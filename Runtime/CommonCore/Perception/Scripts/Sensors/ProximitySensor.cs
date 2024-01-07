@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -15,7 +14,7 @@ namespace CommonCore
                 var Listener = Entry.Listener;
                 var Config = Entry.Configuration as ProximitySensorConfig;
 
-                foreach(var Perceivable in InPerceivables)
+                foreach (var Perceivable in InPerceivables)
                 {
                     // is the listener not able to detect this perceivable?
                     if (!Listener.CanDetect(Perceivable))

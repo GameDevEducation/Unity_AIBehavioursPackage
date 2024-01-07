@@ -1,5 +1,5 @@
-using UnityEngine;
 using CommonCore;
+using UnityEngine;
 
 public abstract class BaseNavigation : MonoBehaviour, INavigationInterface
 {

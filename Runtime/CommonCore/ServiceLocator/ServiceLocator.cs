@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -56,8 +55,8 @@ namespace CommonCore
             AttemptToFlushPendingQueries();
         }
 
-        public static void AsyncLocateService<T>(System.Action<ILocatableService> InCallbackFn, 
-                                                 System.Object InContext = null, 
+        public static void AsyncLocateService<T>(System.Action<ILocatableService> InCallbackFn,
+                                                 System.Object InContext = null,
                                                  EServiceSearchMode InSearchMode = EServiceSearchMode.GlobalFirst) where T : class, ILocatableService
         {
             if (Instance != null)
@@ -76,20 +75,24 @@ namespace CommonCore
                 return;
             }
 
-            PendingQueries.Add(new ServiceQuery() { Address = new ServiceAddress() { ServiceType = typeof(T), Context = InContext },
-                                                    CallbackFn = InCallbackFn, SearchMode = InSearchMode} );
+            PendingQueries.Add(new ServiceQuery()
+            {
+                Address = new ServiceAddress() { ServiceType = typeof(T), Context = InContext },
+                CallbackFn = InCallbackFn,
+                SearchMode = InSearchMode
+            });
         }
 
         void AttemptToFlushPendingQueries()
         {
-            for (int Index = PendingQueries.Count - 1; Index >= 0; Index--) 
-            { 
+            for (int Index = PendingQueries.Count - 1; Index >= 0; Index--)
+            {
                 var Query = PendingQueries[Index];
 
                 // attempt to find the service and run the callback if found
                 var Result = AttemptToFindService(Query.Address.ServiceType, Query.Address.Context, Query.SearchMode);
-                if (Result != null) 
-                { 
+                if (Result != null)
+                {
                     Query.CallbackFn(Result);
                     PendingQueries.RemoveAt(Index);
                 }
@@ -100,7 +103,7 @@ namespace CommonCore
         {
             System.Func<System.Type, System.Object, ILocatableService> PerformSearchFn = (System.Type InType, System.Object InContext) =>
             {
-                foreach(var RegistryEntry in ServiceRegistry)
+                foreach (var RegistryEntry in ServiceRegistry)
                 {
                     var Address = RegistryEntry.Key;
 
@@ -132,7 +135,7 @@ namespace CommonCore
                 if (InContext != null)
                 {
                     var Result = PerformSearchFn(InType, InContext);
-                    if (Result != null) 
+                    if (Result != null)
                         return Result;
 
                     // if we are looking only locally then exit
@@ -169,8 +172,8 @@ namespace CommonCore
     public static class ServiceLocatorBootstrapper
     {
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSplashScreen)]
-        public static void Initialise() 
-        { 
+        public static void Initialise()
+        {
             if (ServiceLocator.Instance != null)
             {
                 ServiceLocator.Instance.OnBootstrapped();

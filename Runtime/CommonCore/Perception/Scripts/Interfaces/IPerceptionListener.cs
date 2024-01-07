@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace CommonCore
@@ -13,7 +11,7 @@ namespace CommonCore
 
         bool CanDetect(IPerceivable InPerceivable);
 
-        void OnNotifyBestPerceivable(IPerceivable InPerceivable, float InDetectionStrength, 
+        void OnNotifyBestPerceivable(IPerceivable InPerceivable, float InDetectionStrength,
                                      float InLastDetectionTime, Vector3 InLastDetectionLocation);
         void OnNotifyLostPerceivable(IPerceivable InPerceivable);
     }
