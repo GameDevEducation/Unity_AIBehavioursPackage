@@ -6,7 +6,7 @@ namespace CommonCore
 {
     public interface IPerceptionListener
     {
-        Vector3 SensorOrigin { get; }
+        Vector3 SensorLocation { get; }
         Vector3 SensorFacing { get; }
         GameObject Owner { get; }
         IFaction Faction { get; }

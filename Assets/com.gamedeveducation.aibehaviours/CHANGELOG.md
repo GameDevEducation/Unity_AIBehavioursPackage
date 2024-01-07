@@ -1,3 +1,7 @@
+## [3.0.0] - 7 January 2023
+ - Added remaining components for the new perception system
+ - Removed legacy perception system
+
 ## [2.2.0] - 7 January 2023
  - Work in progress implementation for Perception System (not yet in use)
 

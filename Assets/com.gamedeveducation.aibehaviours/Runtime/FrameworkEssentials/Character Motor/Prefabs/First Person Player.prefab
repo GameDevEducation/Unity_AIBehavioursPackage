@@ -302,8 +302,9 @@ GameObject:
   - component: {fileID: 4308623563077746148}
   - component: {fileID: 4308623563077746149}
   - component: {fileID: 3209412252057004078}
-  - component: {fileID: 5115454356452449724}
   - component: {fileID: -1596915106774740070}
+  - component: {fileID: -516134068868935170}
+  - component: {fileID: 1279869232268356194}
   m_Layer: 6
   m_Name: First Person Player
   m_TagString: Player
@@ -565,11 +566,23 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1279869232268356194}
+        m_TargetAssemblyTypeName: CommonCore.DetectionInjector, CommonCore
+        m_MethodName: TriggerInjection
+        m_Mode: 4
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0.5
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   OnFootstep:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1645085969}
-        m_TargetAssemblyTypeName: FootstepAudio_Builtin, Assembly-CSharp
+        m_TargetAssemblyTypeName: FootstepAudio_Builtin, FrameworkEssentials
         m_MethodName: OnFootstep
         m_Mode: 0
         m_Arguments:
@@ -580,18 +593,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &5115454356452449724
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4308623563077746146}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0dc06e88ac326c4f8c2c6ef550cace2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &-1596915106774740070
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -605,3 +606,39 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <Definition>k__BackingField: {fileID: 11400000, guid: 8510745b749d41b44b9f8a3f3f79a0a0, type: 2}
+--- !u!114 &-516134068868935170
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4308623563077746146}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 254c7812c42e0d040be39a329d3f1b05, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PerceptionOffset: {x: 0, y: 0.85, z: 0}
+  DetectableBy:
+  - AssemblyQualifiedName: CommonCore.HearingSensor, CommonCore, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  - AssemblyQualifiedName: CommonCore.ProximitySensor, CommonCore, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  - AssemblyQualifiedName: CommonCore.VisionSensor, CommonCore, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  VelocitySource: 0
+--- !u!114 &1279869232268356194
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4308623563077746146}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c8acf50df9dd9d141b23b63d15b5f7da, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TargetSensor:
+    AssemblyQualifiedName: CommonCore.HearingSensor, CommonCore, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null

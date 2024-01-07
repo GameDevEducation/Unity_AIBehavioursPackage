@@ -33,7 +33,7 @@ namespace CommonCore
 
         public EFactionRelationship GetRelationshipTo(IFaction InOther)
         {
-            foreach(var Standing in _CurrentStandings) 
+            foreach(var Standing in CurrentStandings) 
             {
                 if (Standing.OtherFaction == InOther.Definition)
                     return Standing.Relationship;

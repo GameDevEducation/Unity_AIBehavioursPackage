@@ -15,33 +15,34 @@ namespace HybridGOAPExample
         {
         }
 
-        #region Awareness Helpers
-        public void SetDetectedTarget(GameObject InTarget)
+        protected override void OnPreTickBrain(float InDeltaTime)
         {
+            base.OnPreTickBrain(InDeltaTime);
+
             GameObject CurrentAwarenessTarget = null;
             CurrentBlackboard.TryGet(CommonCore.Names.Awareness_BestTarget, out CurrentAwarenessTarget, null);
 
+            GameObject PreviousAwarenessTarget = null;
+            CurrentBlackboard.TryGet(CommonCore.Names.Awareness_PreviousBestTarget, out PreviousAwarenessTarget, null);
+
             // if we're changing targets?
-            if ((CurrentAwarenessTarget != null) && (CurrentAwarenessTarget != InTarget))
+            if ((PreviousAwarenessTarget != null) && (CurrentAwarenessTarget != PreviousAwarenessTarget))
             {
                 // clear the look at target if it matches the old awareness target
                 GameObject CurrentLookAtTarget = null;
                 CurrentBlackboard.TryGet(CommonCore.Names.LookAt_GameObject, out CurrentLookAtTarget, null);
 
-                if (CurrentLookAtTarget == CurrentAwarenessTarget)
+                if (CurrentLookAtTarget == PreviousAwarenessTarget)
                     CurrentBlackboard.Set(CommonCore.Names.LookAt_GameObject, (GameObject)null);
 
                 // clear the focus/move target if it matches the old awareness target
                 GameObject CurrentTarget = null;
                 CurrentBlackboard.TryGet(CommonCore.Names.Target_GameObject, out CurrentTarget, null);
 
-                if (CurrentTarget == CurrentAwarenessTarget)
+                if (CurrentTarget == PreviousAwarenessTarget)
                     CurrentBlackboard.Set(CommonCore.Names.Target_GameObject, (GameObject)null);
             }
-
-            CurrentBlackboard.Set(CommonCore.Names.Awareness_BestTarget, InTarget);
         }
-        #endregion
 
         #region Point of Interest (POI) Helpers
         public void PickSuitablePOI(GameObject InQuerier, System.Action<GameObject> InCallbackFn)
