@@ -95,6 +95,28 @@ namespace HybridGOAPExample
         #region Interactable Helpers
         public void GetUseInteractableDesire(GameObject InQuerier, System.Action<float> InCallbackFn)
         {
+            int NumCandidateInteractables = 0;
+
+            // loop through all of the smart objects
+            foreach (var CandidateSO in SmartObjectManager.Instance.RegisteredObjects)
+            {
+                // loop through all of the interactions
+                foreach (var CandidateInteraction in CandidateSO.Interactions)
+                {
+                    if (!CandidateInteraction.CanPerform())
+                        continue;
+
+                    ++NumCandidateInteractables;
+                }
+            }
+
+            // no interactions?
+            if (NumCandidateInteractables == 0)
+            {
+                InCallbackFn(float.MinValue);
+                return;
+            }
+
             InCallbackFn(0.25f);
         }
 

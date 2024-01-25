@@ -1,6 +1,9 @@
+## [3.0.2] - 26 January 2023
+ - Fixes #1 - If there are no valid interactables return float.MinValue rather than the default (shoutout to SiliconOrchid for finding the issue)
+
 ## [3.0.1] - 7 January 2023
  - Code cleanup pass
-	- 
+
 ## [3.0.0] - 7 January 2023
  - Added remaining components for the new perception system
  - Removed legacy perception system
