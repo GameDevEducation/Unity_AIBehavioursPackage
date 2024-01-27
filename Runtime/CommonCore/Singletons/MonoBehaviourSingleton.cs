@@ -87,6 +87,14 @@ namespace CommonCore
 
         protected virtual void OnAwake()
         {
+            if (transform.parent != null)
+            {
+#if UNITY_EDITOR
+                Debug.LogError($"{gameObject.name} is parented to {transform.parent.gameObject.name}. Unparenting so that it can be marked as DontDestroyOnLoad");
+#endif // UNITY_EDITOR
+                transform.SetParent(null);
+            }
+
             DontDestroyOnLoad(gameObject);
         }
 
