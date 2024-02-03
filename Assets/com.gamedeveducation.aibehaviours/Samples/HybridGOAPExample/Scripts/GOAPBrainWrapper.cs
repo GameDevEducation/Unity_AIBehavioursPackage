@@ -7,6 +7,8 @@ namespace HybridGOAPExample
 {
     public class GOAPBrainWrapper : GOAPBrainBase
     {
+        [SerializeField] float DefaultInteractableSearchRange = 30f;
+
         protected override void ConfigureBlackboard()
         {
         }
@@ -93,9 +95,12 @@ namespace HybridGOAPExample
         #endregion
 
         #region Interactable Helpers
-        public void GetUseInteractableDesire(GameObject InQuerier, System.Action<float> InCallbackFn)
+        public void GetUseInteractableDesire(GameObject InQuerier, float InSearchRange, System.Action<float> InCallbackFn)
         {
             int NumCandidateInteractables = 0;
+
+            float MaxInteractionRange = InSearchRange > 0 ? InSearchRange : DefaultInteractableSearchRange;
+            float MaxInteractionRangeSq = MaxInteractionRange * MaxInteractionRange;
 
             // loop through all of the smart objects
             foreach (var CandidateSO in SmartObjectManager.Instance.RegisteredObjects)
@@ -104,6 +109,12 @@ namespace HybridGOAPExample
                 foreach (var CandidateInteraction in CandidateSO.Interactions)
                 {
                     if (!CandidateInteraction.CanPerform())
+                        continue;
+
+                    if ((CandidateSO.InteractionPoint - transform.position).sqrMagnitude > MaxInteractionRangeSq)
+                        continue;
+
+                    if ((Navigation != null) && !Navigation.IsLocationReachable(transform.position, CandidateSO.InteractionPoint))
                         continue;
 
                     ++NumCandidateInteractables;
@@ -120,9 +131,12 @@ namespace HybridGOAPExample
             InCallbackFn(0.25f);
         }
 
-        public void SelectRandomInteraction(GameObject InQuerier, System.Action<SmartObject, BaseInteraction> InCallbackFn)
+        public void SelectRandomInteraction(GameObject InQuerier, float InSearchRange, System.Action<SmartObject, BaseInteraction> InCallbackFn)
         {
             List<System.Tuple<SmartObject, BaseInteraction>> CandidateInteractions = new();
+
+            float MaxInteractionRange = InSearchRange > 0 ? InSearchRange : DefaultInteractableSearchRange;
+            float MaxInteractionRangeSq = MaxInteractionRange * MaxInteractionRange;
 
             // loop through all of the smart objects
             foreach (var CandidateSO in SmartObjectManager.Instance.RegisteredObjects)
@@ -131,6 +145,12 @@ namespace HybridGOAPExample
                 foreach (var CandidateInteraction in CandidateSO.Interactions)
                 {
                     if (!CandidateInteraction.CanPerform())
+                        continue;
+
+                    if ((CandidateSO.InteractionPoint - transform.position).sqrMagnitude > MaxInteractionRangeSq)
+                        continue;
+
+                    if ((Navigation != null) && !Navigation.IsLocationReachable(transform.position, CandidateSO.InteractionPoint))
                         continue;
 
                     CandidateInteractions.Add(new System.Tuple<SmartObject, BaseInteraction>(CandidateSO, CandidateInteraction));

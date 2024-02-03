@@ -1,6 +1,7 @@
 using HybridGOAP;
 using StateMachine;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace HybridGOAPExample
 {
@@ -12,7 +13,10 @@ namespace HybridGOAPExample
         [SerializeField] float MinWaitTime = 4.0f;
         [SerializeField] float MaxWaitTime = 8.0f;
 
-        [SerializeField] float NavigationSearchRange = 5.0f;
+        [Tooltip("Controls how far from our goal location that we will search for a valid location on the NavMesh.")]
+        [SerializeField][FormerlySerializedAs("NavigationSearchRange")] float ValidNavMeshSearchRange = 5.0f;
+
+        [Tooltip("Controls how close the AI needs to get to the destination to consider it reached.")]
         [SerializeField] float StoppingDistance = 0.1f;
 
         public override float CalculateCost()
@@ -22,7 +26,7 @@ namespace HybridGOAPExample
 
         protected override void ConfigureFSM()
         {
-            var State_PickLocation = AddState(new SMState_CalculateMoveLocation(Navigation, NavigationSearchRange, GetWanderLocation));
+            var State_PickLocation = AddState(new SMState_CalculateMoveLocation(Navigation, ValidNavMeshSearchRange, GetWanderLocation));
             var State_MoveToLocation = AddState(new SMState_MoveTo(Navigation, StoppingDistance));
             var State_Wait = AddState(new SMState_WaitForTime(MinWaitTime, MaxWaitTime));
 

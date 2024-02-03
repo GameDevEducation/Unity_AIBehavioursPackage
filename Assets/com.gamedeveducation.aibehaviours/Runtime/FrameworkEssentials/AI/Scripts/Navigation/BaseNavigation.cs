@@ -124,6 +124,8 @@ public abstract class BaseNavigation : MonoBehaviour, INavigationInterface
         State = EState.Idle;
     }
 
+    public abstract bool IsLocationReachable(Vector3 startPosition, Vector3 destinationPosition, float searchRange = -1.0f);
+
     public abstract bool FindNearestPoint(Vector3 searchPos, float range, out Vector3 foundPos);
 
     protected abstract void Initialise();

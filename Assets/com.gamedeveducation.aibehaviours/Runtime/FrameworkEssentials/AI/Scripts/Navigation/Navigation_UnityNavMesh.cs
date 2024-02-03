@@ -158,6 +158,14 @@ public class Navigation_UnityNavMesh : BaseNavigation
         AIMotor.Stop();
     }
 
+    public override bool IsLocationReachable(Vector3 startPosition, Vector3 destinationPosition, float searchRange = -1.0f)
+    {
+        float workingDistance = Mathf.Max(searchRange, LinkedAgent.height * 0.5f);
+
+        NavMeshHit hitResult;
+        return NavMesh.SamplePosition(destinationPosition, out hitResult, workingDistance, NavMesh.AllAreas);
+    }
+
     public override bool FindNearestPoint(Vector3 searchPos, float range, out Vector3 foundPos)
     {
         NavMeshHit hitResult;

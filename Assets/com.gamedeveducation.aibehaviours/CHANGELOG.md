@@ -1,3 +1,12 @@
+## [3.1.0] - 3rd February 2024
+ - Fixes #3 - Navigability/Range to SmartObject Interaction point (reported by SiliconOrchid)
+	        - Added IsLocationReachable to INavigationInterface
+	        - Initial implementation just checks if the location is on the NavMesh. Will add further checks after interactable overhaul.
+	        - The validation is relatively cheap and will form a basis for larger changes to the interactable system.
+ - Fixes #5 - Navigation Search Range meaning/function (reported by SiliconOrchid)
+	        - NavigationSearchRange has been renamed to ValidNavMeshSearchRange and given a tooltip
+	        - Added support for setting an interactable search range. This is temporarily on the GOAPBrainWrapper pending an overhaul of the interaction system.
+
 ## [3.0.3] - 27 January 2024
  - Fixes #2 - MonoBehaviourSingletons will de-parent and log an error (in the editor only ) if they are not at the root of the scene. (shoutout to SiliconOrchid for finding the issue)
 
