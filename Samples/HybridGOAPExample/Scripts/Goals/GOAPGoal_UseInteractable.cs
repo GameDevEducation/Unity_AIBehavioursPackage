@@ -6,13 +6,13 @@ namespace HybridGOAPExample
 {
     public class GOAPGoal_UseInteractable : GOAPGoalBase
     {
-        [SerializeField] UnityEvent<GameObject, System.Action<float>> OnGetUseInteractableDesire;
+        [SerializeField] UnityEvent<GameObject, float, System.Action<float>> OnGetUseInteractableDesire;
 
         public override void PrepareForPlanning()
         {
             float InteractDesire = float.MinValue;
 
-            OnGetUseInteractableDesire.Invoke(Self, (float InDesire) =>
+            OnGetUseInteractableDesire.Invoke(Self, -1.0f, (float InDesire) =>
             {
                 InteractDesire = InDesire;
             });

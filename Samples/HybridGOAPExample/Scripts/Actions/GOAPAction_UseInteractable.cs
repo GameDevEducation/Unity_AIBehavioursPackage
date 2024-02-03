@@ -3,15 +3,19 @@ using HybridGOAP;
 using StateMachine;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.Serialization;
 
 namespace HybridGOAPExample
 {
     public class GOAPAction_UseInteractable : GOAPAction_FSM
     {
-        [SerializeField] float NavigationSearchRange = 5.0f;
+        [Tooltip("Controls how far from our goal location that we will search for a valid location on the NavMesh.")]
+        [SerializeField][FormerlySerializedAs("NavigationSearchRange")] float ValidNavMeshSearchRange = 5.0f;
+
+        [Tooltip("Controls how close the AI needs to get to the destination to consider it reached.")]
         [SerializeField] float StoppingDistance = 0.1f;
 
-        [SerializeField] UnityEvent<GameObject, System.Action<SmartObject, BaseInteraction>> OnSelectInteraction;
+        [SerializeField] UnityEvent<GameObject, float, System.Action<SmartObject, BaseInteraction>> OnSelectInteraction;
 
         public override float CalculateCost()
         {
@@ -21,7 +25,7 @@ namespace HybridGOAPExample
         protected override void ConfigureFSM()
         {
             var State_SelectInteractable = AddState(new SMState_SelectInteraction(SelectInteractionFn));
-            var State_GetInteractableLocation = AddState(new SMState_CalculateMoveLocation(Navigation, NavigationSearchRange, GetInteractableLocation));
+            var State_GetInteractableLocation = AddState(new SMState_CalculateMoveLocation(Navigation, ValidNavMeshSearchRange, GetInteractableLocation));
             var State_MoveToInteractable = AddState(new SMState_MoveTo(Navigation, StoppingDistance));
             var State_UseInteractable = AddState(new SMState_UseInteractable());
 
@@ -62,7 +66,7 @@ namespace HybridGOAPExample
             SmartObject TargetSO = null;
             BaseInteraction TargetInteraction = null;
 
-            OnSelectInteraction.Invoke(Self, (SmartObject InTargetSO, BaseInteraction InTargetInteraction) =>
+            OnSelectInteraction.Invoke(Self, -1.0f, (SmartObject InTargetSO, BaseInteraction InTargetInteraction) =>
             {
                 TargetSO = InTargetSO;
                 TargetInteraction = InTargetInteraction;

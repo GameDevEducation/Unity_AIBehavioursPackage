@@ -1,12 +1,16 @@
 using HybridGOAP;
 using StateMachine;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace HybridGOAPExample
 {
     public class GOAPAction_ReturnHome : GOAPAction_FSM
     {
-        [SerializeField] float NavigationSearchRange = 5.0f;
+        [Tooltip("Controls how far from our goal location that we will search for a valid location on the NavMesh.")]
+        [SerializeField][FormerlySerializedAs("NavigationSearchRange")] float ValidNavMeshSearchRange = 5.0f;
+
+        [Tooltip("Controls how close the AI needs to get to the destination to consider it reached.")]
         [SerializeField] float StoppingDistance = 0.1f;
 
         public override float CalculateCost()
@@ -16,7 +20,7 @@ namespace HybridGOAPExample
 
         protected override void ConfigureFSM()
         {
-            var State_GetHomeLocation = AddState(new SMState_CalculateMoveLocation(Navigation, NavigationSearchRange, GetHomeLocation));
+            var State_GetHomeLocation = AddState(new SMState_CalculateMoveLocation(Navigation, ValidNavMeshSearchRange, GetHomeLocation));
             var State_MoveToLocation = AddState(new SMState_MoveTo(Navigation, StoppingDistance));
 
             State_GetHomeLocation.AddTransition(SMTransition_StateStatus.IfHasFinished(), State_MoveToLocation);

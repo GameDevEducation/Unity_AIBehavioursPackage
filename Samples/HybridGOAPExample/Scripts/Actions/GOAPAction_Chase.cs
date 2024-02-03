@@ -2,12 +2,16 @@ using HybridGOAP;
 using StateMachine;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace HybridGOAPExample
 {
     public class GOAPAction_Chase : GOAPAction_FSM
     {
-        [SerializeField] float NavigationSearchRange = 5.0f;
+        [Tooltip("Controls how far from our goal location that we will search for a valid location on the NavMesh.")]
+        [SerializeField][FormerlySerializedAs("NavigationSearchRange")] float ValidNavMeshSearchRange = 5.0f;
+
+        [Tooltip("Controls how close the AI needs to get to the destination to consider it reached.")]
         [SerializeField] float StoppingDistance = 1f;
 
         public override float CalculateCost()
@@ -18,7 +22,7 @@ namespace HybridGOAPExample
         protected override void ConfigureFSM()
         {
             var ChildStates = new List<ISMState>();
-            ChildStates.Add(new SMState_CalculateMoveLocation(Navigation, NavigationSearchRange, GetTargetLocation, true));
+            ChildStates.Add(new SMState_CalculateMoveLocation(Navigation, ValidNavMeshSearchRange, GetTargetLocation, true));
             ChildStates.Add(new SMState_MoveTo(Navigation, StoppingDistance, true));
 
             AddState(new SMState_Parallel(ChildStates));

@@ -230,6 +230,8 @@ namespace HybridGOAP
 
         public Blackboard<FastName> CurrentBlackboard { get; private set; }
 
+        public INavigationInterface Navigation { get; private set; }
+
         public string DebugDisplayName => gameObject.name;
 
         GOAPPlan ActivePlan = new();
@@ -289,6 +291,11 @@ namespace HybridGOAP
             GameDebugger.AddSource(this);
 
             ServiceLocator.RegisterService(CurrentBlackboard, gameObject);
+
+            ServiceLocator.AsyncLocateService<INavigationInterface>((ILocatableService InService) =>
+            {
+                Navigation = InService as INavigationInterface;
+            }, gameObject, EServiceSearchMode.LocalOnly);
         }
 
         void OnDestroy()
