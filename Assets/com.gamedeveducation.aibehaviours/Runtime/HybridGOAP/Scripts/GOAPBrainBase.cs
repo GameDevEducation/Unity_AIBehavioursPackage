@@ -289,6 +289,7 @@ namespace HybridGOAP
             ConfigureBrain();
 
             GameDebugger.AddSource(this);
+            AIDebuggerCustomEditor.AddSource(this);
 
             ServiceLocator.RegisterService(CurrentBlackboard, gameObject);
 
@@ -301,6 +302,7 @@ namespace HybridGOAP
         void OnDestroy()
         {
             GameDebugger.RemoveSource(this);
+            AIDebuggerCustomEditor.RemoveSource(this);
         }
 
         void Update()
