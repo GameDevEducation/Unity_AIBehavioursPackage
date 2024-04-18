@@ -1,3 +1,10 @@
+## [4.0.0] - 19th April 2024
+ - Update to Unity 2023.2.18f1
+ - Restructure the Game Debugger to make it easy to swap in additional UI interfaces
+ - Add tracking of if we have a destination set to the INavigationInterface
+ - Fixed NavMeshAgent stoppingDistance being out of sync (was always the previous one not the one for the current path)
+ - Add AddComponentMenu support to goals and actions
+
 ## [3.1.0] - 3rd February 2024
  - Fixes #3 - Navigability/Range to SmartObject Interaction point (reported by SiliconOrchid)
 	        - Added IsLocationReachable to INavigationInterface

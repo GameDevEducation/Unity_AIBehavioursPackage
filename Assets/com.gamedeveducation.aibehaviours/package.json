@@ -1,6 +1,6 @@
 {
   "name": "com.gamedeveducation.aibehaviours",
-  "version": "3.1.0",
+  "version": "4.0.0",
   "displayName": "GameDev Education Package: AI Behaviours",
   "description": "This package provides an AI infrastructure including movement, sensors an behaviours.",
   "unity": "2022.3",
@@ -18,9 +18,9 @@
   ],
  "samples": [
   {
-    "displayName": "Hybrid GOAP Sample",
-    "description": "Demonstrates the Hybrid GOAP system in a variety of scenarios",
-    "path": "Samples~/HybridGOAPExample"
+    "displayName": "AI Demo Scenes",
+    "description": "Demonstrates the AI Behaviours package in a variety of scenarios",
+    "path": "Samples~/DemoScenes"
   }
  ]
 }

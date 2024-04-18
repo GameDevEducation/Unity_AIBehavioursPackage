@@ -83,7 +83,7 @@ public abstract class BaseNavigation : MonoBehaviour, INavigationInterface
             Tick_PathFollowing();
     }
 
-    public void SetDestinationReachedThreshold(float newThreshold)
+    public virtual void SetDestinationReachedThreshold(float newThreshold)
     {
         DestinationReachedThreshold = newThreshold;
     }
@@ -170,6 +170,7 @@ public abstract class BaseNavigation : MonoBehaviour, INavigationInterface
     protected abstract void Tick_Animation();
 
     #region INavigationInterface Interfaces
+    public abstract bool HasDestination { get; protected set; }
 
     public bool SetMoveLocation(GameObject InMover, Vector3 InDestination, float InStoppingDistance)
     {
