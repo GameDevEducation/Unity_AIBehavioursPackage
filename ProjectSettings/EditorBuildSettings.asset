@@ -6,16 +6,20 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/com.gamedeveducation.aibehaviours/Samples/HybridGOAPExample/Scenes/HybridGOAP_FirstPersonTestScene.unity
+    path: Assets/com.gamedeveducation.aibehaviours/Samples/DemoScenes/Scenes/Hybrid
+      GOAP/State Machines/HybridGOAP_SM_FirstPersonTestScene.unity
     guid: e8d8a9f059363f146872dad6ff0f71f5
   - enabled: 1
-    path: Assets/com.gamedeveducation.aibehaviours/Samples/HybridGOAPExample/Scenes/HybridGOAP_RTSTestScene.unity
+    path: Assets/com.gamedeveducation.aibehaviours/Samples/DemoScenes/Scenes/Hybrid
+      GOAP/State Machines/HybridGOAP_SM_RTSTestScene.unity
     guid: 31383e5402c068249b19ca73ffaadfac
   - enabled: 1
-    path: Assets/com.gamedeveducation.aibehaviours/Samples/HybridGOAPExample/Scenes/HybridGOAP_SimsStyleTestScene.unity
+    path: Assets/com.gamedeveducation.aibehaviours/Samples/DemoScenes/Scenes/Hybrid
+      GOAP/State Machines/HybridGOAP_SM_SimsStyleTestScene.unity
     guid: c2b0d3ad6905cf74480213a67f5334c2
   - enabled: 1
-    path: Assets/com.gamedeveducation.aibehaviours/Samples/HybridGOAPExample/Scenes/HybridGOAP_VillageTestScene.unity
+    path: Assets/com.gamedeveducation.aibehaviours/Samples/DemoScenes/Scenes/Hybrid
+      GOAP/State Machines/HybridGOAP_SM_VillageTestScene.unity
     guid: 26daa2a9662b35a4db79a26555e123b2
   m_configObjects: {}
   m_UseUCBPForAssetBundles: 0

@@ -1,0 +1,20 @@
+{
+    "name": "DemoScenes",
+    "rootNamespace": "DemoScenes",
+    "references": [
+        "GUID:9240a55a31a208a4484d6530144948de",
+        "GUID:f65b4dca74581ce4a88fcdc4a04768a8",
+        "GUID:6055be8ebefd69e48b49212b09b47b2f",
+        "GUID:cd100ced8a6c1ec4ca91212b6693d938",
+        "GUID:76aaae51f999ffd48ba9fa74c4c7ada7"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

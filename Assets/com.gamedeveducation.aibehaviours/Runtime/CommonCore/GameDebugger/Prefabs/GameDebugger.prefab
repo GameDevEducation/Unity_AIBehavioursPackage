@@ -108,15 +108,17 @@ MonoBehaviour:
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
-  m_enableWordWrapping: 1
+  m_TextWrappingMode: 1
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
   m_linkedTextComponent: {fileID: 0}
   parentLinkedComponent: {fileID: 0}
   m_enableKerning: 1
+  m_ActiveFontFeatures: 6e72656b
   m_enableExtraPadding: 0
   checkPaddingRequired: 0
   m_isRichText: 1
+  m_EmojiFallbackSupport: 1
   m_parseCtrlCharacters: 1
   m_isOrthographic: 1
   m_isCullingEnabled: 0
@@ -167,10 +169,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 2015340602613913182}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 99.415, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 99.415, y: -10.055}
+  m_SizeDelta: {x: 198.83002, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5623164160441248165
 CanvasRenderer:
@@ -243,15 +245,17 @@ MonoBehaviour:
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
-  m_enableWordWrapping: 1
+  m_TextWrappingMode: 1
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
   m_linkedTextComponent: {fileID: 0}
   parentLinkedComponent: {fileID: 0}
   m_enableKerning: 1
+  m_ActiveFontFeatures: 6e72656b
   m_enableExtraPadding: 0
   checkPaddingRequired: 0
   m_isRichText: 1
+  m_EmojiFallbackSupport: 1
   m_parseCtrlCharacters: 1
   m_isOrthographic: 1
   m_isCullingEnabled: 0
@@ -372,7 +376,7 @@ GameObject:
   - component: {fileID: 6695932245995111263}
   - component: {fileID: 3658765517042886087}
   - component: {fileID: 8559264068371066223}
-  - component: {fileID: 4078969534447458279}
+  - component: {fileID: 1254960309644958904}
   m_Layer: 5
   m_Name: GameDebugger
   m_TagString: Untagged
@@ -463,7 +467,7 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
---- !u!114 &4078969534447458279
+--- !u!114 &1254960309644958904
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -472,16 +476,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 4151792078011447115}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 394a7e6942715824c9c851e395220625, type: 3}
+  m_Script: {fileID: 11500000, guid: 553f246b77362a144971d9c2ee70e0d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  IndentString: '  '
   OnPopulateUI_SelectedObjectName:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 4789006328737019104}
         m_TargetAssemblyTypeName: TMPro.TMP_Text, Unity.TextMeshPro
-        m_MethodName: set_text
+        m_MethodName: SetText
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -496,7 +499,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 5934914080167722079}
         m_TargetAssemblyTypeName: TMPro.TMP_Text, Unity.TextMeshPro
-        m_MethodName: set_text
+        m_MethodName: SetText
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -705,8 +708,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 4078969534447458279}
-        m_TargetAssemblyTypeName: CommonCore.GameDebugger, CommonCore
+      - m_Target: {fileID: 1254960309644958904}
+        m_TargetAssemblyTypeName: CommonCore.GameDebugger_UIOverlay, CommonCore
         m_MethodName: UI_OnSelectPrevious
         m_Mode: 1
         m_Arguments:
@@ -825,15 +828,17 @@ MonoBehaviour:
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
-  m_enableWordWrapping: 1
+  m_TextWrappingMode: 1
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
   m_linkedTextComponent: {fileID: 0}
   parentLinkedComponent: {fileID: 0}
   m_enableKerning: 1
+  m_ActiveFontFeatures: 6e72656b
   m_enableExtraPadding: 0
   checkPaddingRequired: 0
   m_isRichText: 1
+  m_EmojiFallbackSupport: 1
   m_parseCtrlCharacters: 1
   m_isOrthographic: 1
   m_isCullingEnabled: 0
@@ -959,15 +964,17 @@ MonoBehaviour:
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
-  m_enableWordWrapping: 1
+  m_TextWrappingMode: 1
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
   m_linkedTextComponent: {fileID: 0}
   parentLinkedComponent: {fileID: 0}
   m_enableKerning: 1
+  m_ActiveFontFeatures: 6e72656b
   m_enableExtraPadding: 0
   checkPaddingRequired: 0
   m_isRichText: 1
+  m_EmojiFallbackSupport: 1
   m_parseCtrlCharacters: 1
   m_isOrthographic: 1
   m_isCullingEnabled: 0
@@ -1434,8 +1441,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 4078969534447458279}
-        m_TargetAssemblyTypeName: CommonCore.GameDebugger, CommonCore
+      - m_Target: {fileID: 1254960309644958904}
+        m_TargetAssemblyTypeName: CommonCore.GameDebugger_UIOverlay, CommonCore
         m_MethodName: UI_OnSelectNext
         m_Mode: 1
         m_Arguments:

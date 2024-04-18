@@ -1,88 +1,81 @@
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Events;
 
 namespace CommonCore
 {
     public class GameDebugger : MonoBehaviourSingleton<GameDebugger>, IGameDebugger
     {
-        [SerializeField] string IndentString = "  ";
-        [SerializeField] UnityEvent<string> OnPopulateUI_SelectedObjectName = new();
-        [SerializeField] UnityEvent<string> OnPopulateUI_DebugText = new();
+        string IndentString = "  ";
 
         List<IDebuggableObject> Sources = new();
 
         int CurrentSourceIndex = -1;
-        IDebuggableObject CurrentSource => ((CurrentSourceIndex < 0) || (CurrentSourceIndex >= Sources.Count)) ? null : Sources[CurrentSourceIndex];
+        public IDebuggableObject CurrentSource => ((CurrentSourceIndex < 0) || (CurrentSourceIndex >= Sources.Count)) ? null : Sources[CurrentSourceIndex];
+        public string DebugTextForCurrentSource { get; protected set; } = null;
+        public string DebugTextForOtherSources { get; protected set; } = null;
 
         System.Text.StringBuilder DebugTextBuilder = new();
         int IndentLevel = 0;
 
-        void Start()
+        List<IGameDebuggerUI> LinkedUIs = new();
+
+        protected override void OnAwake()
         {
-            RefreshUI();
+            base.OnAwake();
+
+            ServiceLocator.RegisterService<IGameDebugger>(this);
         }
 
         void Update()
         {
-            RefreshUI();
+            if (Sources.Count == 0)
+            {
+                DebugTextForCurrentSource = DebugTextForOtherSources = null;
+                return;
+            }
+
+            if (CurrentSource == null)
+                CurrentSourceIndex = 0;
+
+            var PrimarySource = CurrentSource;
+
+            // Refresh the text for the current source
+            DebugTextBuilder.Clear();
+            foreach (var Source in Sources)
+            {
+                if (Source != PrimarySource)
+                    continue;
+
+                Source.GatherDebugData(this, true);
+            }
+            DebugTextForCurrentSource = DebugTextBuilder.ToString();
+
+            // refresh the text for inactive sources
+            DebugTextBuilder.Clear();
+            foreach (var Source in Sources)
+            {
+                if (Source == PrimarySource)
+                    continue;
+
+                Source.GatherDebugData(this, false);
+            }
+            DebugTextForOtherSources = DebugTextBuilder.ToString();
         }
 
-        public void UI_OnSelectPrevious()
+        public void SelectPreviousSource()
         {
             if (Sources.Count == 0)
                 return;
 
             CurrentSourceIndex = (CurrentSourceIndex - 1 + Sources.Count) % Sources.Count;
-
-            RefreshUI();
         }
 
-        public void UI_OnSelectNext()
+        public void SelectNextSource()
         {
             if (Sources.Count == 0)
                 return;
 
             CurrentSourceIndex = (CurrentSourceIndex + 1) % Sources.Count;
-
-            RefreshUI();
-        }
-
-        void RefreshUI()
-        {
-            // remove any nulls
-            for (int Index = Sources.Count - 1; Index >= 0; Index--)
-            {
-                if (Sources[Index] == null)
-                {
-                    Sources.RemoveAt(Index);
-
-                    if (Index == CurrentSourceIndex)
-                        CurrentSourceIndex = -1;
-                }
-            }
-
-            if ((CurrentSource == null) && (Sources.Count == 0))
-                CurrentSourceIndex = 0;
-
-            if (CurrentSource == null)
-            {
-                OnPopulateUI_SelectedObjectName.Invoke("No Sources");
-                OnPopulateUI_DebugText.Invoke("");
-                return;
-            }
-
-            OnPopulateUI_SelectedObjectName.Invoke(CurrentSource.DebugDisplayName);
-
-            // gather the debug data
-            var PrimarySource = CurrentSource;
-            DebugTextBuilder.Clear();
-            foreach (var Source in Sources)
-            {
-                Source.GatherDebugData(this, Source == PrimarySource);
-            }
-
-            OnPopulateUI_DebugText.Invoke(DebugTextBuilder.ToString());
         }
 
         public void AddEndLine()
@@ -122,12 +115,17 @@ namespace CommonCore
             ++IndentLevel;
         }
 
-        public static void AddSource(IDebuggableObject InObject)
+        public void RegisterUI(IGameDebuggerUI InDebuggerUI)
         {
-            if (Instance == null)
+            if (LinkedUIs.Contains(InDebuggerUI))
                 return;
 
-            Instance.RegisterSource(InObject);
+            LinkedUIs.Add(InDebuggerUI);
+        }
+
+        public void UnregisterUI(IGameDebuggerUI InDebuggerUI)
+        {
+            LinkedUIs.Remove(InDebuggerUI);
         }
 
         public void RegisterSource(IDebuggableObject InObject)
@@ -138,18 +136,9 @@ namespace CommonCore
             Sources.Add(InObject);
 
             if (CurrentSource == null)
-            {
                 CurrentSourceIndex = 0;
-                RefreshUI();
-            }
-        }
 
-        public static void RemoveSource(IDebuggableObject InObject)
-        {
-            if (Instance == null)
-                return;
-
-            Instance.UnregisterSource(InObject);
+            RefreshLinkedUIs();
         }
 
         public void UnregisterSource(IDebuggableObject InObject)
@@ -163,9 +152,29 @@ namespace CommonCore
             {
                 if (Sources.Count > 0)
                     CurrentSourceIndex = 0;
-
-                RefreshUI();
             }
+
+            RefreshLinkedUIs();
+        }
+
+        void RefreshLinkedUIs()
+        {
+            foreach (var LinkedUI in LinkedUIs)
+            {
+                if (LinkedUI == null)
+                    continue;
+
+                LinkedUI.RequestRefresh();
+            }
+        }
+    }
+    public static class GameDebuggerBootstrapper
+    {
+        [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]
+        public static void Initialize()
+        {
+            if (GameDebugger.Instance != null)
+                GameDebugger.Instance.OnBootstrapped();
         }
     }
 }

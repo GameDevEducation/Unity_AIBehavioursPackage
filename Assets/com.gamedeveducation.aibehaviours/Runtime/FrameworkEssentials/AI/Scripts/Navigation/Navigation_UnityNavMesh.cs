@@ -13,6 +13,8 @@ public class Navigation_UnityNavMesh : BaseNavigation
     Vector3[] CurrentPath;
     int TargetPoint = -1;
 
+    public override bool HasDestination { get; protected set; } = false;
+
     protected override void Initialise()
     {
         LinkedAgent = GetComponent<NavMeshAgent>();
@@ -26,6 +28,13 @@ public class Navigation_UnityNavMesh : BaseNavigation
         LinkedAgent.updatePosition = LinkedAgent.updateRotation = bInAgentHasControl;
     }
 
+    public override void SetDestinationReachedThreshold(float newThreshold)
+    {
+        base.SetDestinationReachedThreshold(newThreshold);
+
+        LinkedAgent.stoppingDistance = newThreshold;
+    }
+
     protected override bool RequestPath()
     {
         LinkedAgent.speed = MaxMoveSpeed;
@@ -33,6 +42,7 @@ public class Navigation_UnityNavMesh : BaseNavigation
         LinkedAgent.stoppingDistance = DestinationReachedThreshold;
 
         LinkedAgent.SetDestination(Destination);
+        HasDestination = true;
 
         OnBeganPathFinding();
 
@@ -56,7 +66,10 @@ public class Navigation_UnityNavMesh : BaseNavigation
                 OnPathFound();
             }
             else
+            {
                 OnFailedToFindPath();
+                HasDestination = false;
+            }
         }
     }
 
@@ -92,6 +105,7 @@ public class Navigation_UnityNavMesh : BaseNavigation
             if (TargetPoint == CurrentPath.Length)
             {
                 AIMotor.Stop();
+                HasDestination = false;
 
                 OnReachedDestination();
                 return;
@@ -112,6 +126,7 @@ public class Navigation_UnityNavMesh : BaseNavigation
         if (LinkedAgent.hasPath && LinkedAgent.remainingDistance <= LinkedAgent.stoppingDistance)
         {
             AIMotor.Stop();
+            HasDestination = false;
 
             // take control back from the agent
             SetIsAgentControllingLocomotion(false);
@@ -154,6 +169,7 @@ public class Navigation_UnityNavMesh : BaseNavigation
 
         CurrentPath = null;
         TargetPoint = -1;
+        HasDestination = false;
 
         AIMotor.Stop();
     }
