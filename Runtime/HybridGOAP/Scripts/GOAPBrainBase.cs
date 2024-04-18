@@ -288,7 +288,10 @@ namespace HybridGOAP
 
             ConfigureBrain();
 
-            GameDebugger.AddSource(this);
+            ServiceLocator.AsyncLocateService<IGameDebugger>((ILocatableService InDebugger) =>
+            {
+                (InDebugger as IGameDebugger).RegisterSource(this);
+            });
 
             ServiceLocator.RegisterService(CurrentBlackboard, gameObject);
 
@@ -300,7 +303,10 @@ namespace HybridGOAP
 
         void OnDestroy()
         {
-            GameDebugger.RemoveSource(this);
+            ServiceLocator.AsyncLocateService<IGameDebugger>((ILocatableService InDebugger) =>
+            {
+                (InDebugger as IGameDebugger).UnregisterSource(this);
+            });
         }
 
         void Update()

@@ -17,7 +17,10 @@ namespace StateMachine
         // Start is called before the first frame update
         void Start()
         {
-            GameDebugger.AddSource(this);
+            ServiceLocator.AsyncLocateService<IGameDebugger>((ILocatableService InDebugger) =>
+            {
+                (InDebugger as IGameDebugger).RegisterSource(this);
+            });
 
             var State1 = LinkedStateMachine.AddState(new SMState_WaitForTime(2f, 5f, "Wait 1"));
             var State2 = LinkedStateMachine.AddState(new SMState_WaitForTime(2f, 5f, "Wait 2"));
@@ -31,7 +34,10 @@ namespace StateMachine
 
         void OnDestroy()
         {
-            GameDebugger.RemoveSource(this);
+            ServiceLocator.AsyncLocateService<IGameDebugger>((ILocatableService InDebugger) =>
+            {
+                (InDebugger as IGameDebugger).UnregisterSource(this);
+            });
         }
 
         // Update is called once per frame
