@@ -1,3 +1,6 @@
+## [4.0.1] - Baseline for Behaviour Tree System
+ - Setup all scenes for BTs
+
 ## [4.0.0] - 19th April 2024
  - Update to Unity 2023.2.18f1
  - Restructure the Game Debugger to make it easy to swap in additional UI interfaces
