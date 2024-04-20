@@ -1,7 +1,6 @@
 using HybridGOAP;
 using StateMachine;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace DemoScenes
 {
