@@ -113,7 +113,7 @@ namespace BehaviourTree
 
         }
 
-        public void Reset()
+        public virtual void Reset()
         {
             LastStatus = EBTNodeResult.ReadyToTick;
         }
