@@ -150,8 +150,8 @@ public class Navigation_UnityNavMesh : BaseNavigation
 
     protected override void Tick_Animation()
     {
-        float forwardsSpeed = State != EState.Idle ? Vector3.Dot(LinkedAgent.velocity, transform.forward) / LinkedAgent.speed : 0f;
-        float sidewaysSpeed = State != EState.Idle ? Vector3.Dot(LinkedAgent.velocity, transform.right) / LinkedAgent.speed : 0f;
+        float forwardsSpeed = State == EState.FollowingPath ? Vector3.Dot(LinkedAgent.velocity, transform.forward) / LinkedAgent.speed : 0f;
+        float sidewaysSpeed = State == EState.FollowingPath ? Vector3.Dot(LinkedAgent.velocity, transform.right) / LinkedAgent.speed : 0f;
         AnimController.SetFloat("ForwardsSpeed", forwardsSpeed);
         AnimController.SetFloat("SidewaysSpeed", sidewaysSpeed);
     }
