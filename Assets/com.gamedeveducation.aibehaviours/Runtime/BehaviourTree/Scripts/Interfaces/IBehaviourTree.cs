@@ -12,7 +12,7 @@ namespace BehaviourTree
 
         void Reset();
 
-        IBTNode AddChildToRootNode<NodeType>(NodeType InNode) where NodeType : IBTNode;
+        IBTNode AddChildToRootNode(IBTNode InNode);
 
         EBTNodeResult Tick(float InDeltaTime);
     }
