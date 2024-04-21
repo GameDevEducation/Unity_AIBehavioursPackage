@@ -172,7 +172,11 @@ namespace BehaviourTree
                 OnEnter();
 
                 if (HasFinished)
+                {
+                    OnExit();
+
                     return OnTickReturn(LastStatus);
+                }
             }
 
             CurrentTickPhase = EBTNodeTickPhase.NodeLogic;
