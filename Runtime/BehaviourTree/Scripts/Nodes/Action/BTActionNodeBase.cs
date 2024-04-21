@@ -24,7 +24,7 @@ namespace BehaviourTree
             return false;
         }
 
-        protected bool SetStatusAndCalculateReturnValue(EBTNodeResult InResult, bool? bOverrideReturnValue)
+        protected bool SetStatusAndCalculateReturnValue(EBTNodeResult InResult, bool? bOverrideReturnValue = null)
         {
             LastStatus = InResult;
 
