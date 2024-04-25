@@ -8,8 +8,8 @@ namespace DemoScenes
     {
         System.Func<GameObject, System.Tuple<SmartObject, BaseInteraction>> SelectInteractionFn;
 
-        public SMState_SelectInteraction(System.Func<GameObject, System.Tuple<SmartObject, BaseInteraction>> InSelectInteractionFn, string InCustomName = null) :
-            base(InCustomName)
+        public SMState_SelectInteraction(System.Func<GameObject, System.Tuple<SmartObject, BaseInteraction>> InSelectInteractionFn, string InDisplayName = null) :
+            base(InDisplayName)
         {
             SelectInteractionFn = InSelectInteractionFn;
         }

@@ -8,8 +8,8 @@ namespace DemoScenes
     {
         IResourceQueryInterface ResourceInterface;
 
-        public SMState_SelectStorage(IResourceQueryInterface InResourceInterface, string InCustomName = null) :
-            base(InCustomName)
+        public SMState_SelectStorage(IResourceQueryInterface InResourceInterface, string InDisplayName = null) :
+            base(InDisplayName)
         {
             ResourceInterface = InResourceInterface;
         }

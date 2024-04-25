@@ -20,10 +20,10 @@ namespace BehaviourTree
         {
             if (bInIsSelected)
             {
-                string Prefix = LastStatus == EBTNodeResult.InProgress ? "<b>" : "";
+                string Prefix = LastStatus == EBTNodeResult.InProgress ? "<b>* " : "";
                 string Suffix = LastStatus == EBTNodeResult.InProgress ? "</b>" : "";
 
-                InDebugger.AddTextLine($"{Prefix}Flow: {DebugDisplayName}{Suffix}");
+                InDebugger.AddSectionHeader($"{Prefix}Flow: {DebugDisplayName}{Suffix}");
             }
 
             base.GatherDebugDataInternal(InDebugger, bInIsSelected);

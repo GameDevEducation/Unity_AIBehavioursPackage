@@ -13,8 +13,8 @@ namespace StateMachine
 
         Vector3 LastSearchLocation;
 
-        public SMState_CalculateMoveLocation(INavigationInterface InNavInterface, float InSearchRange, System.Func<Vector3> InGetSearchLocationFn, bool bInContinuousMode = false, float InRecalculateThreshold = 0.1f, string InCustomName = null) :
-            base(InCustomName)
+        public SMState_CalculateMoveLocation(INavigationInterface InNavInterface, float InSearchRange, System.Func<Vector3> InGetSearchLocationFn, bool bInContinuousMode = false, float InRecalculateThreshold = 0.1f, string InDisplayName = null) :
+            base(InDisplayName)
         {
             Navigation = InNavInterface;
             SearchRange = InSearchRange;

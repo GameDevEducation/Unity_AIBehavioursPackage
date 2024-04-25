@@ -1,5 +1,6 @@
 using UnityEngine;
 
+[AddComponentMenu("Character Motor/Character Motor: AI")]
 public class AICharacterMotor : CharacterMotor
 {
     [Header("AI")]

@@ -102,5 +102,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1970d2dde58e7f44d81a0d1cce9411f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ValidNavMeshSearchRange: 5
+  ValidNavMeshSearchRange: 2
   StoppingDistance: 1

@@ -7,8 +7,8 @@ namespace StateMachine
     {
         List<ISMState> ChildStates = null;
 
-        public SMState_Parallel(List<ISMState> InChildStates, string InCustomName = null) :
-            base(InCustomName)
+        public SMState_Parallel(List<ISMState> InChildStates, string InDisplayName = null) :
+            base(InDisplayName)
         {
             ChildStates = InChildStates;
         }

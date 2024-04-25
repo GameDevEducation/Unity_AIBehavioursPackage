@@ -92,7 +92,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b24be4f7747a3141974b1afef2db2b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ValidNavMeshSearchRange: 5
+  ValidNavMeshSearchRange: 2
   StoppingDistance: 0.1
   GatherSpeed: 5
   StoreSpeed: 10

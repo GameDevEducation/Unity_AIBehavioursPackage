@@ -13,7 +13,7 @@ namespace HybridGOAP
         [SerializeField] float MaxWaitTime = 8.0f;
 
         [Tooltip("Controls how far from our goal location that we will search for a valid location on the NavMesh.")]
-        [SerializeField] float ValidNavMeshSearchRange = 5.0f;
+        [SerializeField] float ValidNavMeshSearchRange = 2.0f;
 
         [Tooltip("Controls how close the AI needs to get to the destination to consider it reached.")]
         [SerializeField] float StoppingDistance = 0.1f;

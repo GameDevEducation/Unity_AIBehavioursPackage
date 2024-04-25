@@ -11,8 +11,8 @@ namespace StateMachine
         Vector3 LastDestination;
         float RepathThresholdSq;
 
-        public SMState_MoveTo(INavigationInterface InNavInterface, float InStoppingDistance, bool bInContinuousMode = false, float InRepathThreshold = 0.1f, string InCustomName = null) :
-            base(InCustomName)
+        public SMState_MoveTo(INavigationInterface InNavInterface, float InStoppingDistance, bool bInContinuousMode = false, float InRepathThreshold = 0.1f, string InDisplayName = null) :
+            base(InDisplayName)
         {
             Navigation = InNavInterface;
             StoppingDistance = InStoppingDistance;

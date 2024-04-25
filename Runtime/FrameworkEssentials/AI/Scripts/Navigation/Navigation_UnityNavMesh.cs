@@ -1,11 +1,15 @@
 using UnityEngine;
 using UnityEngine.AI;
 
+[AddComponentMenu("AI/Navigation/Navigation: Unity NavMesh")]
 [RequireComponent(typeof(NavMeshAgent))]
 [RequireComponent(typeof(AICharacterMotor))]
 public class Navigation_UnityNavMesh : BaseNavigation
 {
     [SerializeField] bool OverrideAgentLocomotion = false;
+
+    [SerializeField] bool PerformPhysicsRaycastBeforeNavMeshProjection = true;
+    [SerializeField] LayerMask NavMeshPhysicsProjectionMask = ~0;
 
     NavMeshAgent LinkedAgent;
     AICharacterMotor AIMotor;
@@ -178,12 +182,30 @@ public class Navigation_UnityNavMesh : BaseNavigation
     {
         float workingDistance = Mathf.Max(searchRange, LinkedAgent.height * 0.5f);
 
+        if (PerformPhysicsRaycastBeforeNavMeshProjection)
+        {
+            RaycastHit physicsHitResult;
+            if (Physics.Raycast(startPosition, -transform.up, out physicsHitResult, LinkedAgent.height, NavMeshPhysicsProjectionMask, QueryTriggerInteraction.Ignore))
+            {
+                startPosition = physicsHitResult.point + transform.up * Mathf.Min(0.1f, 0.1f * LinkedAgent.height);
+            }
+        }
+
         NavMeshHit hitResult;
         return NavMesh.SamplePosition(destinationPosition, out hitResult, workingDistance, NavMesh.AllAreas);
     }
 
     public override bool FindNearestPoint(Vector3 searchPos, float range, out Vector3 foundPos)
     {
+        if (PerformPhysicsRaycastBeforeNavMeshProjection)
+        {
+            RaycastHit physicsHitResult;
+            if (Physics.Raycast(searchPos, -transform.up, out physicsHitResult, LinkedAgent.height, NavMeshPhysicsProjectionMask, QueryTriggerInteraction.Ignore))
+            {
+                searchPos = physicsHitResult.point + transform.up * Mathf.Min(0.1f, 0.1f * LinkedAgent.height);
+            }
+        }
+
         NavMeshHit hitResult;
         if (NavMesh.SamplePosition(searchPos, out hitResult, range, NavMesh.AllAreas))
         {

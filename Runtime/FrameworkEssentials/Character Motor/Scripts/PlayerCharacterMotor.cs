@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 
+[AddComponentMenu("Character Motor/Character Motor: Player")]
 [RequireComponent(typeof(Rigidbody))]
 public class PlayerCharacterMotor : CharacterMotor
 {

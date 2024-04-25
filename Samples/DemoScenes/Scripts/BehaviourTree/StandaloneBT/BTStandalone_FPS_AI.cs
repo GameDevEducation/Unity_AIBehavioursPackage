@@ -22,7 +22,7 @@ namespace DemoScenes
 
         [Header("Navigation")]
         [Tooltip("Controls how far from our goal location that we will search for a valid location on the NavMesh.")]
-        [SerializeField] float ValidNavMeshSearchRange = 5.0f;
+        [SerializeField] float ValidNavMeshSearchRange = 2.0f;
 
         [Tooltip("Controls how close the AI needs to get to the destination to consider it reached.")]
         [SerializeField] float StoppingDistance = 0.1f;
@@ -64,7 +64,7 @@ namespace DemoScenes
 
         Vector3 GetWanderLocation()
         {
-            Vector3 CurrentLocation = CurrentBlackboard.GetVector3(CommonCore.Names.CurrentLocation);
+            Vector3 CurrentLocation = LinkedBlackboard.GetVector3(CommonCore.Names.CurrentLocation);
 
             // pick random direction and distance
             float Angle = Random.Range(0f, Mathf.PI * 2f);
@@ -84,17 +84,17 @@ namespace DemoScenes
 
             // attempt to get the target object
             GameObject TargetGO = null;
-            CurrentBlackboard.TryGet(CommonCore.Names.Awareness_BestTarget, out TargetGO, null);
+            LinkedBlackboard.TryGet(CommonCore.Names.Awareness_BestTarget, out TargetGO, null);
 
             if (TargetGO != null)
             {
                 TargetLocation = TargetGO.transform.position;
-                CurrentBlackboard.Set(CommonCore.Names.Target_GameObject, TargetGO);
+                LinkedBlackboard.Set(CommonCore.Names.Target_GameObject, TargetGO);
             }
             else
             {
-                CurrentBlackboard.Set(CommonCore.Names.Target_GameObject, (GameObject)null);
-                CurrentBlackboard.TryGet(CommonCore.Names.Target_Position, out TargetLocation, CommonCore.Constants.InvalidVector3Position);
+                LinkedBlackboard.Set(CommonCore.Names.Target_GameObject, (GameObject)null);
+                LinkedBlackboard.TryGet(CommonCore.Names.Target_Position, out TargetLocation, CommonCore.Constants.InvalidVector3Position);
             }
 
             return TargetLocation;
@@ -107,7 +107,7 @@ namespace DemoScenes
             if (TargetLocation == CommonCore.Constants.InvalidVector3Position)
                 return false;
 
-            Vector3 CurrentLocation = CurrentBlackboard.GetVector3(CommonCore.Names.CurrentLocation);
+            Vector3 CurrentLocation = LinkedBlackboard.GetVector3(CommonCore.Names.CurrentLocation);
             float DistanceToTargetSq = (TargetLocation - CurrentLocation).sqrMagnitude;
 
             return DistanceToTargetSq < (ChaseMaxDistance * ChaseMaxDistance);

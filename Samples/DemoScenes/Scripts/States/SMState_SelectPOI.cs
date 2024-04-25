@@ -8,8 +8,8 @@ namespace DemoScenes
     {
         System.Func<GameObject, GameObject> PickPOIFn;
 
-        public SMState_SelectPOI(System.Func<GameObject, GameObject> InPickPOIFn, string InCustomName = null) :
-            base(InCustomName)
+        public SMState_SelectPOI(System.Func<GameObject, GameObject> InPickPOIFn, string InDisplayName = null) :
+            base(InDisplayName)
         {
             PickPOIFn = InPickPOIFn;
         }

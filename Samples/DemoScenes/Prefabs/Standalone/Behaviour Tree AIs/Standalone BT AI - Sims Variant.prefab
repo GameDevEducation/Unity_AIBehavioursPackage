@@ -103,7 +103,7 @@ MonoBehaviour:
   MaxWanderWaitTime: 8
   MinIdleWaitTime: 1
   MaxIdleWaitTime: 10
-  ValidNavMeshSearchRange: 5
+  ValidNavMeshSearchRange: 2
   StoppingDistance: 0.1
 --- !u!114 &9114811850327119203 stripped
 MonoBehaviour:

@@ -11,8 +11,8 @@ namespace StateMachine
         public SMState_Function(System.Func<Blackboard<FastName>, ESMStateStatus> InOnEnterInternalFn,
                                 System.Func<Blackboard<FastName>, float, ESMStateStatus> InOnTickInternalFn,
                                 System.Action<Blackboard<FastName>> InOnExitInternalFn,
-                                string InCustomName = null) :
-            base(InCustomName)
+                                string InDisplayName = null) :
+            base(InDisplayName)
         {
             OnEnterInternalFn = InOnEnterInternalFn;
             OnTickInternalFn = InOnTickInternalFn;
