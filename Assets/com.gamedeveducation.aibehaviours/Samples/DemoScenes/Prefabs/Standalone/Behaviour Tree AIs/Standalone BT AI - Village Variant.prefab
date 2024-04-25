@@ -1,0 +1,125 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &366354890014980283
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 807527060591293646, guid: 1703c34cd13aecb4c9126cca4dd127de, type: 3}
+      propertyPath: m_Name
+      value: Standalone BT AI - Village Variant
+      objectReference: {fileID: 0}
+    - target: {fileID: 3713783562801163603, guid: 1703c34cd13aecb4c9126cca4dd127de, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3713783562801163603, guid: 1703c34cd13aecb4c9126cca4dd127de, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3713783562801163603, guid: 1703c34cd13aecb4c9126cca4dd127de, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3713783562801163603, guid: 1703c34cd13aecb4c9126cca4dd127de, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3713783562801163603, guid: 1703c34cd13aecb4c9126cca4dd127de, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3713783562801163603, guid: 1703c34cd13aecb4c9126cca4dd127de, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3713783562801163603, guid: 1703c34cd13aecb4c9126cca4dd127de, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3713783562801163603, guid: 1703c34cd13aecb4c9126cca4dd127de, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3713783562801163603, guid: 1703c34cd13aecb4c9126cca4dd127de, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3713783562801163603, guid: 1703c34cd13aecb4c9126cca4dd127de, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 807527060591293646, guid: 1703c34cd13aecb4c9126cca4dd127de, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5232163590280002058}
+  m_SourcePrefab: {fileID: 100100000, guid: 1703c34cd13aecb4c9126cca4dd127de, type: 3}
+--- !u!1 &1018205223516032117 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 807527060591293646, guid: 1703c34cd13aecb4c9126cca4dd127de, type: 3}
+  m_PrefabInstance: {fileID: 366354890014980283}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &5232163590280002058
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1018205223516032117}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f99ba5b18e821045b6589957f1f780c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ResourceCapacity: 50
+  DefaultInteractableSearchRange: 30
+  OnSetPOI:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 7020656957140525297}
+        m_TargetAssemblyTypeName: BaseAI, FrameworkEssentials
+        m_MethodName: SetLookTarget
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  GatherSpeed: 5
+  StoreSpeed: 10
+  MinGatherCooldown: 5
+  MaxGatherCooldown: 10
+  MinimumGatherDesire: 0.1
+  MissingHomeStartDistance: 50
+  MissingHomePeaksDistance: 100
+  MissingHomeResetDistance: 10
+  MinReturnHomeCooldown: 1
+  MaxReturnHomeCooldown: 5
+  MinWanderRange: 10
+  MaxWanderRange: 50
+  MinWanderWaitTime: 4
+  MaxWanderWaitTime: 8
+  MinIdleWaitTime: 1
+  MaxIdleWaitTime: 10
+  ValidNavMeshSearchRange: 5
+  StoppingDistance: 0.1
+--- !u!114 &7020656957140525297 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7240644274611394634, guid: 1703c34cd13aecb4c9126cca4dd127de, type: 3}
+  m_PrefabInstance: {fileID: 366354890014980283}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1018205223516032117}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d845e743de6fa7446800ed517aafccb8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

@@ -1,0 +1,133 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &7858031150441647013
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 179460970876103288, guid: 340499be711f6b64c940ba4847de52c0, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 179460970876103288, guid: 340499be711f6b64c940ba4847de52c0, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 179460970876103288, guid: 340499be711f6b64c940ba4847de52c0, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 179460970876103288, guid: 340499be711f6b64c940ba4847de52c0, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 179460970876103288, guid: 340499be711f6b64c940ba4847de52c0, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 179460970876103288, guid: 340499be711f6b64c940ba4847de52c0, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 179460970876103288, guid: 340499be711f6b64c940ba4847de52c0, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 179460970876103288, guid: 340499be711f6b64c940ba4847de52c0, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 179460970876103288, guid: 340499be711f6b64c940ba4847de52c0, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 179460970876103288, guid: 340499be711f6b64c940ba4847de52c0, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 419186164601215875, guid: 340499be711f6b64c940ba4847de52c0, type: 3}
+      propertyPath: m_Name
+      value: HybridGOAP BT AI - Village Variant
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 419186164601215875, guid: 340499be711f6b64c940ba4847de52c0, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7793642046442932958}
+    - targetCorrespondingSourceObject: {fileID: 419186164601215875, guid: 340499be711f6b64c940ba4847de52c0, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1780381797940924291}
+    - targetCorrespondingSourceObject: {fileID: 419186164601215875, guid: 340499be711f6b64c940ba4847de52c0, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6806694802253401265}
+    - targetCorrespondingSourceObject: {fileID: 419186164601215875, guid: 340499be711f6b64c940ba4847de52c0, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5131094145469835906}
+  m_SourcePrefab: {fileID: 100100000, guid: 340499be711f6b64c940ba4847de52c0, type: 3}
+--- !u!1 &7556031003976208422 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 419186164601215875, guid: 340499be711f6b64c940ba4847de52c0, type: 3}
+  m_PrefabInstance: {fileID: 7858031150441647013}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &7793642046442932958
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7556031003976208422}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c63a54f4031f6fa498b53a885fdcba4a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1780381797940924291
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7556031003976208422}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b24be4f7747a3141974b1afef2db2b8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ValidNavMeshSearchRange: 5
+  StoppingDistance: 0.1
+  GatherSpeed: 5
+  StoreSpeed: 10
+--- !u!114 &6806694802253401265
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7556031003976208422}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 93bccfb813002a549be4ee92cc556e67, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MissingHomeStartDistance: 50
+  MissingHomePeaksDistance: 100
+  MissingHomeResetDistance: 10
+--- !u!114 &5131094145469835906
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7556031003976208422}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e3e1d344de2f6ef448d29be87ce93744, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ValidNavMeshSearchRange: 5
+  StoppingDistance: 0.1

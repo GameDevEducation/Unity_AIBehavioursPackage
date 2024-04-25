@@ -2899,6 +2899,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5485867991844283173, guid: 21369f6673bb05a4ea5c48fd3c8497bd, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5485867991844283173, guid: 21369f6673bb05a4ea5c48fd3c8497bd, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5485867991844283173, guid: 21369f6673bb05a4ea5c48fd3c8497bd, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8000814310996030412, guid: 21369f6673bb05a4ea5c48fd3c8497bd, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -3523,7 +3535,7 @@ PrefabInstance:
     - target: {fileID: 8406770653495004269, guid: e8c210deacd13b9489985aa64cd18939, type: 3}
       propertyPath: VillagerPrefab
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 7556031003976208422, guid: 37ac18d94a64e98439a62e57dc80ca59, type: 3}
     - target: {fileID: 8406770653495004269, guid: e8c210deacd13b9489985aa64cd18939, type: 3}
       propertyPath: InitialPopulation
       value: 20
