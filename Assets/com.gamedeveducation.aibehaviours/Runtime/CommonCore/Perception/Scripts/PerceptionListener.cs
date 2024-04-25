@@ -4,6 +4,7 @@ using UnityEngine.Events;
 
 namespace CommonCore
 {
+    [AddComponentMenu("AI/Perception/Perception Listener")]
     public class PerceptionListener : MonoBehaviour, IPerceptionListener
     {
         [SerializeField] protected Transform SensorOrigin;

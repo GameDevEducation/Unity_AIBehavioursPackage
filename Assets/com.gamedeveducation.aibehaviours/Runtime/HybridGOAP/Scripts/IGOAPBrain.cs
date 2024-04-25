@@ -4,6 +4,6 @@ namespace HybridGOAP
 {
     public interface IGOAPBrain : IDebuggableObject
     {
-        Blackboard<FastName> CurrentBlackboard { get; }
+        Blackboard<FastName> LinkedBlackboard { get; }
     }
 }

@@ -18,9 +18,9 @@ namespace StateMachine
 
         public ESMStateStatus CurrentStatus { get; protected set; } = ESMStateStatus.Uninitialised;
 
-        public SMStateBase(string InCustomName = null)
+        public SMStateBase(string InDisplayName = null)
         {
-            DebugDisplayName = string.IsNullOrEmpty(InCustomName) ? GetType().Name : InCustomName;
+            DebugDisplayName = string.IsNullOrEmpty(InDisplayName) ? GetType().Name : InDisplayName;
         }
 
         public void AddDefaultTransitions(ISMState InFinishedState, ISMState InFailedState)

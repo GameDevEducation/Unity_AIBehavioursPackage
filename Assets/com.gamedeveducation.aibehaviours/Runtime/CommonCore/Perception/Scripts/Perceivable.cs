@@ -4,6 +4,7 @@ using UnityEngine;
 
 namespace CommonCore
 {
+    [AddComponentMenu("AI/Perception/Perceivable")]
     public class Perceivable : MonoBehaviour, IPerceivable
     {
         protected enum EVelocitySource

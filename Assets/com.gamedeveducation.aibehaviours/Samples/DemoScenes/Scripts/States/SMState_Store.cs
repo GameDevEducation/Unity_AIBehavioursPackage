@@ -11,8 +11,8 @@ namespace DemoScenes
 
         CommonCore.FastName AmountHeldKey;
 
-        public SMState_Store(float InSpeed, string InCustomName = null) :
-            base(InCustomName)
+        public SMState_Store(float InSpeed, string InDisplayName = null) :
+            base(InDisplayName)
         {
             Speed = InSpeed;
         }

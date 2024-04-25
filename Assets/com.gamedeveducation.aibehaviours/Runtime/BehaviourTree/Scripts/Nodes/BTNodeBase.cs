@@ -24,7 +24,7 @@ namespace BehaviourTree
 
         public abstract string DebugDisplayName { get; protected set; }
 
-        protected bool bDecoratorsAllowRunning = false;
+        protected bool bDecoratorsAllowRunning = true;
         protected bool bCanSendExitNotification = false;
 
         public IBTNode AddDecorator(IBTDecorator InDecorator)

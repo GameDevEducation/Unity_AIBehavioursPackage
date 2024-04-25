@@ -6,7 +6,7 @@ namespace HybridGOAP
     public abstract class GOAPGoalBase : MonoBehaviour, IGOAPGoal
     {
         protected IGOAPBrain LinkedBrain;
-        protected Blackboard<FastName> LinkedBlackboard => LinkedBrain.CurrentBlackboard;
+        protected Blackboard<FastName> LinkedBlackboard => LinkedBrain.LinkedBlackboard;
 
         public int Priority { get; protected set; } = GoalPriority.DoNotRun;
 

@@ -248,6 +248,7 @@ namespace CommonCore
         }
     }
 
+    [AddComponentMenu("AI/Blackboard/Blackboard Manager")]
     public class BlackboardManager : MonoBehaviourSingleton<BlackboardManager>
     {
         Dictionary<MonoBehaviour, Blackboard<FastName>> IndividualBlackboards = new();

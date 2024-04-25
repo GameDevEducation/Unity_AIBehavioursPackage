@@ -22,27 +22,27 @@ namespace DemoScenes
             base.OnPreTickBrain(InDeltaTime);
 
             GameObject CurrentAwarenessTarget = null;
-            CurrentBlackboard.TryGet(CommonCore.Names.Awareness_BestTarget, out CurrentAwarenessTarget, null);
+            LinkedBlackboard.TryGet(CommonCore.Names.Awareness_BestTarget, out CurrentAwarenessTarget, null);
 
             GameObject PreviousAwarenessTarget = null;
-            CurrentBlackboard.TryGet(CommonCore.Names.Awareness_PreviousBestTarget, out PreviousAwarenessTarget, null);
+            LinkedBlackboard.TryGet(CommonCore.Names.Awareness_PreviousBestTarget, out PreviousAwarenessTarget, null);
 
             // if we're changing targets?
             if ((PreviousAwarenessTarget != null) && (CurrentAwarenessTarget != PreviousAwarenessTarget))
             {
                 // clear the look at target if it matches the old awareness target
                 GameObject CurrentLookAtTarget = null;
-                CurrentBlackboard.TryGet(CommonCore.Names.LookAt_GameObject, out CurrentLookAtTarget, null);
+                LinkedBlackboard.TryGet(CommonCore.Names.LookAt_GameObject, out CurrentLookAtTarget, null);
 
                 if (CurrentLookAtTarget == PreviousAwarenessTarget)
-                    CurrentBlackboard.Set(CommonCore.Names.LookAt_GameObject, (GameObject)null);
+                    LinkedBlackboard.Set(CommonCore.Names.LookAt_GameObject, (GameObject)null);
 
                 // clear the focus/move target if it matches the old awareness target
                 GameObject CurrentTarget = null;
-                CurrentBlackboard.TryGet(CommonCore.Names.Target_GameObject, out CurrentTarget, null);
+                LinkedBlackboard.TryGet(CommonCore.Names.Target_GameObject, out CurrentTarget, null);
 
                 if (CurrentTarget == PreviousAwarenessTarget)
-                    CurrentBlackboard.Set(CommonCore.Names.Target_GameObject, (GameObject)null);
+                    LinkedBlackboard.Set(CommonCore.Names.Target_GameObject, (GameObject)null);
             }
         }
 
@@ -51,7 +51,7 @@ namespace DemoScenes
         {
             // first priority is our awareness target
             GameObject CurrentAwarenessTarget = null;
-            CurrentBlackboard.TryGet(CommonCore.Names.Awareness_BestTarget, out CurrentAwarenessTarget, null);
+            LinkedBlackboard.TryGet(CommonCore.Names.Awareness_BestTarget, out CurrentAwarenessTarget, null);
             if (IsPOIValid(CurrentAwarenessTarget))
             {
                 InCallbackFn(CurrentAwarenessTarget);
@@ -60,7 +60,7 @@ namespace DemoScenes
 
             // next priority is our interaction target
             SmartObject CurrentInteractionSO = null;
-            CurrentBlackboard.TryGet(CommonCore.Names.Interaction_SmartObject, out CurrentInteractionSO, null);
+            LinkedBlackboard.TryGet(CommonCore.Names.Interaction_SmartObject, out CurrentInteractionSO, null);
             if ((CurrentInteractionSO != null) && IsPOIValid(CurrentInteractionSO.gameObject))
             {
                 InCallbackFn(CurrentInteractionSO.gameObject);
@@ -69,7 +69,7 @@ namespace DemoScenes
 
             // next priority is our current focus target
             GameObject CurrentTarget = null;
-            CurrentBlackboard.TryGet(CommonCore.Names.Target_GameObject, out CurrentTarget, null);
+            LinkedBlackboard.TryGet(CommonCore.Names.Target_GameObject, out CurrentTarget, null);
             if (IsPOIValid(CurrentTarget))
             {
                 InCallbackFn(CurrentTarget);
@@ -78,7 +78,7 @@ namespace DemoScenes
 
             // next priority is our current look target
             GameObject CurrentLookAtTarget = null;
-            CurrentBlackboard.TryGet(CommonCore.Names.LookAt_GameObject, out CurrentLookAtTarget, null);
+            LinkedBlackboard.TryGet(CommonCore.Names.LookAt_GameObject, out CurrentLookAtTarget, null);
             if (IsPOIValid(CurrentLookAtTarget))
             {
                 InCallbackFn(CurrentLookAtTarget);
@@ -97,6 +97,20 @@ namespace DemoScenes
         #region Interactable Helpers
         public void GetUseInteractableDesire(GameObject InQuerier, float InSearchRange, System.Action<float> InCallbackFn)
         {
+            // if we already have an interaction block switching
+            SmartObject TargetSO = null;
+            LinkedBlackboard.TryGet(CommonCore.Names.Interaction_SmartObject, out TargetSO, null);
+            if (TargetSO != null)
+            {
+                BaseInteraction TargetInteraction = null;
+                LinkedBlackboard.TryGet(CommonCore.Names.Interaction_Type, out TargetInteraction, null);
+                if (TargetInteraction != null)
+                {
+                    InCallbackFn(0.25f);
+                    return;
+                }
+            }
+
             int NumCandidateInteractables = 0;
 
             float MaxInteractionRange = InSearchRange > 0 ? InSearchRange : DefaultInteractableSearchRange;

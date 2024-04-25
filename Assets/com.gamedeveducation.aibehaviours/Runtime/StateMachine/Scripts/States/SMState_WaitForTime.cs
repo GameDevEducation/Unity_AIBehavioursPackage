@@ -9,8 +9,8 @@ namespace StateMachine
         float MaxTime;
         float TimeRemaining;
 
-        public SMState_WaitForTime(float InMinTime, float InMaxTime, string InCustomName = null) :
-            base(InCustomName)
+        public SMState_WaitForTime(float InMinTime, float InMaxTime, string InDisplayName = null) :
+            base(InDisplayName)
         {
             MinTime = InMinTime;
             MaxTime = InMaxTime;

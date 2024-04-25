@@ -8,8 +8,8 @@ namespace DemoScenes
     {
         System.Action<GameObject> SetLookTargetFn;
 
-        public SMState_LookAtPOI(System.Action<GameObject> InSetLookTargetFn, string InCustomName = null) :
-            base(InCustomName)
+        public SMState_LookAtPOI(System.Action<GameObject> InSetLookTargetFn, string InDisplayName = null) :
+            base(InDisplayName)
         {
             SetLookTargetFn = InSetLookTargetFn;
         }

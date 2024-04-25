@@ -3,6 +3,7 @@ using UnityEngine;
 
 namespace CommonCore
 {
+    [AddComponentMenu("AI/Factions/Faction Component")]
     public class FactionComponent : MonoBehaviour, IFaction
     {
         [field: SerializeField] public FactionDefinition Definition { get; protected set; }

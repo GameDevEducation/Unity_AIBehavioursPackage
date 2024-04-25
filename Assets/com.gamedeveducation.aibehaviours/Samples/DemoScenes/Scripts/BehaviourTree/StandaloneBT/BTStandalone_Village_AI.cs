@@ -33,7 +33,7 @@ namespace DemoScenes
 
         [Header("Navigation")]
         [Tooltip("Controls how far from our goal location that we will search for a valid location on the NavMesh.")]
-        [SerializeField] float ValidNavMeshSearchRange = 5.0f;
+        [SerializeField] float ValidNavMeshSearchRange = 2.0f;
 
         [Tooltip("Controls how close the AI needs to get to the destination to consider it reached.")]
         [SerializeField] float StoppingDistance = 0.1f;
@@ -97,7 +97,7 @@ namespace DemoScenes
             if (HomeLocation == CommonCore.Constants.InvalidVector3Position)
                 return false;
 
-            Vector3 CurrentLocation = CurrentBlackboard.GetVector3(CommonCore.Names.CurrentLocation);
+            Vector3 CurrentLocation = LinkedBlackboard.GetVector3(CommonCore.Names.CurrentLocation);
 
             float DistanceToHomeSq = (HomeLocation - CurrentLocation).sqrMagnitude;
 
@@ -139,7 +139,7 @@ namespace DemoScenes
 
         Vector3 GetWanderLocation()
         {
-            Vector3 CurrentLocation = CurrentBlackboard.GetVector3(CommonCore.Names.CurrentLocation);
+            Vector3 CurrentLocation = LinkedBlackboard.GetVector3(CommonCore.Names.CurrentLocation);
 
             // pick random direction and distance
             float Angle = Random.Range(0f, Mathf.PI * 2f);
@@ -159,7 +159,7 @@ namespace DemoScenes
 
             // attempt to retrieve the source
             GameObject SourceGO = null;
-            CurrentBlackboard.TryGet(CommonCore.Names.Resource_FocusSource, out SourceGO, null);
+            LinkedBlackboard.TryGet(CommonCore.Names.Resource_FocusSource, out SourceGO, null);
             if (SourceGO != null)
                 SourceLocation = SourceGO.transform.position;
 
@@ -172,7 +172,7 @@ namespace DemoScenes
 
             // attempt to retrieve the storage
             GameObject StorageGO = null;
-            CurrentBlackboard.TryGet(CommonCore.Names.Resource_FocusStorage, out StorageGO, null);
+            LinkedBlackboard.TryGet(CommonCore.Names.Resource_FocusStorage, out StorageGO, null);
             if (StorageGO != null)
                 StorageLocation = StorageGO.transform.position;
 
@@ -183,7 +183,7 @@ namespace DemoScenes
         {
             Vector3 HomeLocation = CommonCore.Constants.InvalidVector3Position;
 
-            CurrentBlackboard.TryGet(CommonCore.Names.HomeLocation, out HomeLocation, CommonCore.Constants.InvalidVector3Position);
+            LinkedBlackboard.TryGet(CommonCore.Names.HomeLocation, out HomeLocation, CommonCore.Constants.InvalidVector3Position);
 
             return HomeLocation;
         }

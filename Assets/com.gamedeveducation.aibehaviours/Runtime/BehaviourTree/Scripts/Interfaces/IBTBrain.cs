@@ -4,6 +4,6 @@ namespace BehaviourTree
 {
     public interface IBTBrain : IDebuggableObject
     {
-        Blackboard<FastName> CurrentBlackboard { get; }
+        Blackboard<FastName> LinkedBlackboard { get; }
     }
 }

@@ -7,7 +7,7 @@ namespace HybridGOAP
     {
         protected IGOAPBrain LinkedBrain;
         protected INavigationInterface Navigation;
-        protected Blackboard<FastName> LinkedBlackboard => LinkedBrain.CurrentBlackboard;
+        protected Blackboard<FastName> LinkedBlackboard => LinkedBrain.LinkedBlackboard;
 
         protected System.Type[] SupportedGoalTypes = { };
 

@@ -228,7 +228,7 @@ namespace HybridGOAP
         List<IGOAPAction> AvailableActions = new();
         List<IGOAPGoal> AvailableGoals = new();
 
-        public Blackboard<FastName> CurrentBlackboard { get; private set; }
+        public Blackboard<FastName> LinkedBlackboard { get; private set; }
 
         public INavigationInterface Navigation { get; private set; }
 
@@ -239,29 +239,29 @@ namespace HybridGOAP
 
         void Start()
         {
-            CurrentBlackboard = BlackboardManager.GetIndividualBlackboard(this);
+            LinkedBlackboard = BlackboardManager.GetIndividualBlackboard(this);
 
-            CurrentBlackboard.Set(CommonCore.Names.Self, gameObject);
+            LinkedBlackboard.Set(CommonCore.Names.Self, gameObject);
 
-            CurrentBlackboard.Set(CommonCore.Names.CurrentLocation, transform.position);
-            CurrentBlackboard.Set(CommonCore.Names.HomeLocation, transform.position);
+            LinkedBlackboard.Set(CommonCore.Names.CurrentLocation, transform.position);
+            LinkedBlackboard.Set(CommonCore.Names.HomeLocation, transform.position);
 
-            CurrentBlackboard.Set(CommonCore.Names.MoveToLocation, CommonCore.Constants.InvalidVector3Position);
+            LinkedBlackboard.Set(CommonCore.Names.MoveToLocation, CommonCore.Constants.InvalidVector3Position);
 
-            CurrentBlackboard.Set(CommonCore.Names.Target_GameObject, (GameObject)null);
-            CurrentBlackboard.Set(CommonCore.Names.Target_Position, CommonCore.Constants.InvalidVector3Position);
+            LinkedBlackboard.Set(CommonCore.Names.Target_GameObject, (GameObject)null);
+            LinkedBlackboard.Set(CommonCore.Names.Target_Position, CommonCore.Constants.InvalidVector3Position);
 
-            CurrentBlackboard.Set(CommonCore.Names.Awareness_PreviousBestTarget, (GameObject)null);
-            CurrentBlackboard.Set(CommonCore.Names.Awareness_BestTarget, (GameObject)null);
+            LinkedBlackboard.Set(CommonCore.Names.Awareness_PreviousBestTarget, (GameObject)null);
+            LinkedBlackboard.Set(CommonCore.Names.Awareness_BestTarget, (GameObject)null);
 
-            CurrentBlackboard.Set(CommonCore.Names.LookAt_GameObject, (GameObject)null);
+            LinkedBlackboard.Set(CommonCore.Names.LookAt_GameObject, (GameObject)null);
 
-            CurrentBlackboard.Set(CommonCore.Names.Interaction_SmartObject, (SmartObject)null);
-            CurrentBlackboard.Set(CommonCore.Names.Interaction_Type, (BaseInteraction)null);
+            LinkedBlackboard.Set(CommonCore.Names.Interaction_SmartObject, (SmartObject)null);
+            LinkedBlackboard.Set(CommonCore.Names.Interaction_Type, (BaseInteraction)null);
 
-            CurrentBlackboard.SetGeneric(CommonCore.Names.Resource_FocusType, CommonCore.Resources.EType.Unknown);
-            CurrentBlackboard.Set(CommonCore.Names.Resource_FocusSource, (GameObject)null);
-            CurrentBlackboard.Set(CommonCore.Names.Resource_FocusStorage, (GameObject)null);
+            LinkedBlackboard.SetGeneric(CommonCore.Names.Resource_FocusType, CommonCore.Resources.EType.Unknown);
+            LinkedBlackboard.Set(CommonCore.Names.Resource_FocusSource, (GameObject)null);
+            LinkedBlackboard.Set(CommonCore.Names.Resource_FocusStorage, (GameObject)null);
 
             // populate the inventory
             var ResourceNames = System.Enum.GetNames(typeof(CommonCore.Resources.EType));
@@ -270,8 +270,8 @@ namespace HybridGOAP
                 if (ResourceName == CommonCore.Resources.EType.Unknown.ToString())
                     continue;
 
-                CurrentBlackboard.Set(new FastName($"Self.Inventory.{ResourceName}.Held"), 0f);
-                CurrentBlackboard.Set(new FastName($"Self.Inventory.{ResourceName}.Capacity"), ResourceCapacity);
+                LinkedBlackboard.Set(new FastName($"Self.Inventory.{ResourceName}.Held"), 0f);
+                LinkedBlackboard.Set(new FastName($"Self.Inventory.{ResourceName}.Capacity"), ResourceCapacity);
             }
 
             ConfigureBlackboard();
@@ -293,7 +293,7 @@ namespace HybridGOAP
                 (InDebugger as IGameDebugger).RegisterSource(this);
             });
 
-            ServiceLocator.RegisterService(CurrentBlackboard, gameObject);
+            ServiceLocator.RegisterService(LinkedBlackboard, gameObject);
 
             ServiceLocator.AsyncLocateService<INavigationInterface>((ILocatableService InService) =>
             {
@@ -311,7 +311,7 @@ namespace HybridGOAP
 
         void Update()
         {
-            CurrentBlackboard.Set(CommonCore.Names.CurrentLocation, transform.position);
+            LinkedBlackboard.Set(CommonCore.Names.CurrentLocation, transform.position);
 
             TickBrain(Time.deltaTime);
         }
@@ -320,8 +320,6 @@ namespace HybridGOAP
         {
             if (!bInIsSelected)
                 return;
-
-            CurrentBlackboard.GatherDebugData(InDebugger, true);
 
             foreach (var Element in ActivePlan.Elements)
             {
@@ -339,6 +337,8 @@ namespace HybridGOAP
 
                 Goal.GatherDebugData(InDebugger, false);
             }
+
+            LinkedBlackboard.GatherDebugData(InDebugger, true);
         }
 
         protected void TickBrain(float InDeltaTime)

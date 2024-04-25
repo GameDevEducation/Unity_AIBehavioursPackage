@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.Events;
 
+[AddComponentMenu("Character Motor/Movement Mode: Ground")]
 public class MovementMode_Ground : MonoBehaviour, IMovementMode
 {
     [SerializeField] protected UnityEvent<bool> OnRunChanged = new UnityEvent<bool>();

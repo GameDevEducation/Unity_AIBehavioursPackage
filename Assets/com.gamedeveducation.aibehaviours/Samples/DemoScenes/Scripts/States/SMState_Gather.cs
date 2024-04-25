@@ -12,8 +12,8 @@ namespace DemoScenes
         CommonCore.FastName AmountHeldKey;
         CommonCore.FastName CapacityKey;
 
-        public SMState_Gather(float InGatherSpeed, string InCustomName = null) :
-            base(InCustomName)
+        public SMState_Gather(float InGatherSpeed, string InDisplayName = null) :
+            base(InDisplayName)
         {
             Speed = InGatherSpeed;
         }

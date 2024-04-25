@@ -246,6 +246,10 @@ MonoBehaviour:
   DEBUG_MoveTarget: {fileID: 0}
   DEBUG_ShowHeading: 0
   OverrideAgentLocomotion: 0
+  PerformPhysicsRaycastBeforeNavMeshProjection: 1
+  NavMeshPhysicsProjectionMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
 --- !u!114 &8918175585314403993
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -504,7 +508,7 @@ MonoBehaviour:
   MaxWanderRange: 50
   MinWaitTime: 4
   MaxWaitTime: 8
-  ValidNavMeshSearchRange: 5
+  ValidNavMeshSearchRange: 2
   StoppingDistance: 0.1
 --- !u!114 &9042230532616016109
 MonoBehaviour:

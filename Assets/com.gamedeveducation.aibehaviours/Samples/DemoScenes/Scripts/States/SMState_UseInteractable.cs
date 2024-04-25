@@ -7,7 +7,7 @@ namespace DemoScenes
     {
         bool bHasFinishedInteraction = false;
 
-        public SMState_UseInteractable(string InCustomName = null) : base(InCustomName) { }
+        public SMState_UseInteractable(string InDisplayName = null) : base(InDisplayName) { }
 
         protected override ESMStateStatus OnEnterInternal(Blackboard<FastName> InBlackboard)
         {

@@ -1,6 +1,6 @@
 {
   "name": "com.gamedeveducation.aibehaviours",
-  "version": "4.0.1",
+  "version": "4.0.2",
   "displayName": "GameDev Education Package: AI Behaviours",
   "description": "This package provides an AI infrastructure including movement, sensors an behaviours.",
   "unity": "2022.3",
