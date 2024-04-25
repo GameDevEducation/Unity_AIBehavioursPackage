@@ -1,0 +1,98 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &6713456583357002632
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 179460970876103288, guid: 340499be711f6b64c940ba4847de52c0, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 179460970876103288, guid: 340499be711f6b64c940ba4847de52c0, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 179460970876103288, guid: 340499be711f6b64c940ba4847de52c0, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 179460970876103288, guid: 340499be711f6b64c940ba4847de52c0, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 179460970876103288, guid: 340499be711f6b64c940ba4847de52c0, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 179460970876103288, guid: 340499be711f6b64c940ba4847de52c0, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 179460970876103288, guid: 340499be711f6b64c940ba4847de52c0, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 179460970876103288, guid: 340499be711f6b64c940ba4847de52c0, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 179460970876103288, guid: 340499be711f6b64c940ba4847de52c0, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 179460970876103288, guid: 340499be711f6b64c940ba4847de52c0, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 419186164601215875, guid: 340499be711f6b64c940ba4847de52c0, type: 3}
+      propertyPath: m_Name
+      value: HybridGOAP BT AI - RTS Variant
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 419186164601215875, guid: 340499be711f6b64c940ba4847de52c0, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7392532247000994627}
+    - targetCorrespondingSourceObject: {fileID: 419186164601215875, guid: 340499be711f6b64c940ba4847de52c0, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7990696701496788269}
+  m_SourcePrefab: {fileID: 100100000, guid: 340499be711f6b64c940ba4847de52c0, type: 3}
+--- !u!1 &6411932529654245387 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 419186164601215875, guid: 340499be711f6b64c940ba4847de52c0, type: 3}
+  m_PrefabInstance: {fileID: 6713456583357002632}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &7392532247000994627
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6411932529654245387}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c63a54f4031f6fa498b53a885fdcba4a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &7990696701496788269
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6411932529654245387}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b24be4f7747a3141974b1afef2db2b8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ValidNavMeshSearchRange: 5
+  StoppingDistance: 0.1
+  GatherSpeed: 5
+  StoreSpeed: 10

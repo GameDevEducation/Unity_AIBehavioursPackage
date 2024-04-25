@@ -29,11 +29,13 @@ namespace BehaviourTree
                 return;
 
             if (bLastResult != null)
-                InDebugger.AddTextLine($"Decorator: {(bIsInverted ? "NOT " : "")}{DebugDisplayName} = {(bLastResult.Value ? "Pass" : "Fail")}");
+                InDebugger.AddText($"Decorator: {(bIsInverted ? "NOT " : "")}{DebugDisplayName} = {(bLastResult.Value ? "Pass" : "Fail")}");
             else
-                InDebugger.AddTextLine($"Decorator: {(bIsInverted ? "NOT " : "")}{DebugDisplayName} = Not Evaluated");
+                InDebugger.AddText($"Decorator: {(bIsInverted ? "NOT " : "")}{DebugDisplayName} = Not Evaluated");
 
             GatherDebugDataInternal(InDebugger, bInIsSelected);
+
+            InDebugger.AddEndLine();
         }
 
         protected virtual void GatherDebugDataInternal(IGameDebugger InDebugger, bool bInIsSelected)
