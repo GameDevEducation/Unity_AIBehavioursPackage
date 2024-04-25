@@ -1,3 +1,4 @@
+using CommonCore;
 using UnityEngine;
 
 namespace BehaviourTree
@@ -23,6 +24,16 @@ namespace BehaviourTree
             MaxCooldownTime = InMaxCooldown;
         }
 
+        protected override void GatherDebugDataInternal(IGameDebugger InDebugger, bool bInIsSelected)
+        {
+            base.GatherDebugDataInternal(InDebugger, bInIsSelected);
+
+            if (bInIsSelected && (CooldownRemaining != null))
+            {
+                InDebugger.AddText($" [{CooldownRemaining.Value}]");
+            }
+        }
+
         protected override bool OnEvaluate(float InDeltaTime)
         {
             // not on cooldown?
@@ -30,7 +41,7 @@ namespace BehaviourTree
                 return true;
 
             // update the cooldown and test if expired
-            CooldownRemaining = InDeltaTime;
+            CooldownRemaining -= InDeltaTime;
             if (CooldownRemaining <= 0)
             {
                 CooldownRemaining = null;
