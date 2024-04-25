@@ -1,5 +1,6 @@
 using BehaviourTree;
 using CommonCore;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -80,6 +81,81 @@ namespace DemoScenes
         {
             if (InPOI != null)
                 OnSetPOI.Invoke(InPOI.transform);
+        }
+        #endregion
+
+        #region Interactable Helpers
+        public float GetUseInteractableDesire(GameObject InQuerier, float InSearchRange)
+        {
+            int NumCandidateInteractables = 0;
+
+            float MaxInteractionRange = InSearchRange > 0 ? InSearchRange : DefaultInteractableSearchRange;
+            float MaxInteractionRangeSq = MaxInteractionRange * MaxInteractionRange;
+
+            // loop through all of the smart objects
+            foreach (var CandidateSO in SmartObjectManager.Instance.RegisteredObjects)
+            {
+                // loop through all of the interactions
+                foreach (var CandidateInteraction in CandidateSO.Interactions)
+                {
+                    if (!CandidateInteraction.CanPerform())
+                        continue;
+
+                    if ((CandidateSO.InteractionPoint - transform.position).sqrMagnitude > MaxInteractionRangeSq)
+                        continue;
+
+                    if ((Navigation != null) && !Navigation.IsLocationReachable(transform.position, CandidateSO.InteractionPoint))
+                        continue;
+
+                    ++NumCandidateInteractables;
+                }
+            }
+
+            // no interactions?
+            if (NumCandidateInteractables == 0)
+            {
+                return float.MinValue;
+            }
+
+            return 0.25f;
+        }
+
+        public void SelectRandomInteraction(GameObject InQuerier, float InSearchRange, System.Action<SmartObject, BaseInteraction> InCallbackFn)
+        {
+            List<System.Tuple<SmartObject, BaseInteraction>> CandidateInteractions = new();
+
+            float MaxInteractionRange = InSearchRange > 0 ? InSearchRange : DefaultInteractableSearchRange;
+            float MaxInteractionRangeSq = MaxInteractionRange * MaxInteractionRange;
+
+            // loop through all of the smart objects
+            foreach (var CandidateSO in SmartObjectManager.Instance.RegisteredObjects)
+            {
+                // loop through all of the interactions
+                foreach (var CandidateInteraction in CandidateSO.Interactions)
+                {
+                    if (!CandidateInteraction.CanPerform())
+                        continue;
+
+                    if ((CandidateSO.InteractionPoint - transform.position).sqrMagnitude > MaxInteractionRangeSq)
+                        continue;
+
+                    if ((Navigation != null) && !Navigation.IsLocationReachable(transform.position, CandidateSO.InteractionPoint))
+                        continue;
+
+                    CandidateInteractions.Add(new System.Tuple<SmartObject, BaseInteraction>(CandidateSO, CandidateInteraction));
+                }
+            }
+
+            // no interactions?
+            if (CandidateInteractions.Count == 0)
+            {
+                InCallbackFn(null, null);
+                return;
+            }
+
+            // pick a random interaction
+            var SelectedIndex = CandidateInteractions.Count == 1 ? 0 : Random.Range(0, CandidateInteractions.Count);
+            InCallbackFn(CandidateInteractions[SelectedIndex].Item1, CandidateInteractions[SelectedIndex].Item2);
         }
         #endregion
     }
