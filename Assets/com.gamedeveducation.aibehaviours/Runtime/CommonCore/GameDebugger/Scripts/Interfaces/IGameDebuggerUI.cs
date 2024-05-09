@@ -2,6 +2,7 @@ namespace CommonCore
 {
     public interface IGameDebuggerUI
     {
-        void RequestRefresh();
+        void OnSourceListModified();
+        void OnDebugOutputUpdated();
     }
 }

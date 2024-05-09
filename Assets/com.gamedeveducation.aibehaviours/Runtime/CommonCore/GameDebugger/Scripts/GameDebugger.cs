@@ -13,6 +13,8 @@ namespace CommonCore
         public IDebuggableObject CurrentSource => ((CurrentSourceIndex < 0) || (CurrentSourceIndex >= Sources.Count)) ? null : Sources[CurrentSourceIndex];
         public string DebugTextForCurrentSource { get; protected set; } = null;
         public string DebugTextForOtherSources { get; protected set; } = null;
+        public int SourceCount => Sources != null ? Sources.Count : 0;
+        public List<string> SourceNames { get; protected set; } = new();
 
         System.Text.StringBuilder DebugTextBuilder = new();
         int IndentLevel = 0;
@@ -60,6 +62,13 @@ namespace CommonCore
                 Source.GatherDebugData(this, false);
             }
             DebugTextForOtherSources = DebugTextBuilder.ToString();
+
+            // notify any linked UIs of the update
+            foreach(var LinkedUI in LinkedUIs)
+            {
+                if (LinkedUI != null)
+                    LinkedUI.OnDebugOutputUpdated();
+            }
         }
 
         public void SelectPreviousSource()
@@ -76,6 +85,14 @@ namespace CommonCore
                 return;
 
             CurrentSourceIndex = (CurrentSourceIndex + 1) % Sources.Count;
+        }
+
+        public void SelectSourceByIndex(int InIndex)
+        {
+            if (SourceCount == 0)
+                return;
+
+            CurrentSourceIndex = Mathf.Clamp(InIndex, 0, SourceCount - 1);
         }
 
         public void AddEndLine()
@@ -120,6 +137,8 @@ namespace CommonCore
             if (LinkedUIs.Contains(InDebuggerUI))
                 return;
 
+            LinkedUIs.RemoveAll(InLinkedUI => InLinkedUI == null);
+
             LinkedUIs.Add(InDebuggerUI);
         }
 
@@ -134,11 +153,12 @@ namespace CommonCore
                 return;
 
             Sources.Add(InObject);
+            SourceNames.Add(InObject.DebugDisplayName);
 
             if (CurrentSource == null)
                 CurrentSourceIndex = 0;
 
-            RefreshLinkedUIs();
+            OnSourceListModified();
         }
 
         public void UnregisterSource(IDebuggableObject InObject)
@@ -146,7 +166,12 @@ namespace CommonCore
             if (CurrentSource == InObject)
                 CurrentSourceIndex = -1;
 
-            Sources.Remove(InObject);
+            int Index = Sources.IndexOf(InObject);
+            if (Index >= 0)
+            {
+                Sources.RemoveAt(Index);
+                SourceNames.RemoveAt(Index);
+            }
 
             if (CurrentSource == null)
             {
@@ -154,17 +179,17 @@ namespace CommonCore
                     CurrentSourceIndex = 0;
             }
 
-            RefreshLinkedUIs();
+            OnSourceListModified();
         }
 
-        void RefreshLinkedUIs()
+        void OnSourceListModified()
         {
             foreach (var LinkedUI in LinkedUIs)
             {
                 if (LinkedUI == null)
                     continue;
 
-                LinkedUI.RequestRefresh();
+                LinkedUI.OnSourceListModified();
             }
         }
     }

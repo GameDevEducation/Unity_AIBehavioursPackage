@@ -1,3 +1,6 @@
+## [4.1.0] - Game Debugger Editor Window
+- Added support for an Editor Window for the Game Debugger (thankyou again to SiliconOrchid for the suggestion and sharing your approach!)
+
 ## [4.0.2] - Initial release of Behaviour Trees
 - Major updates to folder structure
 - Added new Behaviour Tree system
