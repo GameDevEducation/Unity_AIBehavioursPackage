@@ -71,9 +71,13 @@ namespace CommonCore
             OnPopulateUI_DebugText.Invoke(LinkedDebugger.DebugTextForCurrentSource);
         }
 
-        public void RequestRefresh()
+        public void OnSourceListModified()
         {
             RefreshUI();
+        }
+
+        public void OnDebugOutputUpdated()
+        {
         }
     }
 }
