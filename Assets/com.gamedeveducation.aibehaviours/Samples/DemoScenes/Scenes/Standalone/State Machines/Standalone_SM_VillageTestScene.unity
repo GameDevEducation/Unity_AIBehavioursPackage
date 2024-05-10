@@ -3535,7 +3535,7 @@ PrefabInstance:
     - target: {fileID: 8406770653495004269, guid: e8c210deacd13b9489985aa64cd18939, type: 3}
       propertyPath: VillagerPrefab
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 6481779367499703348, guid: d2aabf868f306a84c8b12bc52ecf3bdc, type: 3}
     - target: {fileID: 8406770653495004269, guid: e8c210deacd13b9489985aa64cd18939, type: 3}
       propertyPath: InitialPopulation
       value: 20

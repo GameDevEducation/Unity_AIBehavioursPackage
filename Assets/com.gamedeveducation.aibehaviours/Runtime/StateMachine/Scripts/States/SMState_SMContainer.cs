@@ -2,7 +2,7 @@ using CommonCore;
 
 namespace StateMachine
 {
-    public abstract class SMState_SMContainer : SMStateBase
+    public class SMState_SMContainer : SMStateBase
     {
         class InternalState_StateMachineFinished : SMStateBase
         {
@@ -87,7 +87,7 @@ namespace StateMachine
             LinkedStateMachine.BindToBlackboard(InOwner.LinkedBlackboard);
         }
 
-        protected ISMState AddState(ISMState InState)
+        public ISMState AddState(ISMState InState)
         {
             return LinkedStateMachine.AddState(InState);
         }

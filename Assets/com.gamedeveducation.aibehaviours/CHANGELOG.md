@@ -1,3 +1,9 @@
+## [4.2.0] - Standalone State Machines
+- Add full Blackboard support to the State Machine
+- Added new FSM State SMState_SMContainer which supports embedding a state machine within a state machine (no depth limit)
+- Expanded SMState_Parallel to support ignoring failing states as well as options to never finish
+- Added support for Standalone State Machines with example scenes
+
 ## [4.1.0] - Game Debugger Editor Window
 - Added support for an Editor Window for the Game Debugger (thankyou again to SiliconOrchid for the suggestion and sharing your approach!)
 
