@@ -23,7 +23,7 @@ public class Village : MonoBehaviour
 
     private void Update()
     {
-        if (NumSpawned < InitialPopulation) 
+        if (NumSpawned < InitialPopulation)
         {
             TimeTillNextSpawn -= Time.deltaTime;
             if (TimeTillNextSpawn <= 0)

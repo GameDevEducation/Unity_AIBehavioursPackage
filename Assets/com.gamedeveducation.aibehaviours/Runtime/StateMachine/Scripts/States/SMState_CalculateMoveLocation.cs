@@ -23,7 +23,7 @@ namespace StateMachine
             RecalculateThresholdSq = InRecalculateThreshold * InRecalculateThreshold;
         }
 
-        protected override ESMStateStatus OnEnterInternal(Blackboard<FastName> InBlackboard)
+        protected override ESMStateStatus OnEnterInternal()
         {
             Vector3 MoveLocation = GetSearchLocationFn();
             if (MoveLocation == CommonCore.Constants.InvalidVector3Position)
@@ -33,11 +33,9 @@ namespace StateMachine
 
             LastSearchLocation = MoveLocation;
 
-            var Self = GetOwner(InBlackboard);
-
             // find the nearest navigable point
             MoveLocation = Navigation.FindNearestNavigableLocation(Self, MoveLocation, SearchRange);
-            InBlackboard.Set(CommonCore.Names.MoveToLocation, MoveLocation);
+            LinkedBlackboard.Set(CommonCore.Names.MoveToLocation, MoveLocation);
             if (MoveLocation == CommonCore.Constants.InvalidVector3Position)
             {
                 return ESMStateStatus.Failed;
@@ -46,11 +44,11 @@ namespace StateMachine
             return bContinuousMode ? ESMStateStatus.Running : ESMStateStatus.Finished;
         }
 
-        protected override void OnExitInternal(Blackboard<FastName> InBlackboard)
+        protected override void OnExitInternal()
         {
         }
 
-        protected override ESMStateStatus OnTickInternal(Blackboard<FastName> InBlackboard, float InDeltaTime)
+        protected override ESMStateStatus OnTickInternal(float InDeltaTime)
         {
             if (bContinuousMode)
             {
@@ -65,11 +63,9 @@ namespace StateMachine
                 {
                     LastSearchLocation = MoveLocation;
 
-                    var Self = GetOwner(InBlackboard);
-
                     // find the nearest navigable point
                     MoveLocation = Navigation.FindNearestNavigableLocation(Self, MoveLocation, SearchRange);
-                    InBlackboard.Set(CommonCore.Names.MoveToLocation, MoveLocation);
+                    LinkedBlackboard.Set(CommonCore.Names.MoveToLocation, MoveLocation);
                     if (MoveLocation == CommonCore.Constants.InvalidVector3Position)
                     {
                         return ESMStateStatus.Failed;

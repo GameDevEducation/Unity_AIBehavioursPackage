@@ -20,15 +20,13 @@ namespace StateMachine
             RepathThresholdSq = InRepathThreshold * InRepathThreshold;
         }
 
-        protected override ESMStateStatus OnEnterInternal(Blackboard<FastName> InBlackboard)
+        protected override ESMStateStatus OnEnterInternal()
         {
             Vector3 Destination = CommonCore.Constants.InvalidVector3Position;
-            if (InBlackboard.TryGet(CommonCore.Names.MoveToLocation, out Destination, CommonCore.Constants.InvalidVector3Position))
+            if (LinkedBlackboard.TryGet(CommonCore.Names.MoveToLocation, out Destination, CommonCore.Constants.InvalidVector3Position))
             {
                 if (Destination == CommonCore.Constants.InvalidVector3Position)
                     return ESMStateStatus.Failed;
-
-                var Self = GetOwner(InBlackboard);
 
                 LastDestination = Destination;
                 if (Navigation.SetMoveLocation(Self, Destination, StoppingDistance))
@@ -38,23 +36,19 @@ namespace StateMachine
             return ESMStateStatus.Failed;
         }
 
-        protected override void OnExitInternal(Blackboard<FastName> InBlackboard)
+        protected override void OnExitInternal()
         {
-            var Self = GetOwner(InBlackboard);
-
             if (Navigation.IsPathfindingOrMoving(Self))
                 Navigation.StopMoving(Self);
         }
 
-        protected override ESMStateStatus OnTickInternal(Blackboard<FastName> InBlackboard, float InDeltaTime)
+        protected override ESMStateStatus OnTickInternal(float InDeltaTime)
         {
-            var Self = GetOwner(InBlackboard);
-
             if (bContinuousMode)
             {
                 // look for changes to the destination
                 Vector3 CurrentDestination = CommonCore.Constants.InvalidVector3Position;
-                InBlackboard.TryGet(CommonCore.Names.MoveToLocation, out CurrentDestination, CommonCore.Constants.InvalidVector3Position);
+                LinkedBlackboard.TryGet(CommonCore.Names.MoveToLocation, out CurrentDestination, CommonCore.Constants.InvalidVector3Position);
 
                 if (CurrentDestination == CommonCore.Constants.InvalidVector3Position)
                     return ESMStateStatus.Failed;

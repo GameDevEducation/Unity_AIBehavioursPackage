@@ -64,7 +64,7 @@ namespace CommonCore
             DebugTextForOtherSources = DebugTextBuilder.ToString();
 
             // notify any linked UIs of the update
-            foreach(var LinkedUI in LinkedUIs)
+            foreach (var LinkedUI in LinkedUIs)
             {
                 if (LinkedUI != null)
                     LinkedUI.OnDebugOutputUpdated();

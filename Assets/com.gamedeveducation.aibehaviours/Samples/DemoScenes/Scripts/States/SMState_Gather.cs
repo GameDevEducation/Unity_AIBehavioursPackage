@@ -18,18 +18,18 @@ namespace DemoScenes
             Speed = InGatherSpeed;
         }
 
-        protected override ESMStateStatus OnEnterInternal(Blackboard<FastName> InBlackboard)
+        protected override ESMStateStatus OnEnterInternal()
         {
             // get the focus type
             var FocusType = CommonCore.Resources.EType.Unknown;
-            InBlackboard.TryGetGeneric<CommonCore.Resources.EType>(CommonCore.Names.Resource_FocusType, out FocusType, CommonCore.Resources.EType.Unknown);
+            LinkedBlackboard.TryGetGeneric<CommonCore.Resources.EType>(CommonCore.Names.Resource_FocusType, out FocusType, CommonCore.Resources.EType.Unknown);
 
             if (FocusType == CommonCore.Resources.EType.Unknown)
                 return ESMStateStatus.Failed;
 
             // get the source game object
             GameObject SourceGO = null;
-            InBlackboard.TryGet(CommonCore.Names.Resource_FocusSource, out SourceGO, null);
+            LinkedBlackboard.TryGet(CommonCore.Names.Resource_FocusSource, out SourceGO, null);
 
             if (SourceGO == null)
                 return ESMStateStatus.Failed;
@@ -48,20 +48,20 @@ namespace DemoScenes
             return ESMStateStatus.Running;
         }
 
-        protected override void OnExitInternal(Blackboard<FastName> InBlackboard)
+        protected override void OnExitInternal()
         {
-            InBlackboard.Set(CommonCore.Names.Resource_FocusSource, (GameObject)null);
+            LinkedBlackboard.Set(CommonCore.Names.Resource_FocusSource, (GameObject)null);
         }
 
-        protected override ESMStateStatus OnTickInternal(Blackboard<FastName> InBlackboard, float InDeltaTime)
+        protected override ESMStateStatus OnTickInternal(float InDeltaTime)
         {
-            float AmountHeld = InBlackboard.GetFloat(AmountHeldKey);
-            float Capacity = InBlackboard.GetFloat(CapacityKey);
+            float AmountHeld = LinkedBlackboard.GetFloat(AmountHeldKey);
+            float Capacity = LinkedBlackboard.GetFloat(CapacityKey);
 
             float AmountToRetrieve = Mathf.Min(InDeltaTime * Speed, Capacity - AmountHeld);
 
             AmountHeld += Source.Consume(AmountToRetrieve);
-            InBlackboard.Set(AmountHeldKey, AmountHeld);
+            LinkedBlackboard.Set(AmountHeldKey, AmountHeld);
 
             if (!Source.CanHarvest || Mathf.Approximately(AmountHeld, Capacity))
                 return ESMStateStatus.Finished;

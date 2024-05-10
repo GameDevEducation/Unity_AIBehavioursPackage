@@ -14,15 +14,13 @@ namespace DemoScenes
             SelectInteractionFn = InSelectInteractionFn;
         }
 
-        protected override ESMStateStatus OnEnterInternal(Blackboard<FastName> InBlackboard)
+        protected override ESMStateStatus OnEnterInternal()
         {
-            InBlackboard.Set(CommonCore.Names.Interaction_SmartObject, (SmartObject)null);
-            InBlackboard.Set(CommonCore.Names.Interaction_Type, (BaseInteraction)null);
+            LinkedBlackboard.Set(CommonCore.Names.Interaction_SmartObject, (SmartObject)null);
+            LinkedBlackboard.Set(CommonCore.Names.Interaction_Type, (BaseInteraction)null);
 
             if (SelectInteractionFn == null)
                 return ESMStateStatus.Failed;
-
-            var Self = GetOwner(InBlackboard);
 
             // attempt to find an interaction
             var Interaction = SelectInteractionFn(Self);
@@ -34,17 +32,17 @@ namespace DemoScenes
             if (!TargetInteraction.LockInteraction(Self))
                 return ESMStateStatus.Failed;
 
-            InBlackboard.Set(CommonCore.Names.Interaction_SmartObject, TargetSO);
-            InBlackboard.Set(CommonCore.Names.Interaction_Type, TargetInteraction);
+            LinkedBlackboard.Set(CommonCore.Names.Interaction_SmartObject, TargetSO);
+            LinkedBlackboard.Set(CommonCore.Names.Interaction_Type, TargetInteraction);
 
             return ESMStateStatus.Finished;
         }
 
-        protected override void OnExitInternal(Blackboard<FastName> InBlackboard)
+        protected override void OnExitInternal()
         {
         }
 
-        protected override ESMStateStatus OnTickInternal(Blackboard<FastName> InBlackboard, float InDeltaTime)
+        protected override ESMStateStatus OnTickInternal(float InDeltaTime)
         {
             return CurrentStatus;
         }

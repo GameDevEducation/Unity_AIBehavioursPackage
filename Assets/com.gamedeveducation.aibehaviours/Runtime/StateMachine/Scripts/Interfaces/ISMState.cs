@@ -1,4 +1,5 @@
 using CommonCore;
+using UnityEngine;
 
 namespace StateMachine
 {
@@ -12,15 +13,21 @@ namespace StateMachine
 
     public interface ISMState : IDebuggable
     {
+        ISMInstance Owner { get; }
+        Blackboard<FastName> LinkedBlackboard { get; }
+        GameObject Self { get; }
+
+        void BindToOwner(ISMInstance InOwner);
+
         ESMStateStatus CurrentStatus { get; }
 
         ISMState AddTransition(ISMTransition InTransition, ISMState InNewState);
         void AddDefaultTransitions(ISMState InFinishedState, ISMState InFailedState);
 
-        void EvaluateTransitions(Blackboard<FastName> InBlackboard, out ISMState OutNextState);
+        void EvaluateTransitions(out ISMState OutNextState);
 
-        ESMStateStatus OnEnter(Blackboard<FastName> InBlackboard);
-        ESMStateStatus OnTick(Blackboard<FastName> InBlackboard, float InDeltaTime);
-        void OnExit(Blackboard<FastName> InBlackboard);
+        ESMStateStatus OnEnter();
+        ESMStateStatus OnTick(float InDeltaTime);
+        void OnExit();
     }
 }

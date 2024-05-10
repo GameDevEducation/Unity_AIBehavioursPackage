@@ -17,6 +17,9 @@ namespace StateMachine
         public string DebugDisplayName { get; protected set; }
 
         public ESMStateStatus CurrentStatus { get; protected set; } = ESMStateStatus.Uninitialised;
+        public ISMInstance Owner { get; protected set; }
+        public GameObject Self => Owner.Self;
+        public Blackboard<FastName> LinkedBlackboard => Owner.LinkedBlackboard;
 
         public SMStateBase(string InDisplayName = null)
         {
@@ -53,28 +56,23 @@ namespace StateMachine
             return this;
         }
 
-        public void EvaluateTransitions(Blackboard<FastName> InBlackboard, out ISMState OutNextState)
+        public void EvaluateTransitions(out ISMState OutNextState)
         {
-            EvaluateTransitionsInternal(InBlackboard, out OutNextState);
+            EvaluateTransitionsInternal(out OutNextState);
         }
 
-        protected virtual void EvaluateTransitionsInternal(Blackboard<FastName> InBlackboard, out ISMState OutNextState)
+        protected virtual void EvaluateTransitionsInternal(out ISMState OutNextState)
         {
             OutNextState = null;
 
             foreach (var Entry in Transitions)
             {
-                if (Entry.Transition.Evaluate(this, InBlackboard) == ESMTransitionResult.Valid)
+                if (Entry.Transition.Evaluate(this, LinkedBlackboard) == ESMTransitionResult.Valid)
                 {
                     OutNextState = Entry.State;
                     return;
                 }
             }
-        }
-
-        protected GameObject GetOwner(Blackboard<FastName> InBlackboard)
-        {
-            return InBlackboard.GetGameObject(CommonCore.Names.Self);
         }
 
         public void GatherDebugData(IGameDebugger InDebugger, bool bInIsSelected)
@@ -92,30 +90,35 @@ namespace StateMachine
 
         }
 
-        public ESMStateStatus OnEnter(Blackboard<FastName> InBlackboard)
+        public ESMStateStatus OnEnter()
         {
-            CurrentStatus = OnEnterInternal(InBlackboard);
+            CurrentStatus = OnEnterInternal();
             return CurrentStatus;
         }
 
-        protected abstract ESMStateStatus OnEnterInternal(Blackboard<FastName> InBlackboard);
+        protected abstract ESMStateStatus OnEnterInternal();
 
-        public void OnExit(Blackboard<FastName> InBlackboard)
+        public void OnExit()
         {
-            OnExitInternal(InBlackboard);
+            OnExitInternal();
         }
-        protected abstract void OnExitInternal(Blackboard<FastName> InBlackboard);
+        protected abstract void OnExitInternal();
 
-        public ESMStateStatus OnTick(Blackboard<FastName> InBlackboard, float InDeltaTime)
+        public ESMStateStatus OnTick(float InDeltaTime)
         {
             if (CurrentStatus == ESMStateStatus.Running)
             {
-                CurrentStatus = OnTickInternal(InBlackboard, InDeltaTime);
+                CurrentStatus = OnTickInternal(InDeltaTime);
             }
 
             return CurrentStatus;
         }
 
-        protected abstract ESMStateStatus OnTickInternal(Blackboard<FastName> InBlackboard, float InDeltaTime);
+        protected abstract ESMStateStatus OnTickInternal(float InDeltaTime);
+
+        public virtual void BindToOwner(ISMInstance InOwner)
+        {
+            Owner = InOwner;
+        }
     }
 }

@@ -15,24 +15,24 @@ namespace HybridGOAP
                 CallbackFn = InCallbackFn;
             }
 
-            protected override ESMStateStatus OnEnterInternal(Blackboard<FastName> InBlackboard)
+            protected override ESMStateStatus OnEnterInternal()
             {
                 CallbackFn();
 
                 return ESMStateStatus.Finished;
             }
 
-            protected override void OnExitInternal(Blackboard<FastName> InBlackboard)
+            protected override void OnExitInternal()
             {
             }
 
-            protected override ESMStateStatus OnTickInternal(Blackboard<FastName> InBlackboard, float InDeltaTime)
+            protected override ESMStateStatus OnTickInternal(float InDeltaTime)
             {
                 return ESMStateStatus.Finished;
             }
         }
 
-        protected SMInstance LinkedStateMachine = new();
+        protected ISMInstance LinkedStateMachine = new SMInstance();
 
         protected ISMState InternalState_Failed { get; private set; }
         protected ISMState InternalState_Finished { get; private set; }

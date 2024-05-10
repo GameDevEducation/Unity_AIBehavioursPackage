@@ -7,13 +7,29 @@ namespace StateMachine
     {
         List<ISMState> ChildStates = null;
 
-        public SMState_Parallel(List<ISMState> InChildStates, string InDisplayName = null) :
+        bool bIgnoreFailures;
+        bool bExitIfAllFinished;
+
+        public SMState_Parallel(List<ISMState> InChildStates, bool bInIgnoreFailures = false, bool bInExitIfAllAreFinished = true, string InDisplayName = null) :
             base(InDisplayName)
         {
             ChildStates = InChildStates;
+            bIgnoreFailures = bInIgnoreFailures;
+            bExitIfAllFinished = bInExitIfAllAreFinished;
         }
 
-        protected override ESMStateStatus OnEnterInternal(Blackboard<FastName> InBlackboard)
+        public override void BindToOwner(ISMInstance InOwner)
+        {
+            base.BindToOwner(InOwner);
+
+            if (ChildStates != null)
+            {
+                foreach (var Child in ChildStates)
+                    Child.BindToOwner(InOwner);
+            }
+        }
+
+        protected override ESMStateStatus OnEnterInternal()
         {
             if (ChildStates == null || ChildStates.Count == 0)
                 return ESMStateStatus.Failed;
@@ -21,28 +37,28 @@ namespace StateMachine
             bool bAllFinished = true;
             foreach (var Child in ChildStates)
             {
-                var Result = Child.OnEnter(InBlackboard);
+                var Result = Child.OnEnter();
 
-                if (Result == ESMStateStatus.Failed)
+                if (!bIgnoreFailures && (Result == ESMStateStatus.Failed))
                     return ESMStateStatus.Failed;
 
                 if (Result == ESMStateStatus.Running)
                     bAllFinished = false;
             }
 
-            return bAllFinished ? ESMStateStatus.Finished : ESMStateStatus.Running;
+            return (bExitIfAllFinished && bAllFinished) ? ESMStateStatus.Finished : ESMStateStatus.Running;
         }
 
-        protected override void OnExitInternal(Blackboard<FastName> InBlackboard)
+        protected override void OnExitInternal()
         {
             if (ChildStates == null || ChildStates.Count == 0)
                 return;
 
             foreach (var Child in ChildStates)
-                Child.OnExit(InBlackboard);
+                Child.OnExit();
         }
 
-        protected override ESMStateStatus OnTickInternal(Blackboard<FastName> InBlackboard, float InDeltaTime)
+        protected override ESMStateStatus OnTickInternal(float InDeltaTime)
         {
             if (ChildStates == null || ChildStates.Count == 0)
                 return ESMStateStatus.Failed;
@@ -50,7 +66,7 @@ namespace StateMachine
             bool bAllFinished = true;
             foreach (var Child in ChildStates)
             {
-                var Result = Child.OnTick(InBlackboard, InDeltaTime);
+                var Result = Child.OnTick(InDeltaTime);
 
                 if (Result == ESMStateStatus.Failed)
                     return ESMStateStatus.Failed;

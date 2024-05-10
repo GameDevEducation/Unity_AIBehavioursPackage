@@ -2,7 +2,8 @@
     "name": "StateMachine",
     "rootNamespace": "StateMachine",
     "references": [
-        "GUID:9240a55a31a208a4484d6530144948de"
+        "GUID:9240a55a31a208a4484d6530144948de",
+        "GUID:f65b4dca74581ce4a88fcdc4a04768a8"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

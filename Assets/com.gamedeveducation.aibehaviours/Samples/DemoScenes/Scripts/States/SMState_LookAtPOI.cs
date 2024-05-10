@@ -1,4 +1,3 @@
-using CommonCore;
 using StateMachine;
 using UnityEngine;
 
@@ -14,13 +13,13 @@ namespace DemoScenes
             SetLookTargetFn = InSetLookTargetFn;
         }
 
-        protected override ESMStateStatus OnEnterInternal(Blackboard<FastName> InBlackboard)
+        protected override ESMStateStatus OnEnterInternal()
         {
             if (SetLookTargetFn == null)
                 return ESMStateStatus.Failed;
 
             GameObject POI = null;
-            InBlackboard.TryGet(CommonCore.Names.LookAt_GameObject, out POI, null);
+            LinkedBlackboard.TryGet(CommonCore.Names.LookAt_GameObject, out POI, null);
 
             if (POI == null)
                 return ESMStateStatus.Failed;
@@ -30,13 +29,13 @@ namespace DemoScenes
             return ESMStateStatus.Running;
         }
 
-        protected override void OnExitInternal(Blackboard<FastName> InBlackboard)
+        protected override void OnExitInternal()
         {
         }
 
-        protected override ESMStateStatus OnTickInternal(Blackboard<FastName> InBlackboard, float InDeltaTime)
+        protected override ESMStateStatus OnTickInternal(float InDeltaTime)
         {
-            return OnEnterInternal(InBlackboard);
+            return OnEnterInternal();
         }
     }
 }
