@@ -1,0 +1,124 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &639934405138378393
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 5792141343949074846, guid: 188b7f5abf386f04f9e44bf89d554bbc, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5792141343949074846, guid: 188b7f5abf386f04f9e44bf89d554bbc, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5792141343949074846, guid: 188b7f5abf386f04f9e44bf89d554bbc, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5792141343949074846, guid: 188b7f5abf386f04f9e44bf89d554bbc, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5792141343949074846, guid: 188b7f5abf386f04f9e44bf89d554bbc, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5792141343949074846, guid: 188b7f5abf386f04f9e44bf89d554bbc, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5792141343949074846, guid: 188b7f5abf386f04f9e44bf89d554bbc, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5792141343949074846, guid: 188b7f5abf386f04f9e44bf89d554bbc, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5792141343949074846, guid: 188b7f5abf386f04f9e44bf89d554bbc, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5792141343949074846, guid: 188b7f5abf386f04f9e44bf89d554bbc, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5841844973688081069, guid: 188b7f5abf386f04f9e44bf89d554bbc, type: 3}
+      propertyPath: m_Name
+      value: Standalone SM AI - Village Variant
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 5841844973688081069, guid: 188b7f5abf386f04f9e44bf89d554bbc, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1236646352540373945}
+  m_SourcePrefab: {fileID: 100100000, guid: 188b7f5abf386f04f9e44bf89d554bbc, type: 3}
+--- !u!114 &5003053729001592295 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5588943122333154174, guid: 188b7f5abf386f04f9e44bf89d554bbc, type: 3}
+  m_PrefabInstance: {fileID: 639934405138378393}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6481779367499703348}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d845e743de6fa7446800ed517aafccb8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1 &6481779367499703348 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5841844973688081069, guid: 188b7f5abf386f04f9e44bf89d554bbc, type: 3}
+  m_PrefabInstance: {fileID: 639934405138378393}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1236646352540373945
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6481779367499703348}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e98eb64d7a2ec14b8e97800ad34ad37, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ResourceCapacity: 50
+  DefaultInteractableSearchRange: 30
+  OnSetPOI:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5003053729001592295}
+        m_TargetAssemblyTypeName: BaseAI, FrameworkEssentials
+        m_MethodName: SetLookTarget
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  GatherSpeed: 5
+  StoreSpeed: 10
+  MissingHomeStartDistance: 50
+  MissingHomePeaksDistance: 100
+  MissingHomeResetDistance: 10
+  MinShortWanderRange: 2
+  MaxShortWanderRange: 5
+  MinShortWanderWaitTime: 2
+  MaxShortWanderWaitTime: 4
+  MinLongWanderRange: 10
+  MaxLongWanderRange: 50
+  MinLongWanderWaitTime: 4
+  MaxLongWanderWaitTime: 8
+  MinIdleWaitTime: 1
+  MaxIdleWaitTime: 10
+  ValidNavMeshSearchRange: 2
+  StoppingDistance: 0.1

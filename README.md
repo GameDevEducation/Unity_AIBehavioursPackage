@@ -5,5 +5,6 @@ This package provides a set of tools to build AIs for your project. The key syst
 - Core infrastructure (FastName system, generic Singleton, AI sensors and Blackboard)
 - Flexible Finite State Machine (FSM) Architecture
 - Hybrid Goal Oriented Action Planning (GOAP) system capable of running multiple goals in parallel
-- Support for general and also FSM based actions
+- Support for FSM or Behaviour Tree based GOAP actions
+- Support for standalone FSMs or Behaviour Trees
 - Example scenes and behaviours demonstrating wandering, chasing, gathering resources, looking at points of interest and interacting with objects.

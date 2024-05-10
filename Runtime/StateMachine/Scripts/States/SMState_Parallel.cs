@@ -68,14 +68,14 @@ namespace StateMachine
             {
                 var Result = Child.OnTick(InDeltaTime);
 
-                if (Result == ESMStateStatus.Failed)
+                if (!bIgnoreFailures && (Result == ESMStateStatus.Failed))
                     return ESMStateStatus.Failed;
 
                 if (Result != ESMStateStatus.Finished)
                     bAllFinished = false;
             }
 
-            return bAllFinished ? ESMStateStatus.Finished : ESMStateStatus.Running;
+            return (bExitIfAllFinished && bAllFinished) ? ESMStateStatus.Finished : ESMStateStatus.Running;
         }
 
         protected override void GatherDebugDataInternal(IGameDebugger InDebugger, bool bInIsSelected)
