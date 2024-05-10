@@ -1,5 +1,6 @@
 using CommonCore;
 using System.Collections.Generic;
+using UnityEngine;
 
 namespace StateMachine
 {
@@ -9,11 +10,13 @@ namespace StateMachine
         Failed
     }
 
-    public class SMInstance : IDebuggable
+    public class SMInstance : ISMInstance
     {
         List<ISMState> States = new();
         ISMState CurrentState = null;
-        Blackboard<FastName> LinkedBlackboard = null;
+
+        public Blackboard<FastName> LinkedBlackboard { get; protected set; } = null;
+        public GameObject Self => LinkedBlackboard.GetGameObject(CommonCore.Names.Self);
 
         public string DebugDisplayName => "StateMachine";
 
@@ -24,6 +27,7 @@ namespace StateMachine
 
         public ISMState AddState(ISMState InState)
         {
+            InState.BindToOwner(this);
             States.Add(InState);
             return InState;
         }
@@ -42,9 +46,13 @@ namespace StateMachine
         public void Reset()
         {
             if ((CurrentState != null) && (CurrentState.CurrentStatus == ESMStateStatus.Running))
-                CurrentState.OnExit(LinkedBlackboard);
+                CurrentState.OnExit();
 
             CurrentState = null;
+
+            // force a rebind to owner in case any changes to the state machine
+            foreach (var State in States)
+                State.BindToOwner(this);
         }
 
         public ESMTickResult Tick(float InDeltaTime)
@@ -63,23 +71,23 @@ namespace StateMachine
                 if (CurrentState == null)
                     return ESMTickResult.Failed;
 
-                CurrentState.OnEnter(LinkedBlackboard);
+                CurrentState.OnEnter();
             }
 
-            CurrentState.OnTick(LinkedBlackboard, InDeltaTime);
+            CurrentState.OnTick(InDeltaTime);
 
             // check transitions
             ISMState NextState = null;
-            CurrentState.EvaluateTransitions(LinkedBlackboard, out NextState);
+            CurrentState.EvaluateTransitions(out NextState);
 
             // transition required?
             if (NextState != null)
             {
-                CurrentState.OnExit(LinkedBlackboard);
+                CurrentState.OnExit();
 
                 CurrentState = NextState;
 
-                CurrentState.OnEnter(LinkedBlackboard);
+                CurrentState.OnEnter();
             }
 
             return ESMTickResult.Running;

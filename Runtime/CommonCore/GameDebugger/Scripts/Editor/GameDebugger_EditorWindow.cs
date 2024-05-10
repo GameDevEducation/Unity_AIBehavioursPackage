@@ -1,7 +1,6 @@
-using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 using UnityEditor;
+using UnityEngine;
 using UnityEngine.UIElements;
 
 namespace CommonCore
@@ -15,7 +14,7 @@ namespace CommonCore
         IGameDebugger LinkedDebugger;
 
         [MenuItem("Tools/AI/Game Debugger")]
-        public static void ShowGameDebugger() 
+        public static void ShowGameDebugger()
         {
             EditorWindow Window = GetWindow<GameDebugger_EditorWindow>();
             Window.titleContent = new GUIContent("Game Debugger");

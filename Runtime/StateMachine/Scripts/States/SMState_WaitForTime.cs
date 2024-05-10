@@ -16,18 +16,18 @@ namespace StateMachine
             MaxTime = InMaxTime;
         }
 
-        protected override ESMStateStatus OnEnterInternal(Blackboard<FastName> InBlackboard)
+        protected override ESMStateStatus OnEnterInternal()
         {
             TimeRemaining = Random.Range(MinTime, MaxTime);
 
             return TimeRemaining > 0 ? ESMStateStatus.Running : ESMStateStatus.Finished;
         }
 
-        protected override void OnExitInternal(Blackboard<FastName> InBlackboard)
+        protected override void OnExitInternal()
         {
         }
 
-        protected override ESMStateStatus OnTickInternal(Blackboard<FastName> InBlackboard, float InDeltaTime)
+        protected override ESMStateStatus OnTickInternal(float InDeltaTime)
         {
             if (TimeRemaining > 0)
                 TimeRemaining -= InDeltaTime;

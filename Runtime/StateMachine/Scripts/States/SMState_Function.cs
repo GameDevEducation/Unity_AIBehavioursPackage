@@ -19,19 +19,19 @@ namespace StateMachine
             OnExitInternalFn = InOnExitInternalFn;
         }
 
-        protected override ESMStateStatus OnEnterInternal(Blackboard<FastName> InBlackboard)
+        protected override ESMStateStatus OnEnterInternal()
         {
-            return OnEnterInternalFn(InBlackboard);
+            return OnEnterInternalFn(LinkedBlackboard);
         }
 
-        protected override void OnExitInternal(Blackboard<FastName> InBlackboard)
+        protected override void OnExitInternal()
         {
-            OnExitInternalFn(InBlackboard);
+            OnExitInternalFn(LinkedBlackboard);
         }
 
-        protected override ESMStateStatus OnTickInternal(Blackboard<FastName> InBlackboard, float InDeltaTime)
+        protected override ESMStateStatus OnTickInternal(float InDeltaTime)
         {
-            return OnTickInternalFn(InBlackboard, InDeltaTime);
+            return OnTickInternalFn(LinkedBlackboard, InDeltaTime);
         }
     }
 }

@@ -14,15 +14,13 @@ namespace DemoScenes
             ResourceInterface = InResourceInterface;
         }
 
-        protected override ESMStateStatus OnEnterInternal(Blackboard<FastName> InBlackboard)
+        protected override ESMStateStatus OnEnterInternal()
         {
-            InBlackboard.SetGeneric(CommonCore.Names.Resource_FocusType, CommonCore.Resources.EType.Unknown);
-            InBlackboard.Set(CommonCore.Names.Resource_FocusSource, (GameObject)null);
+            LinkedBlackboard.SetGeneric(CommonCore.Names.Resource_FocusType, CommonCore.Resources.EType.Unknown);
+            LinkedBlackboard.Set(CommonCore.Names.Resource_FocusSource, (GameObject)null);
 
             if (ResourceInterface == null)
                 return ESMStateStatus.Failed;
-
-            var Self = GetOwner(InBlackboard);
 
             // Attempt to pick a focus
             var FocusType = CommonCore.Resources.EType.Unknown;
@@ -44,17 +42,17 @@ namespace DemoScenes
             if (FocusSource == null)
                 return ESMStateStatus.Failed;
 
-            InBlackboard.SetGeneric(CommonCore.Names.Resource_FocusType, FocusType);
-            InBlackboard.Set(CommonCore.Names.Resource_FocusSource, FocusSource);
+            LinkedBlackboard.SetGeneric(CommonCore.Names.Resource_FocusType, FocusType);
+            LinkedBlackboard.Set(CommonCore.Names.Resource_FocusSource, FocusSource);
 
             return ESMStateStatus.Finished;
         }
 
-        protected override void OnExitInternal(Blackboard<FastName> InBlackboard)
+        protected override void OnExitInternal()
         {
         }
 
-        protected override ESMStateStatus OnTickInternal(Blackboard<FastName> InBlackboard, float InDeltaTime)
+        protected override ESMStateStatus OnTickInternal(float InDeltaTime)
         {
             return CurrentStatus;
         }

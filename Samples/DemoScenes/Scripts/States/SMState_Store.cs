@@ -17,18 +17,18 @@ namespace DemoScenes
             Speed = InSpeed;
         }
 
-        protected override ESMStateStatus OnEnterInternal(Blackboard<FastName> InBlackboard)
+        protected override ESMStateStatus OnEnterInternal()
         {
             // get the focus type
             var FocusType = CommonCore.Resources.EType.Unknown;
-            InBlackboard.TryGetGeneric<CommonCore.Resources.EType>(CommonCore.Names.Resource_FocusType, out FocusType, CommonCore.Resources.EType.Unknown);
+            LinkedBlackboard.TryGetGeneric<CommonCore.Resources.EType>(CommonCore.Names.Resource_FocusType, out FocusType, CommonCore.Resources.EType.Unknown);
 
             if (FocusType == CommonCore.Resources.EType.Unknown)
                 return ESMStateStatus.Failed;
 
             // get the container game object
             GameObject StorageGO = null;
-            InBlackboard.TryGet(CommonCore.Names.Resource_FocusStorage, out StorageGO, null);
+            LinkedBlackboard.TryGet(CommonCore.Names.Resource_FocusStorage, out StorageGO, null);
 
             if (StorageGO == null)
                 return ESMStateStatus.Failed;
@@ -46,22 +46,22 @@ namespace DemoScenes
             return ESMStateStatus.Running;
         }
 
-        protected override void OnExitInternal(Blackboard<FastName> InBlackboard)
+        protected override void OnExitInternal()
         {
-            InBlackboard.SetGeneric(CommonCore.Names.Resource_FocusType, CommonCore.Resources.EType.Unknown);
-            InBlackboard.Set(CommonCore.Names.Resource_FocusStorage, (GameObject)null);
+            LinkedBlackboard.SetGeneric(CommonCore.Names.Resource_FocusType, CommonCore.Resources.EType.Unknown);
+            LinkedBlackboard.Set(CommonCore.Names.Resource_FocusStorage, (GameObject)null);
         }
 
-        protected override ESMStateStatus OnTickInternal(Blackboard<FastName> InBlackboard, float InDeltaTime)
+        protected override ESMStateStatus OnTickInternal(float InDeltaTime)
         {
-            float AmountHeld = InBlackboard.GetFloat(AmountHeldKey);
+            float AmountHeld = LinkedBlackboard.GetFloat(AmountHeldKey);
 
             float AmountToStore = Mathf.Max(InDeltaTime * Speed, 0f);
 
             Storage.StoreResource(AmountToStore);
 
             AmountHeld -= AmountToStore;
-            InBlackboard.Set(AmountHeldKey, AmountHeld);
+            LinkedBlackboard.Set(AmountHeldKey, AmountHeld);
 
             if (!Storage.CanStore || (AmountHeld <= 0))
                 return ESMStateStatus.Finished;

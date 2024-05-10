@@ -1,4 +1,3 @@
-using CommonCore;
 using StateMachine;
 using UnityEngine;
 
@@ -14,36 +13,34 @@ namespace DemoScenes
             PickPOIFn = InPickPOIFn;
         }
 
-        protected override ESMStateStatus OnEnterInternal(Blackboard<FastName> InBlackboard)
+        protected override ESMStateStatus OnEnterInternal()
         {
             if (PickPOIFn == null)
             {
-                InBlackboard.Set(CommonCore.Names.LookAt_GameObject, (GameObject)null);
+                LinkedBlackboard.Set(CommonCore.Names.LookAt_GameObject, (GameObject)null);
                 return ESMStateStatus.Failed;
             }
-
-            var Self = GetOwner(InBlackboard);
 
             // attempt to pick a POI
             var POI = PickPOIFn(Self);
             if (POI == null)
             {
-                InBlackboard.Set(CommonCore.Names.LookAt_GameObject, (GameObject)null);
+                LinkedBlackboard.Set(CommonCore.Names.LookAt_GameObject, (GameObject)null);
                 return ESMStateStatus.Failed;
             }
 
-            InBlackboard.Set(CommonCore.Names.LookAt_GameObject, POI);
+            LinkedBlackboard.Set(CommonCore.Names.LookAt_GameObject, POI);
 
             return ESMStateStatus.Running;
         }
 
-        protected override void OnExitInternal(Blackboard<FastName> InBlackboard)
+        protected override void OnExitInternal()
         {
         }
 
-        protected override ESMStateStatus OnTickInternal(Blackboard<FastName> InBlackboard, float InDeltaTime)
+        protected override ESMStateStatus OnTickInternal(float InDeltaTime)
         {
-            return OnEnterInternal(InBlackboard);
+            return OnEnterInternal();
         }
     }
 }
