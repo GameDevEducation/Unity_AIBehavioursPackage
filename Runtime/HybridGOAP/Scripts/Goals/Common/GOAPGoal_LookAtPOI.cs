@@ -1,7 +1,6 @@
-using HybridGOAP;
 using UnityEngine;
 
-namespace DemoScenes
+namespace HybridGOAP
 {
     [AddComponentMenu("AI/GOAP/Goals/Goal: Look at Points of Interest")]
     public class GOAPGoal_LookAtPOI : GOAPGoalBase

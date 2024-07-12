@@ -305,6 +305,7 @@ GameObject:
   - component: {fileID: -1596915106774740070}
   - component: {fileID: -516134068868935170}
   - component: {fileID: 1279869232268356194}
+  - component: {fileID: -3251828139068467406}
   m_Layer: 6
   m_Name: First Person Player
   m_TagString: Player
@@ -642,3 +643,17 @@ MonoBehaviour:
   TargetSensor:
     AssemblyQualifiedName: CommonCore.HearingSensor, CommonCore, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
+--- !u!114 &-3251828139068467406
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4308623563077746146}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a7570d15e54c2624b8bffcb55a698d25, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Offset: {x: 0, y: 0, z: 0}
+  OverrideTransform: {fileID: 4308623561885781482}

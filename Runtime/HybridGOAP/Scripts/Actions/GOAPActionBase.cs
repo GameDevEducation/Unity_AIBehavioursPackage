@@ -1,3 +1,4 @@
+using CharacterCore;
 using CommonCore;
 using UnityEngine;
 
@@ -7,6 +8,7 @@ namespace HybridGOAP
     {
         protected IGOAPBrain LinkedBrain;
         protected INavigationInterface Navigation;
+        protected ILookHandler LookAtHandler;
         protected Blackboard<FastName> LinkedBlackboard => LinkedBrain.LinkedBlackboard;
 
         protected System.Type[] SupportedGoalTypes = { };
@@ -24,6 +26,10 @@ namespace HybridGOAP
             ServiceLocator.AsyncLocateService<INavigationInterface>((ILocatableService InService) =>
             {
                 Navigation = InService as INavigationInterface;
+            }, gameObject, EServiceSearchMode.LocalOnly);
+            ServiceLocator.AsyncLocateService<ILookHandler>((ILocatableService InService) =>
+            {
+                LookAtHandler = (ILookHandler)InService;
             }, gameObject, EServiceSearchMode.LocalOnly);
 
             PopulateSupportedGoalTypes();

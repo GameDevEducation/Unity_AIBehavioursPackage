@@ -1715,7 +1715,6 @@ GameObject:
   - component: {fileID: 4245308126841523975}
   - component: {fileID: 1197245272745120396}
   - component: {fileID: 2204154440339505643}
-  - component: {fileID: 8479922552009501162}
   - component: {fileID: 5125263572712964077}
   - component: {fileID: 4826517113763808603}
   - component: {fileID: 2625799256035024170}
@@ -1725,6 +1724,8 @@ GameObject:
   - component: {fileID: 5513608314689191707}
   - component: {fileID: 4336320954358026725}
   - component: {fileID: 4487270657594231052}
+  - component: {fileID: 7494107184795558635}
+  - component: {fileID: 5232128489054726227}
   m_Layer: 0
   m_Name: HybridGOAP SM AI
   m_TagString: Character
@@ -1934,34 +1935,6 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 1, z: 0}
---- !u!114 &8479922552009501162
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6019449823397602677}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d845e743de6fa7446800ed517aafccb8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  HeadBoneTransform: {fileID: 4269657149802518541}
-  HeadBoneToEyeOffset: {x: 0, y: 0.1, z: 0}
-  LookAtSpeed: 90
-  MaxYawAngle: 75
-  MinPitchAngle: -30
-  MaxPitchAngle: 45
-  _VisionConeAngle: 60
-  _VisionConeRange: 30
-  _VisionConeColour: {r: 1, g: 0, b: 0, a: 0.25}
-  _HearingRange: 20
-  _HearingRangeColour: {r: 1, g: 1, b: 0, a: 0.25}
-  _ProximityDetectionRange: 3
-  _ProximityRangeColour: {r: 1, g: 1, b: 1, a: 0.25}
-  DEBUG_DrawLookDirection: 0
-  DEBUG_LookTargetToSet: {fileID: 0}
-  DEBUG_UpdateLookTarget: 0
 --- !u!114 &5125263572712964077
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2056,36 +2029,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a3c30fc2ef4d43044aa23ccf7a783d5e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  OnPickPOIFn:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 5125263572712964077}
-        m_TargetAssemblyTypeName: HybridGOAPExample.GOAPBrainWrapper, HybridGOAPExample
-        m_MethodName: PickSuitablePOI
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  OnSetPOIFn:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 8479922552009501162}
-        m_TargetAssemblyTypeName: BaseAI, FrameworkEssentials
-        m_MethodName: SetLookTarget
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!114 &4336320954358026725
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2124,6 +2067,39 @@ MonoBehaviour:
   OnFocusChanged:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &7494107184795558635
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6019449823397602677}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a7570d15e54c2624b8bffcb55a698d25, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Offset: {x: 0, y: 0.1, z: 0}
+  OverrideTransform: {fileID: 4269657149802518541}
+--- !u!114 &5232128489054726227
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6019449823397602677}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e93335e448e66844afb8baf671f7670, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  HeadBoneTransform: {fileID: 4269657149802518541}
+  HeadBoneToEyeOffset: {x: 0, y: 0.1, z: 0}
+  LookAtSpeed: 90
+  MaxYawAngle: 75
+  MinPitchAngle: -30
+  MaxPitchAngle: 45
+  DEBUG_DrawLookDirection: 0
 --- !u!1 &6166324327413192873
 GameObject:
   m_ObjectHideFlags: 0
