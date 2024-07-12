@@ -143,7 +143,6 @@ GameObject:
   - component: {fileID: 8918175585314403993}
   - component: {fileID: 5006442553539636309}
   - component: {fileID: 5642746524370905727}
-  - component: {fileID: 2916596391173887529}
   - component: {fileID: 4603312703005062226}
   - component: {fileID: 8255190873833975417}
   - component: {fileID: 1017818873186581293}
@@ -153,6 +152,8 @@ GameObject:
   - component: {fileID: 8096011599091085079}
   - component: {fileID: 6286498496878850045}
   - component: {fileID: 9042230532616016109}
+  - component: {fileID: 2496506557107114327}
+  - component: {fileID: 510461926115325217}
   m_Layer: 0
   m_Name: HybridGOAP BT AI
   m_TagString: Character
@@ -362,34 +363,6 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 1, z: 0}
---- !u!114 &2916596391173887529
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 419186164601215875}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d845e743de6fa7446800ed517aafccb8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  HeadBoneTransform: {fileID: 6171222917327759474}
-  HeadBoneToEyeOffset: {x: 0, y: 0.1, z: 0}
-  LookAtSpeed: 90
-  MaxYawAngle: 75
-  MinPitchAngle: -30
-  MaxPitchAngle: 45
-  _VisionConeAngle: 60
-  _VisionConeRange: 30
-  _VisionConeColour: {r: 1, g: 0, b: 0, a: 0.25}
-  _HearingRange: 20
-  _HearingRangeColour: {r: 1, g: 1, b: 0, a: 0.25}
-  _ProximityDetectionRange: 3
-  _ProximityRangeColour: {r: 1, g: 1, b: 1, a: 0.25}
-  DEBUG_DrawLookDirection: 0
-  DEBUG_LookTargetToSet: {fileID: 0}
-  DEBUG_UpdateLookTarget: 0
 --- !u!114 &4603312703005062226
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -522,36 +495,39 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 507d2f10a100c4a458364d52ab610d7c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  OnPickPOIFn:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 4603312703005062226}
-        m_TargetAssemblyTypeName: DemoScenes.GOAPBrainWrapper, DemoScenes
-        m_MethodName: PickSuitablePOI
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  OnSetPOIFn:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 2916596391173887529}
-        m_TargetAssemblyTypeName: BaseAI, FrameworkEssentials
-        m_MethodName: SetLookTarget
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+--- !u!114 &2496506557107114327
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 419186164601215875}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a7570d15e54c2624b8bffcb55a698d25, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Offset: {x: 0, y: 0.1, z: 0}
+  OverrideTransform: {fileID: 6171222917327759474}
+--- !u!114 &510461926115325217
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 419186164601215875}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e93335e448e66844afb8baf671f7670, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  HeadBoneTransform: {fileID: 6171222917327759474}
+  HeadBoneToEyeOffset: {x: 0, y: 0.1, z: 0}
+  LookAtSpeed: 90
+  MaxYawAngle: 75
+  MinPitchAngle: -30
+  MaxPitchAngle: 45
+  DEBUG_DrawLookDirection: 0
 --- !u!1 &474173069320962507
 GameObject:
   m_ObjectHideFlags: 0

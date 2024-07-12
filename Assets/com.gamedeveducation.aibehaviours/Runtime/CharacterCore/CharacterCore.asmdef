@@ -1,10 +1,8 @@
 {
-    "name": "BehaviourTree",
-    "rootNamespace": "BehaviourTree",
+    "name": "CharacterCore",
+    "rootNamespace": "CharacterCore",
     "references": [
-        "GUID:9240a55a31a208a4484d6530144948de",
-        "GUID:f65b4dca74581ce4a88fcdc4a04768a8",
-        "GUID:5998dc7c0c46b3d42bec37d9cffdf3e7"
+        "GUID:9240a55a31a208a4484d6530144948de"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

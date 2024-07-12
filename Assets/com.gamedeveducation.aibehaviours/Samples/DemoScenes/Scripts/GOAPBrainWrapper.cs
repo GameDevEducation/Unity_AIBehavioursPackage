@@ -46,54 +46,6 @@ namespace DemoScenes
             }
         }
 
-        #region Point of Interest (POI) Helpers
-        public void PickSuitablePOI(GameObject InQuerier, System.Action<GameObject> InCallbackFn)
-        {
-            // first priority is our awareness target
-            GameObject CurrentAwarenessTarget = null;
-            LinkedBlackboard.TryGet(CommonCore.Names.Awareness_BestTarget, out CurrentAwarenessTarget, null);
-            if (IsPOIValid(CurrentAwarenessTarget))
-            {
-                InCallbackFn(CurrentAwarenessTarget);
-                return;
-            }
-
-            // next priority is our interaction target
-            SmartObject CurrentInteractionSO = null;
-            LinkedBlackboard.TryGet(CommonCore.Names.Interaction_SmartObject, out CurrentInteractionSO, null);
-            if ((CurrentInteractionSO != null) && IsPOIValid(CurrentInteractionSO.gameObject))
-            {
-                InCallbackFn(CurrentInteractionSO.gameObject);
-                return;
-            }
-
-            // next priority is our current focus target
-            GameObject CurrentTarget = null;
-            LinkedBlackboard.TryGet(CommonCore.Names.Target_GameObject, out CurrentTarget, null);
-            if (IsPOIValid(CurrentTarget))
-            {
-                InCallbackFn(CurrentTarget);
-                return;
-            }
-
-            // next priority is our current look target
-            GameObject CurrentLookAtTarget = null;
-            LinkedBlackboard.TryGet(CommonCore.Names.LookAt_GameObject, out CurrentLookAtTarget, null);
-            if (IsPOIValid(CurrentLookAtTarget))
-            {
-                InCallbackFn(CurrentLookAtTarget);
-                return;
-            }
-
-            InCallbackFn(null);
-        }
-
-        bool IsPOIValid(GameObject InPOI)
-        {
-            return InPOI != null;
-        }
-        #endregion
-
         #region Interactable Helpers
         public void GetUseInteractableDesire(GameObject InQuerier, float InSearchRange, System.Action<float> InCallbackFn)
         {

@@ -1,3 +1,4 @@
+using CharacterCore;
 using CommonCore;
 using UnityEngine;
 
@@ -36,6 +37,7 @@ namespace StateMachine
 
         public Blackboard<FastName> LinkedBlackboard { get; protected set; }
         public INavigationInterface Navigation { get; protected set; }
+        public ILookHandler LookAtHandler { get; protected set; }
 
         protected ISMInstance LinkedStateMachine = new SMInstance();
 
@@ -55,6 +57,10 @@ namespace StateMachine
             {
                 Navigation = InService as INavigationInterface;
             }, gameObject, EServiceSearchMode.LocalOnly);
+            ServiceLocator.AsyncLocateService<ILookHandler>((ILocatableService InService) =>
+            {
+                LookAtHandler = (ILookHandler)InService;
+            }, gameObject, EServiceSearchMode.LocalOnly);
 
             LinkedBlackboard = BlackboardManager.GetIndividualBlackboard(this);
 
@@ -72,6 +78,7 @@ namespace StateMachine
             LinkedBlackboard.Set(CommonCore.Names.Awareness_BestTarget, (GameObject)null);
 
             LinkedBlackboard.Set(CommonCore.Names.LookAt_GameObject, (GameObject)null);
+            LinkedBlackboard.Set(CommonCore.Names.LookAt_Position, CommonCore.Constants.InvalidVector3Position);
 
             LinkedBlackboard.Set(CommonCore.Names.Interaction_SmartObject, (SmartObject)null);
             LinkedBlackboard.Set(CommonCore.Names.Interaction_Type, (BaseInteraction)null);

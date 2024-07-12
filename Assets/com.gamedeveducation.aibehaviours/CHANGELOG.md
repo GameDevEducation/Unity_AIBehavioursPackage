@@ -1,3 +1,6 @@
+## [4.3.0] - 12th July 2024
+- Refactor the POI/Look At system into the Character Core and moved behaviours for it to their base systems
+
 ## [4.2.0] - Standalone State Machines
 - Add full Blackboard support to the State Machine
 - Added new FSM State SMState_SMContainer which supports embedding a state machine within a state machine (no depth limit)

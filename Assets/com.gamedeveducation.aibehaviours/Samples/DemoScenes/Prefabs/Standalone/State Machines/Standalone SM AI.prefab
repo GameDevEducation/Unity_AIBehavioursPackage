@@ -1696,9 +1696,10 @@ GameObject:
   - component: {fileID: 738387925283399828}
   - component: {fileID: 5089451240749693422}
   - component: {fileID: 5367729075060564020}
-  - component: {fileID: 5588943122333154174}
   - component: {fileID: 4524681594952529629}
   - component: {fileID: 2776681114552353575}
+  - component: {fileID: 5378840515742415101}
+  - component: {fileID: 2260826675174709295}
   m_Layer: 0
   m_Name: Standalone SM AI
   m_TagString: Character
@@ -1908,34 +1909,6 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 1, z: 0}
---- !u!114 &5588943122333154174
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5841844973688081069}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d845e743de6fa7446800ed517aafccb8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  HeadBoneTransform: {fileID: 7922023668277017134}
-  HeadBoneToEyeOffset: {x: 0, y: 0.1, z: 0}
-  LookAtSpeed: 90
-  MaxYawAngle: 75
-  MinPitchAngle: -30
-  MaxPitchAngle: 45
-  _VisionConeAngle: 60
-  _VisionConeRange: 30
-  _VisionConeColour: {r: 1, g: 0, b: 0, a: 0.25}
-  _HearingRange: 20
-  _HearingRangeColour: {r: 1, g: 1, b: 0, a: 0.25}
-  _ProximityDetectionRange: 3
-  _ProximityRangeColour: {r: 1, g: 1, b: 1, a: 0.25}
-  DEBUG_DrawLookDirection: 0
-  DEBUG_LookTargetToSet: {fileID: 0}
-  DEBUG_UpdateLookTarget: 0
 --- !u!114 &4524681594952529629
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1974,6 +1947,39 @@ MonoBehaviour:
   OnFocusChanged:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &5378840515742415101
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5841844973688081069}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a7570d15e54c2624b8bffcb55a698d25, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Offset: {x: 0, y: 0.1, z: 0}
+  OverrideTransform: {fileID: 7922023668277017134}
+--- !u!114 &2260826675174709295
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5841844973688081069}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e93335e448e66844afb8baf671f7670, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  HeadBoneTransform: {fileID: 7922023668277017134}
+  HeadBoneToEyeOffset: {x: 0, y: 0.1, z: 0}
+  LookAtSpeed: 90
+  MaxYawAngle: 75
+  MinPitchAngle: -30
+  MaxPitchAngle: 45
+  DEBUG_DrawLookDirection: 0
 --- !u!1 &6083808816762133078
 GameObject:
   m_ObjectHideFlags: 0

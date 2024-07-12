@@ -1,3 +1,4 @@
+using CharacterCore;
 using CommonCore;
 using UnityEngine;
 
@@ -9,6 +10,7 @@ namespace BehaviourTree
 
         public Blackboard<FastName> LinkedBlackboard { get; protected set; }
         public INavigationInterface Navigation { get; protected set; }
+        public ILookHandler LookAtHandler { get; protected set; }
 
         public IBehaviourTree LinkedBehaviourTree { get; protected set; } = new BTInstance();
 
@@ -21,6 +23,10 @@ namespace BehaviourTree
             ServiceLocator.AsyncLocateService<INavigationInterface>((ILocatableService InService) =>
             {
                 Navigation = InService as INavigationInterface;
+            }, gameObject, EServiceSearchMode.LocalOnly);
+            ServiceLocator.AsyncLocateService<ILookHandler>((ILocatableService InService) =>
+            {
+                LookAtHandler = (ILookHandler)InService;
             }, gameObject, EServiceSearchMode.LocalOnly);
 
             LinkedBlackboard = BlackboardManager.GetIndividualBlackboard(this);
@@ -39,6 +45,7 @@ namespace BehaviourTree
             LinkedBlackboard.Set(CommonCore.Names.Awareness_BestTarget, (GameObject)null);
 
             LinkedBlackboard.Set(CommonCore.Names.LookAt_GameObject, (GameObject)null);
+            LinkedBlackboard.Set(CommonCore.Names.LookAt_Position, CommonCore.Constants.InvalidVector3Position);
 
             LinkedBlackboard.Set(CommonCore.Names.Interaction_SmartObject, (SmartObject)null);
             LinkedBlackboard.Set(CommonCore.Names.Interaction_Type, (BaseInteraction)null);
@@ -60,7 +67,7 @@ namespace BehaviourTree
 
             ConfigureBlackboard();
 
-            LinkedBehaviourTree.Initialise(Navigation, LinkedBlackboard);
+            LinkedBehaviourTree.Initialise(Navigation, LookAtHandler, LinkedBlackboard);
 
             ConfigureBehaviourTree();
 

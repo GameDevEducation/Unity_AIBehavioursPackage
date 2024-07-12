@@ -2,16 +2,12 @@ using CommonCore;
 using StateMachine;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Events;
 
 namespace DemoScenes
 {
     public abstract class SMStandaloneBase : SMBrainBase
     {
         [SerializeField] float DefaultInteractableSearchRange = 30f;
-
-        [Header("Look at POI")]
-        [SerializeField] UnityEvent<Transform> OnSetPOI = new();
 
         protected override void OnPreTickBrain(float InDeltaTime)
         {
@@ -41,48 +37,6 @@ namespace DemoScenes
                     LinkedBlackboard.Set(CommonCore.Names.Target_GameObject, (GameObject)null);
             }
         }
-
-        #region Point of Interest (POI) Helpers
-        public GameObject PickSuitablePOI(GameObject InQuerier)
-        {
-            // first priority is our awareness target
-            GameObject CurrentAwarenessTarget = null;
-            LinkedBlackboard.TryGet(CommonCore.Names.Awareness_BestTarget, out CurrentAwarenessTarget, null);
-            if (IsPOIValid(CurrentAwarenessTarget))
-                return CurrentAwarenessTarget;
-
-            // next priority is our interaction target
-            SmartObject CurrentInteractionSO = null;
-            LinkedBlackboard.TryGet(CommonCore.Names.Interaction_SmartObject, out CurrentInteractionSO, null);
-            if ((CurrentInteractionSO != null) && IsPOIValid(CurrentInteractionSO.gameObject))
-                return CurrentInteractionSO.gameObject;
-
-            // next priority is our current focus target
-            GameObject CurrentTarget = null;
-            LinkedBlackboard.TryGet(CommonCore.Names.Target_GameObject, out CurrentTarget, null);
-            if (IsPOIValid(CurrentTarget))
-                return CurrentTarget;
-
-            // next priority is our current look target
-            GameObject CurrentLookAtTarget = null;
-            LinkedBlackboard.TryGet(CommonCore.Names.LookAt_GameObject, out CurrentLookAtTarget, null);
-            if (IsPOIValid(CurrentLookAtTarget))
-                return CurrentLookAtTarget;
-
-            return null;
-        }
-
-        bool IsPOIValid(GameObject InPOI)
-        {
-            return InPOI != null;
-        }
-
-        protected void SetPOIFn(GameObject InPOI)
-        {
-            if (InPOI != null)
-                OnSetPOI.Invoke(InPOI.transform);
-        }
-        #endregion
 
         #region Interactable Helpers
         public float GetUseInteractableDesire(GameObject InQuerier, float InSearchRange)

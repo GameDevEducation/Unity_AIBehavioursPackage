@@ -82,8 +82,8 @@ namespace DemoScenes
             {
                 var ChildStates = new List<ISMState>();
 
-                ChildStates.Add(new SMState_SelectPOI(PickSuitablePOI));
-                ChildStates.Add(new SMState_LookAtPOI(SetPOIFn));
+                ChildStates.Add(new SMState_SelectPOI(LookAtHandler));
+                ChildStates.Add(new SMState_LookAtPOI(LookAtHandler));
 
                 SMLookAt.AddState(new SMState_Parallel(ChildStates));
 

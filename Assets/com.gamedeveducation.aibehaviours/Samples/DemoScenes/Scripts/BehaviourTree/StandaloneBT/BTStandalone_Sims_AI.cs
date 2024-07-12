@@ -57,8 +57,8 @@ namespace DemoScenes
             var LookAtPOIRoot = new BTFlowNode_Selector("Look at POI") as BTFlowNode_Selector;
             LocalRoot.SetSecondary(LookAtPOIRoot);
 
-            LookAtPOIRoot.AddService(new BTService_SelectPOI(PickSuitablePOI), true);
-            LookAtPOIRoot.AddChild(new BTAction_LookAtPOI(SetPOIFn));
+            LookAtPOIRoot.AddService(new BTService_SelectPOI(), true);
+            LookAtPOIRoot.AddChild(new BTAction_LookAtPOI());
         }
 
         protected override void ConfigureBlackboard()

@@ -9,7 +9,7 @@ namespace HybridGOAP
 
         protected override void OnInitialise()
         {
-            LinkedBehaviourTree.Initialise(Navigation, LinkedBlackboard);
+            LinkedBehaviourTree.Initialise(Navigation, LookAtHandler, LinkedBlackboard);
 
             ConfigureBehaviourTree();
         }
