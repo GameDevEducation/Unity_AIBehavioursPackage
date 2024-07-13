@@ -14,7 +14,7 @@ namespace StateMachine
 
         Vector3 LastSearchLocation;
 
-        public SMState_CalculateMoveLocation(INavigationInterface InNavInterface, float InSearchRange, 
+        public SMState_CalculateMoveLocation(INavigationInterface InNavInterface, float InSearchRange,
                                              System.Func<Vector3> InGetSearchLocationFn,
                                              System.Func<Vector3> InGetEndOrientationFn,
                                              bool bInContinuousMode = false, float InRecalculateThreshold = 0.1f, string InDisplayName = null) :
