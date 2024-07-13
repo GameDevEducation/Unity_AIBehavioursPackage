@@ -1700,6 +1700,7 @@ GameObject:
   - component: {fileID: 2776681114552353575}
   - component: {fileID: 5378840515742415101}
   - component: {fileID: 2260826675174709295}
+  - component: {fileID: -5233130127105217766}
   m_Layer: 0
   m_Name: Standalone SM AI
   m_TagString: Character
@@ -1980,6 +1981,22 @@ MonoBehaviour:
   MinPitchAngle: -30
   MaxPitchAngle: 45
   DEBUG_DrawLookDirection: 0
+--- !u!114 &-5233130127105217766
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5841844973688081069}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 04539afc7e6825245983270e3582a4a7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <HasMinSearchRange>k__BackingField: 0
+  <MinSearchRange>k__BackingField: 0
+  <HasMaxSearchRange>k__BackingField: 1
+  <MaxSearchRange>k__BackingField: 20
 --- !u!1 &6083808816762133078
 GameObject:
   m_ObjectHideFlags: 0

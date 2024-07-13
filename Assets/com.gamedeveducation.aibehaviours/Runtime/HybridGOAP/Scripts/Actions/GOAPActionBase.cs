@@ -9,6 +9,9 @@ namespace HybridGOAP
         protected IGOAPBrain LinkedBrain;
         protected INavigationInterface Navigation;
         protected ILookHandler LookAtHandler;
+        protected IInteractionSelector InteractionInterface;
+        protected IInteractionPerformer PerformerInterface;
+
         protected Blackboard<FastName> LinkedBlackboard => LinkedBrain.LinkedBlackboard;
 
         protected System.Type[] SupportedGoalTypes = { };
@@ -30,6 +33,15 @@ namespace HybridGOAP
             ServiceLocator.AsyncLocateService<ILookHandler>((ILocatableService InService) =>
             {
                 LookAtHandler = (ILookHandler)InService;
+            }, gameObject, EServiceSearchMode.LocalOnly);
+
+            ServiceLocator.AsyncLocateService<IInteractionSelector>((ILocatableService InService) =>
+            {
+                InteractionInterface = InService as IInteractionSelector;
+            }, gameObject, EServiceSearchMode.LocalOnly);
+            ServiceLocator.AsyncLocateService<IInteractionPerformer>((ILocatableService InService) =>
+            {
+                PerformerInterface = (IInteractionPerformer)InService;
             }, gameObject, EServiceSearchMode.LocalOnly);
 
             PopulateSupportedGoalTypes();

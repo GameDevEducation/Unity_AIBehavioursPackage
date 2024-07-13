@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace StateMachine
 {
-    public abstract class SMBrainBase : MonoBehaviour, ISMBrain
+    public abstract class SMBrainBase : MonoBehaviour, ISMBrain, IInteractionPerformer
     {
         class InternalState_StateMachineFinished : SMStateBase
         {
@@ -38,6 +38,8 @@ namespace StateMachine
         public Blackboard<FastName> LinkedBlackboard { get; protected set; }
         public INavigationInterface Navigation { get; protected set; }
         public ILookHandler LookAtHandler { get; protected set; }
+        public IInteractionSelector InteractionInterface { get; protected set; }
+        public IInteractionPerformer PerformerInterface { get; protected set; }
 
         protected ISMInstance LinkedStateMachine = new SMInstance();
 
@@ -47,6 +49,10 @@ namespace StateMachine
         public string DebugDisplayName => gameObject.name;
 
         public GameObject Self => gameObject;
+
+        public string DisplayName => gameObject.name;
+
+        public Vector3 PerformerLocation => transform.position;
 
         void Start()
         {
@@ -61,10 +67,19 @@ namespace StateMachine
             {
                 LookAtHandler = (ILookHandler)InService;
             }, gameObject, EServiceSearchMode.LocalOnly);
+            ServiceLocator.AsyncLocateService<IInteractionSelector>((ILocatableService InService) =>
+            {
+                InteractionInterface = InService as IInteractionSelector;
+            }, gameObject, EServiceSearchMode.LocalOnly);
+            ServiceLocator.AsyncLocateService<IInteractionPerformer>((ILocatableService InService) =>
+            {
+                PerformerInterface = (IInteractionPerformer)InService;
+            }, gameObject, EServiceSearchMode.LocalOnly);
 
             LinkedBlackboard = BlackboardManager.GetIndividualBlackboard(this);
 
             ServiceLocator.RegisterService(LinkedBlackboard, gameObject);
+            ServiceLocator.RegisterService<IInteractionPerformer>(this, gameObject);
 
             LinkedBlackboard.Set(CommonCore.Names.Self, gameObject);
 

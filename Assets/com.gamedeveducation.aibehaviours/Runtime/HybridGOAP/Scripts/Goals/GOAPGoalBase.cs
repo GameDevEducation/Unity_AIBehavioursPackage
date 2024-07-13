@@ -1,3 +1,4 @@
+using CharacterCore;
 using CommonCore;
 using UnityEngine;
 
@@ -7,6 +8,8 @@ namespace HybridGOAP
     {
         protected IGOAPBrain LinkedBrain;
         protected Blackboard<FastName> LinkedBlackboard => LinkedBrain.LinkedBlackboard;
+        protected IInteractionSelector InteractionInterface;
+        protected IInteractionPerformer PerformerInterface;
 
         public int Priority { get; protected set; } = GoalPriority.DoNotRun;
 
@@ -17,6 +20,15 @@ namespace HybridGOAP
         public void BindToBrain(IGOAPBrain InBrain)
         {
             LinkedBrain = InBrain;
+
+            ServiceLocator.AsyncLocateService<IInteractionSelector>((ILocatableService InService) =>
+            {
+                InteractionInterface = InService as IInteractionSelector;
+            }, gameObject, EServiceSearchMode.LocalOnly);
+            ServiceLocator.AsyncLocateService<IInteractionPerformer>((ILocatableService InService) =>
+            {
+                PerformerInterface = (IInteractionPerformer)InService;
+            }, gameObject, EServiceSearchMode.LocalOnly);
 
             OnInitialise();
 

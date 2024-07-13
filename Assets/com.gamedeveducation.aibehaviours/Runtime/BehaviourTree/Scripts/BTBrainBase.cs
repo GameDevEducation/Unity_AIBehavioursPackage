@@ -4,19 +4,25 @@ using UnityEngine;
 
 namespace BehaviourTree
 {
-    public abstract class BTBrainBase : MonoBehaviour, IBTBrain
+    public abstract class BTBrainBase : MonoBehaviour, IBTBrain, IInteractionPerformer
     {
         [SerializeField] float ResourceCapacity = 50.0f;
 
         public Blackboard<FastName> LinkedBlackboard { get; protected set; }
         public INavigationInterface Navigation { get; protected set; }
         public ILookHandler LookAtHandler { get; protected set; }
+        public IInteractionSelector InteractionInterface { get; protected set; }
+        public IInteractionPerformer PerformerInterface { get; protected set; }
 
         public IBehaviourTree LinkedBehaviourTree { get; protected set; } = new BTInstance();
 
         public string DebugDisplayName => gameObject.name;
 
         public GameObject Self => gameObject;
+
+        public string DisplayName => gameObject.name;
+
+        public Vector3 PerformerLocation => transform.position;
 
         void Start()
         {
@@ -29,9 +35,19 @@ namespace BehaviourTree
                 LookAtHandler = (ILookHandler)InService;
             }, gameObject, EServiceSearchMode.LocalOnly);
 
+            ServiceLocator.AsyncLocateService<IInteractionSelector>((ILocatableService InService) =>
+            {
+                InteractionInterface = InService as IInteractionSelector;
+            }, gameObject, EServiceSearchMode.LocalOnly);
+            ServiceLocator.AsyncLocateService<IInteractionPerformer>((ILocatableService InService) =>
+            {
+                PerformerInterface = (IInteractionPerformer)InService;
+            }, gameObject, EServiceSearchMode.LocalOnly);
+
             LinkedBlackboard = BlackboardManager.GetIndividualBlackboard(this);
 
             ServiceLocator.RegisterService(LinkedBlackboard, gameObject);
+            ServiceLocator.RegisterService<IInteractionPerformer>(this, gameObject);
 
             LinkedBlackboard.Set(CommonCore.Names.Self, gameObject);
 
@@ -70,7 +86,7 @@ namespace BehaviourTree
 
             ConfigureBlackboard();
 
-            LinkedBehaviourTree.Initialise(Navigation, LookAtHandler, LinkedBlackboard);
+            LinkedBehaviourTree.Initialise(Navigation, LookAtHandler, InteractionInterface, PerformerInterface, LinkedBlackboard);
 
             ConfigureBehaviourTree();
 
