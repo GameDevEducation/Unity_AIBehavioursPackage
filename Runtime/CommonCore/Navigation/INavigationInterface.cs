@@ -7,7 +7,7 @@ namespace CommonCore
         bool HasDestination { get; }
         Vector3 Destination { get; }
 
-        bool SetMoveLocation(GameObject InMover, Vector3 InDestination, float InStoppingDistance);
+        bool SetMoveLocation(GameObject InMover, Vector3 InDestination, Vector3? InDestinationOrientation, float InStoppingDistance);
         bool IsPathfindingOrMoving(GameObject InMover);
         bool HasReachedDestination(GameObject InMover);
         bool StopMoving(GameObject InMover);

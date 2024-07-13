@@ -1,3 +1,9 @@
+## [4.4.0] - 13th July 2024
+- Expand support for setting a destination orientation when moving
+- Add support for storing interfaces that implement IBlackboardStorable into the blackboard
+- Fix movement being considered done during end of path reorienting
+- Fix GOAP plans not sending stop notifications if they became invalid during execution
+
 ## [4.3.0] - 12th July 2024
 - Refactor the POI/Look At system into the Character Core and moved behaviours for it to their base systems
 

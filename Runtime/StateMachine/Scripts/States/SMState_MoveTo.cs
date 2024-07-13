@@ -28,8 +28,13 @@ namespace StateMachine
                 if (Destination == CommonCore.Constants.InvalidVector3Position)
                     return ESMStateStatus.Failed;
 
+                Vector3 DestinationOrientation = CommonCore.Constants.InvalidVector3Position;
+                LinkedBlackboard.TryGet(CommonCore.Names.MoveToEndOrientation, out DestinationOrientation, CommonCore.Constants.InvalidVector3Position);
+
+                Vector3? EndOrientation = (DestinationOrientation != CommonCore.Constants.InvalidVector3Position) ? DestinationOrientation : null;
+
                 LastDestination = Destination;
-                if (Navigation.SetMoveLocation(Self, Destination, StoppingDistance))
+                if (Navigation.SetMoveLocation(Self, Destination, EndOrientation, StoppingDistance))
                     return ESMStateStatus.Running;
             }
 
@@ -57,7 +62,13 @@ namespace StateMachine
                 if ((CurrentDestination - LastDestination).sqrMagnitude >= RepathThresholdSq)
                 {
                     LastDestination = CurrentDestination;
-                    if (Navigation.SetMoveLocation(Self, CurrentDestination, StoppingDistance))
+
+                    Vector3 DestinationOrientation = CommonCore.Constants.InvalidVector3Position;
+                    LinkedBlackboard.TryGet(CommonCore.Names.MoveToEndOrientation, out DestinationOrientation, CommonCore.Constants.InvalidVector3Position);
+
+                    Vector3? EndOrientation = (DestinationOrientation != CommonCore.Constants.InvalidVector3Position) ? DestinationOrientation : null;
+
+                    if (Navigation.SetMoveLocation(Self, CurrentDestination, EndOrientation, StoppingDistance))
                         return ESMStateStatus.Running;
                 }
             }

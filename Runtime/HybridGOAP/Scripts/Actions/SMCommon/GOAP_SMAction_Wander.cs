@@ -25,7 +25,7 @@ namespace HybridGOAP
 
         protected override void ConfigureFSM()
         {
-            var State_PickLocation = AddState(new SMState_CalculateMoveLocation(Navigation, ValidNavMeshSearchRange, GetWanderLocation));
+            var State_PickLocation = AddState(new SMState_CalculateMoveLocation(Navigation, ValidNavMeshSearchRange, GetWanderLocation, null));
             var State_MoveToLocation = AddState(new SMState_MoveTo(Navigation, StoppingDistance));
             var State_Wait = AddState(new SMState_WaitForTime(MinWaitTime, MaxWaitTime));
 

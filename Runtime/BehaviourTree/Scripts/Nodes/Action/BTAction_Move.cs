@@ -34,7 +34,12 @@ namespace BehaviourTree
                     return;
                 }
 
-                if (OwningTree.NavigationInterface.SetMoveLocation(Self, Destination, StoppingDistance))
+                Vector3 DestinationOrientation = CommonCore.Constants.InvalidVector3Position;
+                LinkedBlackboard.TryGet(CommonCore.Names.MoveToEndOrientation, out DestinationOrientation, CommonCore.Constants.InvalidVector3Position);
+
+                Vector3? EndOrientation = (DestinationOrientation != CommonCore.Constants.InvalidVector3Position) ? DestinationOrientation : null;
+
+                if (OwningTree.NavigationInterface.SetMoveLocation(Self, Destination, EndOrientation, StoppingDistance))
                 {
                     LastDestination = Destination;
                     LastStatus = EBTNodeResult.InProgress;
@@ -58,7 +63,12 @@ namespace BehaviourTree
                     // destination has moved far enough for a repath?
                     if ((LastDestination - Destination).sqrMagnitude >= RecalculateThresholdSq)
                     {
-                        if (OwningTree.NavigationInterface.SetMoveLocation(Self, Destination, StoppingDistance))
+                        Vector3 DestinationOrientation = CommonCore.Constants.InvalidVector3Position;
+                        LinkedBlackboard.TryGet(CommonCore.Names.MoveToEndOrientation, out DestinationOrientation, CommonCore.Constants.InvalidVector3Position);
+
+                        Vector3? EndOrientation = (DestinationOrientation != CommonCore.Constants.InvalidVector3Position) ? DestinationOrientation : null;
+
+                        if (OwningTree.NavigationInterface.SetMoveLocation(Self, Destination, EndOrientation, StoppingDistance))
                         {
                             LastDestination = Destination;
                             return SetStatusAndCalculateReturnValue(EBTNodeResult.InProgress);

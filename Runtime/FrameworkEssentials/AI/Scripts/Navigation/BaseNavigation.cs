@@ -28,11 +28,10 @@ public abstract class BaseNavigation : MonoBehaviour, INavigationInterface
     [SerializeField] protected bool DEBUG_ShowHeading;
 
     public Vector3 Destination { get; private set; }
+    public Vector3? DestinationOrientation { get; private set; }
     public EState State { get; private set; } = EState.Idle;
-    public Transform LookTarget { get; private set; } = null;
 
-    public bool IsFindingOrFollowingPath => State == EState.FindingPath || State == EState.OrientingAtStartOfPath || State == EState.FollowingPath;
-    public bool HasLookTarget => LookTarget != null;
+    public bool IsFindingOrFollowingPath => State == EState.FindingPath || State == EState.OrientingAtStartOfPath || State == EState.FollowingPath || State == EState.OrientingAtEndOfPath;
     public bool IsAtDestination
     {
         get
@@ -90,12 +89,12 @@ public abstract class BaseNavigation : MonoBehaviour, INavigationInterface
 
     public bool SetDestination(Vector3 newDestination)
     {
-        return SetDestination(newDestination, LookTarget);
+        return SetDestination(newDestination, null);
     }
 
-    public bool SetDestination(Vector3 newDestination, Transform lookTarget)
+    public bool SetDestination(Vector3 newDestination, Vector3? destinationOrientation = null)
     {
-        LookTarget = lookTarget;
+        DestinationOrientation = destinationOrientation;
 
         // location is already our destination?
         Vector3 destinationDelta = newDestination - Destination;
@@ -108,7 +107,7 @@ public abstract class BaseNavigation : MonoBehaviour, INavigationInterface
         destinationDelta.y = 0f;
         if (destinationDelta.magnitude <= DestinationReachedThreshold)
         {
-            if (HasLookTarget)
+            if (DestinationOrientation.HasValue)
                 State = EState.OrientingAtEndOfPath;
 
             return true;
@@ -154,10 +153,10 @@ public abstract class BaseNavigation : MonoBehaviour, INavigationInterface
 
     protected virtual void OnReachedDestination()
     {
-        State = HasLookTarget ? EState.OrientingAtEndOfPath : EState.Idle;
+        State = DestinationOrientation.HasValue ? EState.OrientingAtEndOfPath : EState.Idle;
     }
 
-    protected virtual void OnFacingLookTarget()
+    protected virtual void OnFacingDestinationOrientation()
     {
         State = EState.Idle;
     }
@@ -172,9 +171,9 @@ public abstract class BaseNavigation : MonoBehaviour, INavigationInterface
     #region INavigationInterface Interfaces
     public abstract bool HasDestination { get; protected set; }
 
-    public bool SetMoveLocation(GameObject InMover, Vector3 InDestination, float InStoppingDistance)
+    public bool SetMoveLocation(GameObject InMover, Vector3 InDestination, Vector3? InDestinationOrientation, float InStoppingDistance)
     {
-        if (SetDestination(InDestination))
+        if (SetDestination(InDestination, InDestinationOrientation))
         {
             SetDestinationReachedThreshold(InStoppingDistance);
             return true;

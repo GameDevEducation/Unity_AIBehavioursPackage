@@ -26,7 +26,7 @@ namespace HybridGOAP
         protected override void ConfigureBehaviourTree()
         {
             var LocalRoot = AddChildToRootNode(new BTFlowNode_Sequence("Wander")) as BTFlowNode_Sequence;
-            LocalRoot.AddChild(new BTAction_CalculateMoveLocation(ValidNavMeshSearchRange, GetWanderLocation));
+            LocalRoot.AddChild(new BTAction_CalculateMoveLocation(ValidNavMeshSearchRange, GetWanderLocation, null));
             LocalRoot.AddChild(new BTAction_Move(StoppingDistance));
             LocalRoot.AddChild(new BTAction_Wait(MinWaitTime, MaxWaitTime));
         }

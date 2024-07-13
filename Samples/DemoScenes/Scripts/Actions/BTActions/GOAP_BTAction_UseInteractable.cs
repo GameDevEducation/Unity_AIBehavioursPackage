@@ -27,7 +27,7 @@ namespace DemoScenes
             var LocalRoot = AddChildToRootNode(new BTFlowNode_Sequence("Use Interactable")) as BTFlowNode_Sequence;
 
             LocalRoot.AddChild(new BTAction_SelectInteraction(SelectInteractionFn));
-            LocalRoot.AddChild(new BTAction_CalculateMoveLocation(ValidNavMeshSearchRange, GetInteractableLocation));
+            LocalRoot.AddChild(new BTAction_CalculateMoveLocation(ValidNavMeshSearchRange, GetInteractableLocation, null));
             LocalRoot.AddChild(new BTAction_Move(StoppingDistance));
             LocalRoot.AddChild(new BTAction_UseInteractable());
         }

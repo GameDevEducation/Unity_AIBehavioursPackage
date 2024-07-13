@@ -33,7 +33,7 @@ namespace DemoScenes
             var SMInteract = SMCoreLogic.AddState(new SMState_SMContainer("Interact")) as SMState_SMContainer;
             {
                 var State_SelectInteractable = SMInteract.AddState(new SMState_SelectInteraction(SelectInteractionFn));
-                var State_GetInteractableLocation = SMInteract.AddState(new SMState_CalculateMoveLocation(Navigation, ValidNavMeshSearchRange, GetInteractableLocation));
+                var State_GetInteractableLocation = SMInteract.AddState(new SMState_CalculateMoveLocation(Navigation, ValidNavMeshSearchRange, GetInteractableLocation, null));
                 var State_MoveToInteractable = SMInteract.AddState(new SMState_MoveTo(Navigation, StoppingDistance));
                 var State_UseInteractable = SMInteract.AddState(new SMState_UseInteractable());
 
@@ -47,7 +47,7 @@ namespace DemoScenes
             // Wander State
             var SMWander = SMCoreLogic.AddState(new SMState_SMContainer("Wander")) as SMState_SMContainer;
             {
-                var State_PickLocation = SMWander.AddState(new SMState_CalculateMoveLocation(Navigation, ValidNavMeshSearchRange, GetWanderLocation));
+                var State_PickLocation = SMWander.AddState(new SMState_CalculateMoveLocation(Navigation, ValidNavMeshSearchRange, GetWanderLocation, null));
                 var State_MoveToLocation = SMWander.AddState(new SMState_MoveTo(Navigation, StoppingDistance));
                 var State_Wait = SMWander.AddState(new SMState_WaitForTime(MinWanderWaitTime, MaxWanderWaitTime));
 

@@ -50,7 +50,7 @@ namespace DemoScenes
             var ReturnHomeRoot = CoreBehavioursRoot.AddChild(new BTFlowNode_Sequence("Return Home")) as BTFlowNode_Sequence;
             ReturnHomeRoot.AddDecorator(new BTDecorator_Cooldown(MinReturnHomeCooldown, MaxReturnHomeCooldown));
             ReturnHomeRoot.AddDecorator(new BTDecorator_Function(ShouldReturnHome, false, "Return Home??"));
-            ReturnHomeRoot.AddChild(new BTAction_CalculateMoveLocation(ValidNavMeshSearchRange, GetHomeLocation));
+            ReturnHomeRoot.AddChild(new BTAction_CalculateMoveLocation(ValidNavMeshSearchRange, GetHomeLocation, null));
             ReturnHomeRoot.AddChild(new BTAction_Move(StoppingDistance));
 
             var GatherRoot = CoreBehavioursRoot.AddChild(new BTFlowNode_Sequence("Gather Resources")) as BTFlowNode_Sequence;
@@ -58,17 +58,17 @@ namespace DemoScenes
             GatherRoot.AddDecorator(new BTDecorator_Function(CanGather, false, "Can Gather?"));
 
             GatherRoot.AddChild(new BTAction_SelectResource(SimpleResourceWrangler.Instance));
-            GatherRoot.AddChild(new BTAction_CalculateMoveLocation(ValidNavMeshSearchRange, GetSourceLocation));
+            GatherRoot.AddChild(new BTAction_CalculateMoveLocation(ValidNavMeshSearchRange, GetSourceLocation, null));
             GatherRoot.AddChild(new BTAction_Move(StoppingDistance));
             GatherRoot.AddChild(new BTAction_Gather(GatherSpeed));
 
             GatherRoot.AddChild(new BTAction_SelectStorage(SimpleResourceWrangler.Instance));
-            GatherRoot.AddChild(new BTAction_CalculateMoveLocation(ValidNavMeshSearchRange, GetStorageLocation));
+            GatherRoot.AddChild(new BTAction_CalculateMoveLocation(ValidNavMeshSearchRange, GetStorageLocation, null));
             GatherRoot.AddChild(new BTAction_Move(StoppingDistance));
             GatherRoot.AddChild(new BTAction_Store(StoreSpeed));
 
             var WanderRoot = CoreBehavioursRoot.AddChild(new BTFlowNode_Sequence("Wander")) as BTFlowNode_Sequence;
-            WanderRoot.AddChild(new BTAction_CalculateMoveLocation(ValidNavMeshSearchRange, GetWanderLocation));
+            WanderRoot.AddChild(new BTAction_CalculateMoveLocation(ValidNavMeshSearchRange, GetWanderLocation, null));
             WanderRoot.AddChild(new BTAction_Move(StoppingDistance));
             WanderRoot.AddChild(new BTAction_Wait(MinWanderWaitTime, MaxWanderWaitTime));
 

@@ -26,7 +26,7 @@ namespace HybridGOAP
 
             // Method 2 - Using a service
             var LocalRoot = AddChildToRootNode(new BTFlowNode_Selector("Chase")) as BTFlowNode_Selector;
-            LocalRoot.AddService(new BTService_CalculateMoveLocation(ValidNavMeshSearchRange, GetTargetLocation));
+            LocalRoot.AddService(new BTService_CalculateMoveLocation(ValidNavMeshSearchRange, GetTargetLocation, GetEndOrientation));
             LocalRoot.AddChild(new BTAction_Move(StoppingDistance, true));
         }
 
@@ -38,6 +38,18 @@ namespace HybridGOAP
         protected override void PopulateSupportedGoalTypes()
         {
             SupportedGoalTypes = new System.Type[] { typeof(GOAPGoal_Chase) };
+        }
+
+        Vector3 GetEndOrientation()
+        {
+            Vector3 CurrentLocation = LinkedBlackboard.GetVector3(CommonCore.Names.CurrentLocation);
+            Vector3 TargetLocation = GetTargetLocation();
+
+            if ((TargetLocation == CommonCore.Constants.InvalidVector3Position) ||
+                (CurrentLocation == CommonCore.Constants.InvalidVector3Position))
+                return CommonCore.Constants.InvalidVector3Position;
+
+            return (TargetLocation - CurrentLocation).normalized;
         }
 
         Vector3 GetTargetLocation()

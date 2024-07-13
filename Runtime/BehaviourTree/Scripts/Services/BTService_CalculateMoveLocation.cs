@@ -9,15 +9,18 @@ namespace BehaviourTree
         float SearchRange;
         float RecalculateThresholdSq;
         System.Func<Vector3> GetRequestedDestinationFn;
+        System.Func<Vector3> GetEndOrientationFn;
 
         Vector3 LastRequestedDestination;
 
         public BTService_CalculateMoveLocation(float InSearchRange, System.Func<Vector3> InGetRequestedDestinationFn,
-            float InRecalculationThreshold = 0.1f, string InDisplayName = null)
+                                               System.Func<Vector3> InGetEndOrientationFn,
+                                               float InRecalculationThreshold = 0.1f, string InDisplayName = null)
         {
             SearchRange = InSearchRange;
             RecalculateThresholdSq = InRecalculationThreshold * InRecalculationThreshold;
             GetRequestedDestinationFn = InGetRequestedDestinationFn;
+            GetEndOrientationFn = InGetEndOrientationFn;
             LastRequestedDestination = CommonCore.Constants.InvalidVector3Position;
 
             if (!string.IsNullOrEmpty(InDisplayName))
@@ -41,6 +44,13 @@ namespace BehaviourTree
 
                 RequestedDestination = OwningTree.NavigationInterface.FindNearestNavigableLocation(Self, RequestedDestination, SearchRange);
                 LinkedBlackboard.Set(CommonCore.Names.MoveToLocation, RequestedDestination);
+                LinkedBlackboard.Set(CommonCore.Names.MoveToEndOrientation, CommonCore.Constants.InvalidVector3Position);
+
+                if (RequestedDestination != CommonCore.Constants.InvalidVector3Position)
+                {
+                    if (GetEndOrientationFn != null)
+                        LinkedBlackboard.Set(CommonCore.Names.MoveToEndOrientation, GetEndOrientationFn());
+                }
             }
 
             return true;

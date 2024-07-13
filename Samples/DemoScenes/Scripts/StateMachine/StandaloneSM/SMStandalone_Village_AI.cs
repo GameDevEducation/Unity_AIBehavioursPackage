@@ -49,7 +49,7 @@ namespace DemoScenes
             // Return Home
             var SMReturnHome = SMCoreLogic.AddState(new SMState_SMContainer("Return Home")) as SMState_SMContainer;
             {
-                var State_GetHomeLocation = SMReturnHome.AddState(new SMState_CalculateMoveLocation(Navigation, ValidNavMeshSearchRange, GetHomeLocation));
+                var State_GetHomeLocation = SMReturnHome.AddState(new SMState_CalculateMoveLocation(Navigation, ValidNavMeshSearchRange, GetHomeLocation, null));
                 var State_MoveToLocation = SMReturnHome.AddState(new SMState_MoveTo(Navigation, StoppingDistance));
 
                 State_GetHomeLocation.AddTransition(SMTransition_StateStatus.IfHasFinished(), State_MoveToLocation);
@@ -61,12 +61,12 @@ namespace DemoScenes
             var SMGather = SMCoreLogic.AddState(new SMState_SMContainer("Gather")) as SMState_SMContainer;
             {
                 var State_SelectResource = SMGather.AddState(new SMState_SelectResource(SimpleResourceWrangler.Instance));
-                var State_GetResourceLocation = SMGather.AddState(new SMState_CalculateMoveLocation(Navigation, ValidNavMeshSearchRange, GetSourceLocation));
+                var State_GetResourceLocation = SMGather.AddState(new SMState_CalculateMoveLocation(Navigation, ValidNavMeshSearchRange, GetSourceLocation, null));
                 var State_MoveToResource = SMGather.AddState(new SMState_MoveTo(Navigation, StoppingDistance, false, 0f, "SMMoveToSource"));
                 var State_GatherResource = SMGather.AddState(new SMState_Gather(GatherSpeed));
 
                 var State_SelectStorage = SMGather.AddState(new SMState_SelectStorage(SimpleResourceWrangler.Instance));
-                var State_GetStorageLocation = SMGather.AddState(new SMState_CalculateMoveLocation(Navigation, ValidNavMeshSearchRange, GetStorageLocation));
+                var State_GetStorageLocation = SMGather.AddState(new SMState_CalculateMoveLocation(Navigation, ValidNavMeshSearchRange, GetStorageLocation, null));
                 var State_MoveToStorage = SMGather.AddState(new SMState_MoveTo(Navigation, StoppingDistance, false, 0f, "SMMoveToStorage"));
                 var State_StoreResource = SMGather.AddState(new SMState_Store(StoreSpeed));
 
@@ -85,7 +85,7 @@ namespace DemoScenes
             // Wander (Short) State
             var SMWander_Short = SMCoreLogic.AddState(new SMState_SMContainer("Wander (Short)")) as SMState_SMContainer;
             {
-                var State_PickLocation = SMWander_Short.AddState(new SMState_CalculateMoveLocation(Navigation, ValidNavMeshSearchRange, GetShortWanderLocation));
+                var State_PickLocation = SMWander_Short.AddState(new SMState_CalculateMoveLocation(Navigation, ValidNavMeshSearchRange, GetShortWanderLocation, null));
                 var State_MoveToLocation = SMWander_Short.AddState(new SMState_MoveTo(Navigation, StoppingDistance));
                 var State_Wait = SMWander_Short.AddState(new SMState_WaitForTime(MinShortWanderWaitTime, MaxShortWanderWaitTime));
 
@@ -98,7 +98,7 @@ namespace DemoScenes
             // Wander (Long) State
             var SMWander_Long = SMCoreLogic.AddState(new SMState_SMContainer("Wander (Long)")) as SMState_SMContainer;
             {
-                var State_PickLocation = SMWander_Long.AddState(new SMState_CalculateMoveLocation(Navigation, ValidNavMeshSearchRange, GetLongWanderLocation));
+                var State_PickLocation = SMWander_Long.AddState(new SMState_CalculateMoveLocation(Navigation, ValidNavMeshSearchRange, GetLongWanderLocation, null));
                 var State_MoveToLocation = SMWander_Long.AddState(new SMState_MoveTo(Navigation, StoppingDistance));
                 var State_Wait = SMWander_Long.AddState(new SMState_WaitForTime(MinLongWanderWaitTime, MaxLongWanderWaitTime));
 

@@ -42,12 +42,12 @@ namespace DemoScenes
             InteractRoot.AddDecorator(new BTDecorator_Function(CanInteract, false, "Can Interact?"));
 
             InteractRoot.AddChild(new BTAction_SelectInteraction(SelectInteractionFn));
-            InteractRoot.AddChild(new BTAction_CalculateMoveLocation(ValidNavMeshSearchRange, GetInteractableLocation));
+            InteractRoot.AddChild(new BTAction_CalculateMoveLocation(ValidNavMeshSearchRange, GetInteractableLocation, null));
             InteractRoot.AddChild(new BTAction_Move(StoppingDistance));
             InteractRoot.AddChild(new BTAction_UseInteractable());
 
             var WanderRoot = CoreBehavioursRoot.AddChild(new BTFlowNode_Sequence("Wander")) as BTFlowNode_Sequence;
-            WanderRoot.AddChild(new BTAction_CalculateMoveLocation(ValidNavMeshSearchRange, GetWanderLocation));
+            WanderRoot.AddChild(new BTAction_CalculateMoveLocation(ValidNavMeshSearchRange, GetWanderLocation, null));
             WanderRoot.AddChild(new BTAction_Move(StoppingDistance));
             WanderRoot.AddChild(new BTAction_Wait(MinWanderWaitTime, MaxWanderWaitTime));
 

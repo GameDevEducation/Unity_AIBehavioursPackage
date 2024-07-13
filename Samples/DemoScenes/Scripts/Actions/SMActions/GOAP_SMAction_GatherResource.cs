@@ -24,12 +24,12 @@ namespace DemoScenes
         protected override void ConfigureFSM()
         {
             var State_SelectResource = AddState(new SMState_SelectResource(SimpleResourceWrangler.Instance));
-            var State_GetResourceLocation = AddState(new SMState_CalculateMoveLocation(Navigation, ValidNavMeshSearchRange, GetSourceLocation));
+            var State_GetResourceLocation = AddState(new SMState_CalculateMoveLocation(Navigation, ValidNavMeshSearchRange, GetSourceLocation, null));
             var State_MoveToResource = AddState(new SMState_MoveTo(Navigation, StoppingDistance, false, 0f, "SMMoveToSource"));
             var State_GatherResource = AddState(new SMState_Gather(GatherSpeed));
 
             var State_SelectStorage = AddState(new SMState_SelectStorage(SimpleResourceWrangler.Instance));
-            var State_GetStorageLocation = AddState(new SMState_CalculateMoveLocation(Navigation, ValidNavMeshSearchRange, GetStorageLocation));
+            var State_GetStorageLocation = AddState(new SMState_CalculateMoveLocation(Navigation, ValidNavMeshSearchRange, GetStorageLocation, null));
             var State_MoveToStorage = AddState(new SMState_MoveTo(Navigation, StoppingDistance, false, 0f, "SMMoveToStorage"));
             var State_StoreResource = AddState(new SMState_Store(StoreSpeed));
 
