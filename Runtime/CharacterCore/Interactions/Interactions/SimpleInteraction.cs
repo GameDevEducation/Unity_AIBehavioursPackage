@@ -1,6 +1,7 @@
 using CommonCore;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace CharacterCore
 {
@@ -24,6 +25,11 @@ namespace CharacterCore
 
         [SerializeField] List<GameObject> LookTargetGameObjects;
         [SerializeField] List<GameObject> InteractionPointGameObjects;
+
+        [SerializeField] UnityEvent<IInteractionPerformer, IInteraction> OnBeganEvent = null;
+        [SerializeField] UnityEvent<IInteractionPerformer, IInteraction, float, float> OnTickedEvent = null;
+        [SerializeField] UnityEvent<IInteractionPerformer, IInteraction> OnCompletedEvent = null;
+        [SerializeField] UnityEvent<IInteractionPerformer, IInteraction> OnAbandonedEvent = null;
 
         public int CurrentPerformerCount => CurrentPerformers.Count;
 
@@ -164,7 +170,7 @@ namespace CharacterCore
             Entry.OnTickCallbackFn = InOnTickCallbackFn;
 
             // report interaction as begun?
-            Owner.BeganInteraction(InPerformer, this);
+            OnBeganInteraction(InPerformer);
             if (InOnBeganCallbackFn != null)
                 InOnBeganCallbackFn.Invoke(this);
 
@@ -174,11 +180,11 @@ namespace CharacterCore
                 // send tick notifications even if finishing immediately
                 if (InOnTickCallbackFn != null)
                     InOnTickCallbackFn.Invoke(this, 0.0f, 1.0f);
-                Owner.TickedInteraction(InPerformer, this);
+                OnTickedInteraction(InPerformer, 0.0f, 1.0f);
 
-                Owner.FinishedInteraction(InPerformer, this);
+                OnCompletedInteraction(InPerformer);
 
-                CompleteInteraction(InPerformer, Entry);
+                CleanupInteraction(InPerformer, Entry);
             }
 
             return true;
@@ -198,7 +204,7 @@ namespace CharacterCore
             Owner.ReleaseInteractionPoint(Entry.LinkedPoint);
             CurrentPerformers.Remove(InPerformer);
 
-            Owner.AbandonedInteraction(InPerformer, this);
+            OnAbandonedInteraction(InPerformer);
 
             return true;
         }
@@ -220,7 +226,7 @@ namespace CharacterCore
 
                 float Progress = Mathf.Min(1.0f, Entry.TimeElapsed / Entry.Duration);
 
-                Owner.TickedInteraction(Performer, this);
+                OnTickedInteraction(Performer, Entry.TimeElapsed, Progress);
 
                 // run the tick callback and see if we're abandoning the interaction?
                 bool bAbandon = false;
@@ -229,7 +235,7 @@ namespace CharacterCore
                     bAbandon = Entry.OnTickCallbackFn(this, Entry.TimeElapsed, Progress);
 
                     if (bAbandon)
-                        Owner.AbandonedInteraction(Performer, this);
+                        OnAbandonedInteraction(Performer);
                 }
 
                 if (bAbandon)
@@ -238,22 +244,50 @@ namespace CharacterCore
                 // interaction finished?
                 if (Entry.TimeElapsed >= Entry.Duration)
                 {
-                    Owner.FinishedInteraction(Performer, this);
+                    OnCompletedInteraction(Performer);
                     PerformersToCleanup.Add(Performer);
                 }
             }
 
             foreach (var Performer in PerformersToCleanup)
-                CompleteInteraction(Performer, CurrentPerformers[Performer]);
+                CleanupInteraction(Performer, CurrentPerformers[Performer]);
         }
 
-        protected void CompleteInteraction(IInteractionPerformer InPerformer, PerformerInfo InEntry)
+        protected void CleanupInteraction(IInteractionPerformer InPerformer, PerformerInfo InEntry)
         {
             if (InEntry.OnCompletedCallbackFn != null)
                 InEntry.OnCompletedCallbackFn.Invoke(this);
 
             if (CurrentPerformers.ContainsKey(InPerformer))
                 UnlockInteraction(InPerformer);
+        }
+
+        protected virtual void OnBeganInteraction(IInteractionPerformer InPerformer)
+        {
+            Owner.BeganInteraction(InPerformer, this);
+
+            OnBeganEvent.Invoke(InPerformer, this);
+        }
+
+        protected virtual void OnTickedInteraction(IInteractionPerformer InPerformer, float InTimeElapsed, float InProgress)
+        {
+            Owner.TickedInteraction(InPerformer, this);
+
+            OnTickedEvent.Invoke(InPerformer, this, InTimeElapsed, InProgress);
+        }
+
+        protected virtual void OnCompletedInteraction(IInteractionPerformer InPerformer)
+        {
+            Owner.FinishedInteraction(InPerformer, this);
+
+            OnCompletedEvent.Invoke(InPerformer, this);
+        }
+
+        protected virtual void OnAbandonedInteraction(IInteractionPerformer InPerformer)
+        {
+            Owner.AbandonedInteraction(InPerformer, this);
+
+            OnAbandonedEvent.Invoke(InPerformer, this);
         }
     }
 }

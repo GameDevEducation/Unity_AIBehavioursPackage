@@ -1,3 +1,4 @@
+using CharacterCore;
 using CommonCore;
 using System.Collections.Generic;
 using UnityEngine;
@@ -221,7 +222,7 @@ namespace HybridGOAP
         }
     }
 
-    public abstract class GOAPBrainBase : MonoBehaviour, IGOAPBrain
+    public abstract class GOAPBrainBase : MonoBehaviour, IGOAPBrain, IInteractionPerformer
     {
         [SerializeField] float ResourceCapacity = 50.0f;
 
@@ -234,6 +235,10 @@ namespace HybridGOAP
 
         public string DebugDisplayName => gameObject.name;
 
+        public string DisplayName => gameObject.name;
+
+        public Vector3 PerformerLocation => transform.position;
+
         GOAPPlan ActivePlan = new();
         GOAPPlan CandidatePlan = new();
 
@@ -242,6 +247,7 @@ namespace HybridGOAP
             LinkedBlackboard = BlackboardManager.GetIndividualBlackboard(this);
 
             ServiceLocator.RegisterService(LinkedBlackboard, gameObject);
+            ServiceLocator.RegisterService<IInteractionPerformer>(this, gameObject);
 
             LinkedBlackboard.Set(CommonCore.Names.Self, gameObject);
 

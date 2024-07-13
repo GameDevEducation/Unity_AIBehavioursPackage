@@ -7412,37 +7412,6 @@ Mesh:
     offset: 0
     size: 0
     path: 
---- !u!1 &1284542001
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1284542002}
-  m_Layer: 0
-  m_Name: Interaction Marker
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1284542002
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1284542001}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 1.5}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 543450653521301264}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!43 &1307640405
 Mesh:
   m_ObjectHideFlags: 0
@@ -9766,11 +9735,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2784907891439519553, guid: 75521a25f23d0dd40b6cd893910dddab, type: 3}
   m_PrefabInstance: {fileID: 1731790636}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1748129136 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 813414600308742786, guid: 91d49ac285761864093ce8ba4c6efae7, type: 3}
-  m_PrefabInstance: {fileID: 542892203218030376}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1777682763
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -12026,10 +11990,6 @@ PrefabInstance:
     m_TransformParent: {fileID: 1496251318}
     m_Modifications:
     - target: {fileID: 568346180616248, guid: 91d49ac285761864093ce8ba4c6efae7, type: 3}
-      propertyPath: m_RootOrder
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 568346180616248, guid: 91d49ac285761864093ce8ba4c6efae7, type: 3}
       propertyPath: m_LocalPosition.x
       value: 1.1689999
       objectReference: {fileID: 0}
@@ -12073,27 +12033,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: MediumObject_Microwave
       objectReference: {fileID: 0}
-    - target: {fileID: 813414600308742786, guid: 91d49ac285761864093ce8ba4c6efae7, type: 3}
-      propertyPath: m_NavMeshLayer
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 813414600308742786, guid: 91d49ac285761864093ce8ba4c6efae7, type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 8
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects:
-    - targetCorrespondingSourceObject: {fileID: 568346180616248, guid: 91d49ac285761864093ce8ba4c6efae7, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1284542002}
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 813414600308742786, guid: 91d49ac285761864093ce8ba4c6efae7, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 543450653521301267}
-    - targetCorrespondingSourceObject: {fileID: 813414600308742786, guid: 91d49ac285761864093ce8ba4c6efae7, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 543450653521301268}
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 91d49ac285761864093ce8ba4c6efae7, type: 3}
 --- !u!4 &543450651999473835 stripped
 Transform:
@@ -12105,47 +12048,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 568346180616248, guid: 91d49ac285761864093ce8ba4c6efae7, type: 3}
   m_PrefabInstance: {fileID: 542892203218030376}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &543450653521301267
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1748129136}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 000c97ffc8243a4418f3bd06cf746b7c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _DisplayName: Heat Food
-  _InteractionType: 1
-  _Duration: 5
-  _Outcomes:
-  - Description: Amazing Food
-    Weighting: 0.1
-    AbandonInteraction: 0
-  - Description: Terrible Food
-    Weighting: 0.1
-    AbandonInteraction: 0
-  - Description: Average Food
-    Weighting: 0.8
-    AbandonInteraction: 0
-  MaxSimultaneousUsers: 1
---- !u!114 &543450653521301268
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1748129136}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b94240a6987a5e3458c657774ff1d6b2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _DisplayName: Microwave
-  _InteractionMarker: {fileID: 1284542002}
-  _LookAtPoint: {fileID: 0}
 --- !u!1001 &1028190886829984871
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -12585,6 +12487,21 @@ MonoBehaviour:
     Weighting: 1
     AbandonInteraction: 0
   MaxSimultaneousUsers: 1
+--- !u!114 &4719248235757459755
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1613250537}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4254a6d691a9c9c4d8c28e0dd26a5213, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _DisplayName: 
+  _InteractionMarker: {fileID: 0}
+  _LookAtPoint: {fileID: 0}
 --- !u!4 &4827433699517635672 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6852568500953520295, guid: 8b43240ff582f9147ab3b0fc66559d49, type: 3}
@@ -12863,6 +12780,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 1486182516679048749, guid: b02940c0011fd9746a3c53ba65095b92, type: 3}
       insertIndex: -1
       addedObject: {fileID: 4719248235757459754}
+    - targetCorrespondingSourceObject: {fileID: 1486182516679048749, guid: b02940c0011fd9746a3c53ba65095b92, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4719248235757459755}
   m_SourcePrefab: {fileID: 100100000, guid: b02940c0011fd9746a3c53ba65095b92, type: 3}
 --- !u!4 &7074479931435917102 stripped
 Transform:

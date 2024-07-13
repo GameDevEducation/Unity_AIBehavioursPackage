@@ -73,13 +73,13 @@ namespace CharacterCore
             Tick(Time.deltaTime);
         }
 
-        public void Tick(float InDeltaTime)
+        public virtual void Tick(float InDeltaTime)
         {
             foreach (var Interaction in ActiveInteractions)
                 Interaction.Tick(InDeltaTime);
         }
 
-        public void GatherDebugData(IGameDebugger InDebugger, bool bInIsSelected)
+        public virtual void GatherDebugData(IGameDebugger InDebugger, bool bInIsSelected)
         {
             InDebugger.AddSectionHeader(DebugDisplayName);
             InDebugger.PushIndent();
@@ -90,7 +90,7 @@ namespace CharacterCore
             InDebugger.PopIndent();
         }
 
-        public bool IsUsable(IInteraction InInteraction = null)
+        public virtual bool IsUsable(IInteraction InInteraction = null)
         {
             // trying to start a mutually exclusive interaction while other interactions are active?
             if ((InInteraction != null) && InInteraction.IsMutuallyExclusive && (ActiveInteractions.Count > 0))
@@ -153,7 +153,7 @@ namespace CharacterCore
             return true;
         }
 
-        public IInteractionPoint RequestInteractionPoint()
+        public virtual IInteractionPoint RequestInteractionPoint()
         {
             IInteractionPoint FoundPoint = null;
 
@@ -172,7 +172,7 @@ namespace CharacterCore
             return FoundPoint;
         }
 
-        public void ReleaseInteractionPoint(IInteractionPoint InInteractionPoint)
+        public virtual void ReleaseInteractionPoint(IInteractionPoint InInteractionPoint)
         {
             InteractionPointUsability[InInteractionPoint] = true;
         }
@@ -196,7 +196,7 @@ namespace CharacterCore
             ActiveInteractions.Remove(InInteraction);
         }
 
-        public List<IInteraction> FilterInteractionsByPredicate(Predicate<IInteraction> InFilterPredicate, IComparer<IInteraction> InComparer = null)
+        public virtual List<IInteraction> FilterInteractionsByPredicate(Predicate<IInteraction> InFilterPredicate, IComparer<IInteraction> InComparer = null)
         {
             var FilteredList = Interactions.FindAll(InFilterPredicate);
 
