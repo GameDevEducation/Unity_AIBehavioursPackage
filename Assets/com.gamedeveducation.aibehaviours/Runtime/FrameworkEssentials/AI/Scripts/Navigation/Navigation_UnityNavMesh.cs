@@ -148,8 +148,8 @@ public class Navigation_UnityNavMesh : BaseNavigation
 
     protected override void Tick_OrientingAtEndOfPath()
     {
-        if (AIMotor.LookTowards(LookTarget, RotationSpeed, false))
-            OnFacingLookTarget();
+        if (AIMotor.LookTowards(transform.position + DestinationOrientation.Value, RotationSpeed, false))
+            OnFacingDestinationOrientation();
     }
 
     protected override void Tick_Animation()

@@ -64,12 +64,15 @@ namespace StateMachine
 
             LinkedBlackboard = BlackboardManager.GetIndividualBlackboard(this);
 
+            ServiceLocator.RegisterService(LinkedBlackboard, gameObject);
+
             LinkedBlackboard.Set(CommonCore.Names.Self, gameObject);
 
             LinkedBlackboard.Set(CommonCore.Names.CurrentLocation, transform.position);
             LinkedBlackboard.Set(CommonCore.Names.HomeLocation, transform.position);
 
             LinkedBlackboard.Set(CommonCore.Names.MoveToLocation, CommonCore.Constants.InvalidVector3Position);
+            LinkedBlackboard.Set(CommonCore.Names.MoveToEndOrientation, CommonCore.Constants.InvalidVector3Position);
 
             LinkedBlackboard.Set(CommonCore.Names.Target_GameObject, (GameObject)null);
             LinkedBlackboard.Set(CommonCore.Names.Target_Position, CommonCore.Constants.InvalidVector3Position);
@@ -112,8 +115,6 @@ namespace StateMachine
             {
                 (InDebugger as IGameDebugger).RegisterSource(this);
             });
-
-            ServiceLocator.RegisterService(LinkedBlackboard, gameObject);
         }
 
         void OnDestroy()

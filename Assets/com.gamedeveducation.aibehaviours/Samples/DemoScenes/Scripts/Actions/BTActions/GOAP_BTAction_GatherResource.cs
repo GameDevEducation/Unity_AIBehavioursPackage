@@ -26,12 +26,12 @@ namespace DemoScenes
             var LocalRoot = AddChildToRootNode(new BTFlowNode_Sequence("Gather Resources")) as BTFlowNode_Sequence;
 
             LocalRoot.AddChild(new BTAction_SelectResource(SimpleResourceWrangler.Instance));
-            LocalRoot.AddChild(new BTAction_CalculateMoveLocation(ValidNavMeshSearchRange, GetSourceLocation));
+            LocalRoot.AddChild(new BTAction_CalculateMoveLocation(ValidNavMeshSearchRange, GetSourceLocation, null));
             LocalRoot.AddChild(new BTAction_Move(StoppingDistance));
             LocalRoot.AddChild(new BTAction_Gather(GatherSpeed));
 
             LocalRoot.AddChild(new BTAction_SelectStorage(SimpleResourceWrangler.Instance));
-            LocalRoot.AddChild(new BTAction_CalculateMoveLocation(ValidNavMeshSearchRange, GetStorageLocation));
+            LocalRoot.AddChild(new BTAction_CalculateMoveLocation(ValidNavMeshSearchRange, GetStorageLocation, null));
             LocalRoot.AddChild(new BTAction_Move(StoppingDistance));
             LocalRoot.AddChild(new BTAction_Store(StoreSpeed));
         }

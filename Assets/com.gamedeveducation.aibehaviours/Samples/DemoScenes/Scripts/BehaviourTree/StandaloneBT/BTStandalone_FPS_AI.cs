@@ -36,11 +36,11 @@ namespace DemoScenes
 
             var ChaseRoot = CoreBehavioursRoot.AddChild(new BTFlowNode_Selector("Chase")) as BTFlowNode_Selector;
             ChaseRoot.AddDecorator(new BTDecorator_Function(CanChase, false, "Can Chase?"));
-            ChaseRoot.AddService(new BTService_CalculateMoveLocation(ValidNavMeshSearchRange, GetTargetLocation));
+            ChaseRoot.AddService(new BTService_CalculateMoveLocation(ValidNavMeshSearchRange, GetTargetLocation, GetEndOrientation));
             ChaseRoot.AddChild(new BTAction_Move(StoppingDistance, true));
 
             var WanderRoot = CoreBehavioursRoot.AddChild(new BTFlowNode_Sequence("Wander")) as BTFlowNode_Sequence;
-            WanderRoot.AddChild(new BTAction_CalculateMoveLocation(ValidNavMeshSearchRange, GetWanderLocation));
+            WanderRoot.AddChild(new BTAction_CalculateMoveLocation(ValidNavMeshSearchRange, GetWanderLocation, null));
             WanderRoot.AddChild(new BTAction_Move(StoppingDistance));
             WanderRoot.AddChild(new BTAction_Wait(MinWanderWaitTime, MaxWanderWaitTime));
 
@@ -76,6 +76,18 @@ namespace DemoScenes
             WanderTarget.z += Distance * Mathf.Cos(Angle);
 
             return WanderTarget;
+        }
+
+        Vector3 GetEndOrientation()
+        {
+            Vector3 CurrentLocation = LinkedBlackboard.GetVector3(CommonCore.Names.CurrentLocation);
+            Vector3 TargetLocation = GetTargetLocation();
+
+            if ((TargetLocation == CommonCore.Constants.InvalidVector3Position) ||
+                (CurrentLocation == CommonCore.Constants.InvalidVector3Position))
+                return CommonCore.Constants.InvalidVector3Position;
+
+            return (TargetLocation - CurrentLocation).normalized;
         }
 
         Vector3 GetTargetLocation()

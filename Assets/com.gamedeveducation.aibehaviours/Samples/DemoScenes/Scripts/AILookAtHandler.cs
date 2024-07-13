@@ -39,7 +39,7 @@ namespace DemoScenes
                 return;
             }
 
-            // next priority is our current look target
+            // next priority is our current look target game object
             GameObject CurrentLookAtTarget = null;
             InBlackboard.TryGet(CommonCore.Names.LookAt_GameObject, out CurrentLookAtTarget, null);
             if (IsLookTargetValid(CurrentLookAtTarget))

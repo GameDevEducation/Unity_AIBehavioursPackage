@@ -21,7 +21,7 @@ namespace HybridGOAP
         protected override void ConfigureFSM()
         {
             var ChildStates = new List<ISMState>();
-            ChildStates.Add(new SMState_CalculateMoveLocation(Navigation, ValidNavMeshSearchRange, GetTargetLocation, true));
+            ChildStates.Add(new SMState_CalculateMoveLocation(Navigation, ValidNavMeshSearchRange, GetTargetLocation, GetEndOrientation, true));
             ChildStates.Add(new SMState_MoveTo(Navigation, StoppingDistance, true));
 
             AddState(new SMState_Parallel(ChildStates));
@@ -37,6 +37,18 @@ namespace HybridGOAP
         protected override void PopulateSupportedGoalTypes()
         {
             SupportedGoalTypes = new System.Type[] { typeof(GOAPGoal_Chase) };
+        }
+
+        Vector3 GetEndOrientation()
+        {
+            Vector3 CurrentLocation = LinkedBlackboard.GetVector3(CommonCore.Names.CurrentLocation);
+            Vector3 TargetLocation = GetTargetLocation();
+
+            if ((TargetLocation == CommonCore.Constants.InvalidVector3Position) ||
+                (CurrentLocation == CommonCore.Constants.InvalidVector3Position))
+                return CommonCore.Constants.InvalidVector3Position;
+
+            return (TargetLocation - CurrentLocation).normalized;
         }
 
         Vector3 GetTargetLocation()

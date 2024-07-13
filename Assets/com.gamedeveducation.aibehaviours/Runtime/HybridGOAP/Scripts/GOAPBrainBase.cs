@@ -241,12 +241,15 @@ namespace HybridGOAP
         {
             LinkedBlackboard = BlackboardManager.GetIndividualBlackboard(this);
 
+            ServiceLocator.RegisterService(LinkedBlackboard, gameObject);
+
             LinkedBlackboard.Set(CommonCore.Names.Self, gameObject);
 
             LinkedBlackboard.Set(CommonCore.Names.CurrentLocation, transform.position);
             LinkedBlackboard.Set(CommonCore.Names.HomeLocation, transform.position);
 
             LinkedBlackboard.Set(CommonCore.Names.MoveToLocation, CommonCore.Constants.InvalidVector3Position);
+            LinkedBlackboard.Set(CommonCore.Names.MoveToEndOrientation, CommonCore.Constants.InvalidVector3Position);
 
             LinkedBlackboard.Set(CommonCore.Names.Target_GameObject, (GameObject)null);
             LinkedBlackboard.Set(CommonCore.Names.Target_Position, CommonCore.Constants.InvalidVector3Position);
@@ -255,6 +258,7 @@ namespace HybridGOAP
             LinkedBlackboard.Set(CommonCore.Names.Awareness_BestTarget, (GameObject)null);
 
             LinkedBlackboard.Set(CommonCore.Names.LookAt_GameObject, (GameObject)null);
+            LinkedBlackboard.Set(CommonCore.Names.LookAt_Position, CommonCore.Constants.InvalidVector3Position);
 
             LinkedBlackboard.Set(CommonCore.Names.Interaction_SmartObject, (SmartObject)null);
             LinkedBlackboard.Set(CommonCore.Names.Interaction_Type, (BaseInteraction)null);
@@ -292,8 +296,6 @@ namespace HybridGOAP
             {
                 (InDebugger as IGameDebugger).RegisterSource(this);
             });
-
-            ServiceLocator.RegisterService(LinkedBlackboard, gameObject);
 
             ServiceLocator.AsyncLocateService<INavigationInterface>((ILocatableService InService) =>
             {
@@ -428,9 +430,11 @@ namespace HybridGOAP
 
         void EvaluateCandidatePlan()
         {
-            // Scenario 1: No current plan, valid candidate
+            // Scenario 1: Current plan is not valid, valid candidate
             if (!ActivePlan.IsValid && CandidatePlan.IsValid)
             {
+                ActivePlan.Stop(true);
+
                 // start the plan
                 ActivePlan.CopyFrom(CandidatePlan);
                 ActivePlan.Start();

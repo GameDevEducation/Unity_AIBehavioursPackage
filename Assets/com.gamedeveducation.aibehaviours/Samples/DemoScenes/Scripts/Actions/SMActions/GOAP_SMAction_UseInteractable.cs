@@ -25,7 +25,7 @@ namespace DemoScenes
         protected override void ConfigureFSM()
         {
             var State_SelectInteractable = AddState(new SMState_SelectInteraction(SelectInteractionFn));
-            var State_GetInteractableLocation = AddState(new SMState_CalculateMoveLocation(Navigation, ValidNavMeshSearchRange, GetInteractableLocation));
+            var State_GetInteractableLocation = AddState(new SMState_CalculateMoveLocation(Navigation, ValidNavMeshSearchRange, GetInteractableLocation, null));
             var State_MoveToInteractable = AddState(new SMState_MoveTo(Navigation, StoppingDistance));
             var State_UseInteractable = AddState(new SMState_UseInteractable());
 

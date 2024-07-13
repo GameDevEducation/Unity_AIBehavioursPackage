@@ -21,7 +21,7 @@ namespace DemoScenes
         protected override void ConfigureBehaviourTree()
         {
             var LocalRoot = AddChildToRootNode(new BTFlowNode_Sequence("Return Home")) as BTFlowNode_Sequence;
-            LocalRoot.AddChild(new BTAction_CalculateMoveLocation(ValidNavMeshSearchRange, GetHomeLocation));
+            LocalRoot.AddChild(new BTAction_CalculateMoveLocation(ValidNavMeshSearchRange, GetHomeLocation, null));
             LocalRoot.AddChild(new BTAction_Move(StoppingDistance));
         }
 

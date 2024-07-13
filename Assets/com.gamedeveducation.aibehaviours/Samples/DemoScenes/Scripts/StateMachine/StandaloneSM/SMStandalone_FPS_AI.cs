@@ -36,7 +36,7 @@ namespace DemoScenes
             var SMChase = SMCoreLogic.AddState(new SMState_SMContainer("Chase")) as SMState_SMContainer;
             {
                 var ChildStates = new List<ISMState>();
-                ChildStates.Add(new SMState_CalculateMoveLocation(Navigation, ValidNavMeshSearchRange, GetTargetLocation, true));
+                ChildStates.Add(new SMState_CalculateMoveLocation(Navigation, ValidNavMeshSearchRange, GetTargetLocation, GetEndOrientation, true));
                 ChildStates.Add(new SMState_MoveTo(Navigation, StoppingDistance, true));
 
                 SMChase.AddState(new SMState_Parallel(ChildStates));
@@ -47,7 +47,7 @@ namespace DemoScenes
             // Wander State
             var SMWander = SMCoreLogic.AddState(new SMState_SMContainer("Wander")) as SMState_SMContainer;
             {
-                var State_PickLocation = SMWander.AddState(new SMState_CalculateMoveLocation(Navigation, ValidNavMeshSearchRange, GetWanderLocation));
+                var State_PickLocation = SMWander.AddState(new SMState_CalculateMoveLocation(Navigation, ValidNavMeshSearchRange, GetWanderLocation, null));
                 var State_MoveToLocation = SMWander.AddState(new SMState_MoveTo(Navigation, StoppingDistance));
                 var State_Wait = SMWander.AddState(new SMState_WaitForTime(MinWanderWaitTime, MaxWanderWaitTime));
 
@@ -103,6 +103,17 @@ namespace DemoScenes
 
         protected override void ConfigureBrain()
         {
+        }
+        Vector3 GetEndOrientation()
+        {
+            Vector3 CurrentLocation = LinkedBlackboard.GetVector3(CommonCore.Names.CurrentLocation);
+            Vector3 TargetLocation = GetTargetLocation();
+
+            if ((TargetLocation == CommonCore.Constants.InvalidVector3Position) ||
+                (CurrentLocation == CommonCore.Constants.InvalidVector3Position))
+                return CommonCore.Constants.InvalidVector3Position;
+
+            return (TargetLocation - CurrentLocation).normalized;
         }
 
         Vector3 GetTargetLocation()

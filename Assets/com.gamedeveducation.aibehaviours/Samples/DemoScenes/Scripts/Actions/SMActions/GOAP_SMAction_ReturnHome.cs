@@ -20,7 +20,7 @@ namespace DemoScenes
 
         protected override void ConfigureFSM()
         {
-            var State_GetHomeLocation = AddState(new SMState_CalculateMoveLocation(Navigation, ValidNavMeshSearchRange, GetHomeLocation));
+            var State_GetHomeLocation = AddState(new SMState_CalculateMoveLocation(Navigation, ValidNavMeshSearchRange, GetHomeLocation, null));
             var State_MoveToLocation = AddState(new SMState_MoveTo(Navigation, StoppingDistance));
 
             State_GetHomeLocation.AddTransition(SMTransition_StateStatus.IfHasFinished(), State_MoveToLocation);

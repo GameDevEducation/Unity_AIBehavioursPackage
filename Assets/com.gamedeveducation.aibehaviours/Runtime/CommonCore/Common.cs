@@ -15,6 +15,7 @@ namespace CommonCore
         public static readonly FastName CurrentLocation = new("Self.Transform.Position");
         public static readonly FastName HomeLocation = new("Self.Home.Position");
         public static readonly FastName MoveToLocation = new("Self.Navigation.MoveToLocation");
+        public static readonly FastName MoveToEndOrientation = new("Self.Navigation.MoveToEndOrientation");
 
         public static readonly FastName Target_GameObject = new("Self.Target.GameObject");
         public static readonly FastName Target_Position = new("Self.Target.Position");

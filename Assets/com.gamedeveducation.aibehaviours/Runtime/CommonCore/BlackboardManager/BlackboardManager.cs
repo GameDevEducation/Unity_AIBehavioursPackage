@@ -3,6 +3,11 @@ using UnityEngine;
 
 namespace CommonCore
 {
+    public interface IBlackboardStorable
+    {
+
+    }
+
     public class Blackboard<BlackboardKeyType> : IDebuggable, ILocatableService
     {
         Dictionary<BlackboardKeyType, int> IntValues = new();
@@ -13,6 +18,7 @@ namespace CommonCore
         Dictionary<BlackboardKeyType, GameObject> GameObjectValues = new();
         Dictionary<BlackboardKeyType, MonoBehaviour> MonoBehaviourValues = new();
         Dictionary<BlackboardKeyType, object> GenericValues = new();
+        Dictionary<BlackboardKeyType, IBlackboardStorable> BlackboardStorableValues = new();
 
         public string DebugDisplayName => "Blackboard";
 
@@ -151,6 +157,27 @@ namespace CommonCore
             MonoBehaviour TempOutValue = null;
 
             bool bResult = TryGet(MonoBehaviourValues, InKey, out TempOutValue, InDefaultValue);
+
+            OutValue = TempOutValue as T;
+
+            return bResult;
+        }
+
+        public void Set(BlackboardKeyType InKey, IBlackboardStorable InValue)
+        {
+            BlackboardStorableValues[InKey] = InValue;
+        }
+
+        public IBlackboardStorable Get(BlackboardKeyType InKey)
+        {
+            return Get(BlackboardStorableValues, InKey);
+        }
+
+        public bool TryGetStorable<T>(BlackboardKeyType InKey, out T OutValue, IBlackboardStorable InDefaultValue = null) where T : class, IBlackboardStorable
+        {
+            IBlackboardStorable TempOutValue;
+
+            bool bResult = TryGet(BlackboardStorableValues, InKey, out TempOutValue, InDefaultValue);
 
             OutValue = TempOutValue as T;
 
