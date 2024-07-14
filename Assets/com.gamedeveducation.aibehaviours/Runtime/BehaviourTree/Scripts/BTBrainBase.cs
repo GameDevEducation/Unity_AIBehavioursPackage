@@ -66,8 +66,9 @@ namespace BehaviourTree
             LinkedBlackboard.Set(CommonCore.Names.LookAt_GameObject, (GameObject)null);
             LinkedBlackboard.Set(CommonCore.Names.LookAt_Position, CommonCore.Constants.InvalidVector3Position);
 
-            LinkedBlackboard.Set(CommonCore.Names.Interaction_SmartObject, (SmartObject)null);
-            LinkedBlackboard.Set(CommonCore.Names.Interaction_Type, (BaseInteraction)null);
+            LinkedBlackboard.Set(CommonCore.Names.Interaction_Interactable, (IInteractable)null);
+            LinkedBlackboard.Set(CommonCore.Names.Interaction_Type, (IInteraction)null);
+            LinkedBlackboard.Set(CommonCore.Names.Interaction_Point, (IInteractionPoint)null);
 
             LinkedBlackboard.SetGeneric(CommonCore.Names.Resource_FocusType, CommonCore.Resources.EType.Unknown);
             LinkedBlackboard.Set(CommonCore.Names.Resource_FocusSource, (GameObject)null);

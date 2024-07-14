@@ -33,6 +33,8 @@ namespace CharacterCore
 
         public int CurrentPerformerCount => CurrentPerformers.Count;
 
+        public bool HasLookTargets => (LookTargets != null) && (LookTargets.Count > 0);
+
         public IInteractable Owner { get; protected set; }
         public List<IInteractionLookTarget> LookTargets { get; protected set; }
         public List<IInteractionPoint> InteractionPoints { get; protected set; }
@@ -133,6 +135,8 @@ namespace CharacterCore
                 TimeElapsed = 0.0f,
                 LinkedPoint = OutFoundPoint
             });
+
+            Owner.LockedInteraction(InPerformer, this);
 
             return true;
         }

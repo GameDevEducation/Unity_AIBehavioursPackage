@@ -8,6 +8,7 @@ namespace CharacterCore
         bool IsMutuallyExclusive { get; }
         int MaxSimultaneousPerformers { get; }
         int CurrentPerformerCount { get; }
+        bool HasLookTargets { get; }
 
         IInteractable Owner { get; }
 

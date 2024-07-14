@@ -1,5 +1,5 @@
 using BehaviourTree;
-using CommonCore;
+using CharacterCore;
 using UnityEngine;
 
 namespace DemoScenes
@@ -10,7 +10,6 @@ namespace DemoScenes
         [Header("Interact")]
         [SerializeField] float MinInteractCooldown = 1.0f;
         [SerializeField] float MaxInteractCooldown = 5.0f;
-        [SerializeField][Range(0.0f, 1.0f)] float MinInteractionDesireRequired = 0.1f;
 
         [Header("Wander")]
         [SerializeField] float MinWanderRange = 10.0f;
@@ -41,8 +40,8 @@ namespace DemoScenes
             InteractRoot.AddDecorator(new BTDecorator_Cooldown(MinInteractCooldown, MaxInteractCooldown));
             InteractRoot.AddDecorator(new BTDecorator_Function(CanInteract, false, "Can Interact?"));
 
-            InteractRoot.AddChild(new BTAction_SelectInteraction(SelectInteractionFn));
-            InteractRoot.AddChild(new BTAction_CalculateMoveLocation(ValidNavMeshSearchRange, GetInteractableLocation, null));
+            InteractRoot.AddChild(new BTAction_SelectInteraction());
+            InteractRoot.AddChild(new BTAction_CalculateMoveLocation(ValidNavMeshSearchRange, GetInteractableLocation, GetInteractionDirection));
             InteractRoot.AddChild(new BTAction_Move(StoppingDistance));
             InteractRoot.AddChild(new BTAction_UseInteractable());
 
@@ -71,21 +70,16 @@ namespace DemoScenes
 
         bool CanInteract(float InDeltaTime)
         {
-            return GetUseInteractableDesire(Self, -1.0f) >= MinInteractionDesireRequired;
-        }
+            IInteraction CurrentInteraction;
+            LinkedBlackboard.TryGetStorable<IInteraction>(CommonCore.Names.Interaction_Type, out CurrentInteraction, null);
 
-        System.Tuple<SmartObject, BaseInteraction> SelectInteractionFn(GameObject InQuerier)
-        {
-            SmartObject TargetSO = null;
-            BaseInteraction TargetInteraction = null;
+            if (CurrentInteraction != null)
+                return true;
 
-            SelectRandomInteraction(Self, -1.0f, (SmartObject InTargetSO, BaseInteraction InTargetInteraction) =>
-            {
-                TargetSO = InTargetSO;
-                TargetInteraction = InTargetInteraction;
-            });
+            IInteractable FoundInteractable;
+            IInteraction FoundInteraction;
 
-            return new System.Tuple<SmartObject, BaseInteraction>(TargetSO, TargetInteraction);
+            return InteractionInterface.PickInteraction(PerformerInterface, out FoundInteractable, out FoundInteraction);
         }
 
         Vector3 GetWanderLocation()
@@ -106,37 +100,38 @@ namespace DemoScenes
 
         Vector3 GetInteractableLocation()
         {
-            Vector3 InteractableLocation = CommonCore.Constants.InvalidVector3Position;
+            // attempt to get the interact point
+            IInteractionPoint TargetPoint;
+            LinkedBlackboard.TryGetStorable<IInteractionPoint>(CommonCore.Names.Interaction_Point, out TargetPoint, null);
+            if (TargetPoint != null)
+                return TargetPoint.PointPosition;
 
-            // attempt to get the smart object
-            SmartObject InteractableSO = null;
-            LinkedBlackboard.TryGet(CommonCore.Names.Interaction_SmartObject, out InteractableSO, null);
-            if (InteractableSO != null)
-            {
-                InteractableLocation = InteractableSO.InteractionPoint;
-            }
+            return CommonCore.Constants.InvalidVector3Position;
+        }
 
-            return InteractableLocation;
+        Vector3 GetInteractionDirection()
+        {
+            // attempt to get the interact point
+            IInteractionPoint TargetPoint;
+            LinkedBlackboard.TryGetStorable<IInteractionPoint>(CommonCore.Names.Interaction_Point, out TargetPoint, null);
+            if (TargetPoint != null)
+                return TargetPoint.PointTransform.forward;
+
+            return CommonCore.Constants.InvalidVector3Position;
         }
 
         protected override void OnBehaviourTreeReset()
         {
             base.OnBehaviourTreeReset();
 
-            SmartObject TargetSO = null;
-            LinkedBlackboard.TryGet(CommonCore.Names.Interaction_SmartObject, out TargetSO, null);
-            if (TargetSO != null)
-            {
-                BaseInteraction TargetInteraction = null;
-                LinkedBlackboard.TryGet(CommonCore.Names.Interaction_Type, out TargetInteraction, null);
-                if (TargetInteraction != null)
-                {
-                    TargetInteraction.UnlockInteraction(Self);
-                }
-            }
+            IInteraction CurrentInteraction;
+            LinkedBlackboard.TryGetStorable<IInteraction>(CommonCore.Names.Interaction_Type, out CurrentInteraction, null);
+            if (CurrentInteraction != null)
+                CurrentInteraction.AbandonInteraction(PerformerInterface);
 
-            LinkedBlackboard.Set(CommonCore.Names.Interaction_SmartObject, (SmartObject)null);
-            LinkedBlackboard.Set(CommonCore.Names.Interaction_Type, (BaseInteraction)null);
+            LinkedBlackboard.Set(CommonCore.Names.Interaction_Interactable, (IInteractable)null);
+            LinkedBlackboard.Set(CommonCore.Names.Interaction_Type, (IInteraction)null);
+            LinkedBlackboard.Set(CommonCore.Names.Interaction_Point, (IInteractionPoint)null);
         }
     }
 }

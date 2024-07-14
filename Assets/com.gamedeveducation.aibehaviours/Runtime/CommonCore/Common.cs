@@ -26,8 +26,9 @@ namespace CommonCore
         public static readonly FastName LookAt_GameObject = new("Self.LookAt.GameObject");
         public static readonly FastName LookAt_Position = new("Self.LookAt.Position");
 
-        public static readonly FastName Interaction_SmartObject = new("Self.Interaction.SmartObject");
+        public static readonly FastName Interaction_Interactable = new("Self.Interaction.Interactable");
         public static readonly FastName Interaction_Type = new("Self.Interaction.Type");
+        public static readonly FastName Interaction_Point = new("Self.Interaction.Point");
 
         public static readonly FastName Resource_FocusType = new("Self.Resources.Focus.Type");
         public static readonly FastName Resource_FocusSource = new("Self.Resources.Focus.Source");

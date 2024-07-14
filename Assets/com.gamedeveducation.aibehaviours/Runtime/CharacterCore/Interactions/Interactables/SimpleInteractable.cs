@@ -75,7 +75,7 @@ namespace CharacterCore
 
         public virtual void Tick(float InDeltaTime)
         {
-            foreach (var Interaction in ActiveInteractions)
+            foreach (var Interaction in Interactions)
                 Interaction.Tick(InDeltaTime);
         }
 
@@ -112,7 +112,7 @@ namespace CharacterCore
             foreach (var Interaction in ActiveInteractions)
             {
                 // current interaction is mutually exclusive and not the requesting one
-                if (Interaction.IsMutuallyExclusive && (Interaction != InInteraction))
+                if (Interaction.IsMutuallyExclusive && (InInteraction != null) && (Interaction != InInteraction))
                     return false;
 
                 // insufficient space to join the interaction?
@@ -177,9 +177,13 @@ namespace CharacterCore
             InteractionPointUsability[InInteractionPoint] = true;
         }
 
-        public virtual void BeganInteraction(IInteractionPerformer InPerformer, IInteraction InInteraction)
+        public virtual void LockedInteraction(IInteractionPerformer InPerformer, IInteraction InInteraction)
         {
             ActiveInteractions.Add(InInteraction);
+        }
+
+        public virtual void BeganInteraction(IInteractionPerformer InPerformer, IInteraction InInteraction)
+        {
         }
 
         public virtual void TickedInteraction(IInteractionPerformer InPerformer, IInteraction InInteraction)

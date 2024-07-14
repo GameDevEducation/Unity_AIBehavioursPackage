@@ -22,12 +22,18 @@ namespace DemoScenes
             }
 
             // next priority is our interaction target
-            SmartObject CurrentInteractionSO = null;
-            InBlackboard.TryGet(CommonCore.Names.Interaction_SmartObject, out CurrentInteractionSO, null);
-            if ((CurrentInteractionSO != null) && IsLookTargetValid(CurrentInteractionSO.gameObject))
+            IInteraction CurrentInteraction = null;
+            InBlackboard.TryGetStorable<IInteraction>(CommonCore.Names.Interaction_Type, out CurrentInteraction, null);
+            if ((CurrentInteraction != null) && CurrentInteraction.HasLookTargets)
             {
-                OutLookTargetGO = CurrentInteractionSO.gameObject;
-                return;
+                foreach (var Target in CurrentInteraction.LookTargets)
+                {
+                    if (IsLookTargetValid(Target.GetLocation()))
+                    {
+                        OutLookTargetPosition = Target.GetLocation();
+                        return;
+                    }
+                }
             }
 
             // next priority is our current focus target

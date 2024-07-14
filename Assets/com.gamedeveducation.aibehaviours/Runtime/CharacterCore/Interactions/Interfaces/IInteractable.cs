@@ -25,6 +25,7 @@ namespace CharacterCore
         List<IInteraction> FilterInteractionsByPredicate(System.Predicate<IInteraction> InFilterPredicate,
                                                          IComparer<IInteraction> InComparer = null);
 
+        void LockedInteraction(IInteractionPerformer InPerformer, IInteraction InInteraction);
         void BeganInteraction(IInteractionPerformer InPerformer, IInteraction InInteraction);
         void TickedInteraction(IInteractionPerformer InPerformer, IInteraction InInteraction);
         void FinishedInteraction(IInteractionPerformer InPerformer, IInteraction InInteraction);
