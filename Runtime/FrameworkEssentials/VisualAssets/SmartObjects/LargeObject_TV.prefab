@@ -185,7 +185,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <IsMutuallyExclusive>k__BackingField: 1
-  <MaxSimultaneousPerformers>k__BackingField: 1
+  <MaxSimultaneousPerformers>k__BackingField: 3
   <MinDuration>k__BackingField: 4
   <MaxDuration>k__BackingField: 8
   LookTargetGameObjects:
@@ -251,7 +251,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <IsMutuallyExclusive>k__BackingField: 1
-  <MaxSimultaneousPerformers>k__BackingField: 1
+  <MaxSimultaneousPerformers>k__BackingField: 3
   <MinDuration>k__BackingField: 4
   <MaxDuration>k__BackingField: 8
   LookTargetGameObjects:
@@ -395,7 +395,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <IsMutuallyExclusive>k__BackingField: 1
-  <MaxSimultaneousPerformers>k__BackingField: 1
+  <MaxSimultaneousPerformers>k__BackingField: 3
   <MinDuration>k__BackingField: 3
   <MaxDuration>k__BackingField: 5
   LookTargetGameObjects:

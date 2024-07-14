@@ -1,3 +1,7 @@
+## [5.0.0] - 14th July 2024
+- Added new interactable system
+- Removed old Smart Object system
+
 ## [4.4.0] - 13th July 2024
 - Expand support for setting a destination orientation when moving
 - Add support for storing interfaces that implement IBlackboardStorable into the blackboard

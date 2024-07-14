@@ -44,7 +44,7 @@ namespace CommonCore
 
             if (!IsOn && (InteractionsRequiringPower.Count > 0))
             {
-                return InteractionsRequiringPower.Contains(InInteraction);
+                return !InteractionsRequiringPower.Contains(InInteraction);
             }
 
             return true;
