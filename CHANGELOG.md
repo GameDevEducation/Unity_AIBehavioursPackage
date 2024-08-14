@@ -1,3 +1,8 @@
+## [5.1.0] - 14th August 2024
+- Added AnimatorBridge and Animation Interface
+- Added animation support to interactions
+- Added Behaviour Tree node to perform animations
+
 ## [5.0.0] - 14th July 2024
 - Added new interactable system
 - Removed old Smart Object system
