@@ -334,10 +334,29 @@ MonoBehaviour:
   <MaxSimultaneousPerformers>k__BackingField: 1
   <MinDuration>k__BackingField: 2
   <MaxDuration>k__BackingField: 4
+  <AnimationData>k__BackingField:
+    StateName: 
+    BooleanParameters: []
+    IntegerParameters: []
+    FloatParameters: []
+    TriggerParameters:
+    - Name: IsReaching
   LookTargetGameObjects:
   - {fileID: 2680919764856181404}
   InteractionPointGameObjects:
   - {fileID: 5182973059004326457}
+  OnBeganEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  OnTickedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  OnCompletedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  OnAbandonedEvent:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &8502435423961296937
 GameObject:
   m_ObjectHideFlags: 0
@@ -386,7 +405,26 @@ MonoBehaviour:
   <MaxSimultaneousPerformers>k__BackingField: 1
   <MinDuration>k__BackingField: 3
   <MaxDuration>k__BackingField: 5
+  <AnimationData>k__BackingField:
+    StateName: 
+    BooleanParameters: []
+    IntegerParameters: []
+    FloatParameters: []
+    TriggerParameters:
+    - Name: IsReaching
   LookTargetGameObjects:
   - {fileID: 2680919764856181404}
   InteractionPointGameObjects:
   - {fileID: 5182973059004326457}
+  OnBeganEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  OnTickedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  OnCompletedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  OnAbandonedEvent:
+    m_PersistentCalls:
+      m_Calls: []

@@ -233,6 +233,8 @@ namespace HybridGOAP
 
         public INavigationInterface Navigation { get; private set; }
 
+        public IAnimationInterface AnimationInterface { get; protected set; }
+
         public string DebugDisplayName => gameObject.name;
 
         public string DisplayName => gameObject.name;
@@ -307,6 +309,11 @@ namespace HybridGOAP
             ServiceLocator.AsyncLocateService<INavigationInterface>((ILocatableService InService) =>
             {
                 Navigation = InService as INavigationInterface;
+            }, gameObject, EServiceSearchMode.LocalOnly);
+
+            ServiceLocator.AsyncLocateService<IAnimationInterface>((ILocatableService InService) =>
+            {
+                AnimationInterface = (IAnimationInterface)InService;
             }, gameObject, EServiceSearchMode.LocalOnly);
         }
 

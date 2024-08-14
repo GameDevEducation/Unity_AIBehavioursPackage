@@ -7,5 +7,6 @@ namespace CharacterCore
     {
         string DisplayName { get; }
         Vector3 PerformerLocation { get; }
+        IAnimationInterface AnimationInterface { get; }
     }
 }

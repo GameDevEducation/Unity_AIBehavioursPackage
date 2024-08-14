@@ -180,6 +180,7 @@ GameObject:
   - component: {fileID: 7635351134038455312}
   - component: {fileID: 8855253305678619409}
   - component: {fileID: 7122926462645449197}
+  - component: {fileID: 5582040580286511532}
   m_Layer: 0
   m_Name: Standalone BT AI
   m_TagString: Character
@@ -476,6 +477,30 @@ MonoBehaviour:
   <MinSearchRange>k__BackingField: 0
   <HasMaxSearchRange>k__BackingField: 1
   <MaxSearchRange>k__BackingField: 20
+--- !u!114 &5582040580286511532
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 807527060591293646}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 06ae91ac0f4844c4f8e2cbc3665344e1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  LinkedAnimator: {fileID: 6715943473281421238}
+  AnimationSets:
+  - ExternalName: Celebration
+    Animations:
+    - StateName: standing jump
+  - ExternalName: Reach
+    Animations:
+    - StateName: reach forward
+  - ExternalName: Gesture
+    Animations:
+    - StateName: dismissing gesture
+  IdleState: Idle
 --- !u!1 &1137451073008916728
 GameObject:
   m_ObjectHideFlags: 0
@@ -2676,6 +2701,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3965455072875585427}
   - component: {fileID: 6715943473281421238}
+  - component: {fileID: 3168726738231064917}
   m_Layer: 0
   m_Name: Mesh
   m_TagString: Untagged
@@ -2722,6 +2748,19 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &3168726738231064917
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7884096114895242050}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbac4d9b966f3de4ba3a576d4dda8f2c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  LinkedBridge: {fileID: 5582040580286511532}
 --- !u!1 &7948119285962978248
 GameObject:
   m_ObjectHideFlags: 0

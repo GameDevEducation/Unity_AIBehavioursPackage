@@ -113,11 +113,31 @@ MonoBehaviour:
   <MaxSimultaneousPerformers>k__BackingField: 2
   <MinDuration>k__BackingField: 3
   <MaxDuration>k__BackingField: 5
+  <AnimationData>k__BackingField:
+    StateName: 
+    BooleanParameters:
+    - Name: IsJumping
+      Value: 1
+    IntegerParameters: []
+    FloatParameters: []
+    TriggerParameters: []
   LookTargetGameObjects:
   - {fileID: 6821090696083642337}
   InteractionPointGameObjects:
   - {fileID: 5038550741511906516}
   - {fileID: 8227844123530244800}
+  OnBeganEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  OnTickedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  OnCompletedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  OnAbandonedEvent:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &5038550741511906516
 GameObject:
   m_ObjectHideFlags: 0
@@ -287,11 +307,31 @@ MonoBehaviour:
   <MaxSimultaneousPerformers>k__BackingField: 2
   <MinDuration>k__BackingField: 4
   <MaxDuration>k__BackingField: 6
+  <AnimationData>k__BackingField:
+    StateName: 
+    BooleanParameters:
+    - Name: IsJumping
+      Value: 1
+    IntegerParameters: []
+    FloatParameters: []
+    TriggerParameters: []
   LookTargetGameObjects:
   - {fileID: 6821090696083642337}
   InteractionPointGameObjects:
   - {fileID: 5038550741511906516}
   - {fileID: 8227844123530244800}
+  OnBeganEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  OnTickedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  OnCompletedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  OnAbandonedEvent:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &8227844123530244800
 GameObject:
   m_ObjectHideFlags: 0

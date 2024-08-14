@@ -1727,6 +1727,7 @@ GameObject:
   - component: {fileID: 7494107184795558635}
   - component: {fileID: 5232128489054726227}
   - component: {fileID: -8085987799822747305}
+  - component: {fileID: 7457097303529124246}
   m_Layer: 0
   m_Name: HybridGOAP SM AI
   m_TagString: Character
@@ -1949,7 +1950,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ResourceCapacity: 50
-  DefaultInteractableSearchRange: 30
 --- !u!114 &4826517113763808603
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2117,6 +2117,30 @@ MonoBehaviour:
   <MinSearchRange>k__BackingField: 0
   <HasMaxSearchRange>k__BackingField: 1
   <MaxSearchRange>k__BackingField: 20
+--- !u!114 &7457097303529124246
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6019449823397602677}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 06ae91ac0f4844c4f8e2cbc3665344e1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  LinkedAnimator: {fileID: 5534921428115598363}
+  AnimationSets:
+  - ExternalName: Celebration
+    Animations:
+    - StateName: standing jump
+  - ExternalName: Reach
+    Animations:
+    - StateName: reach forward
+  - ExternalName: Gesture
+    Animations:
+    - StateName: dismissing gesture
+  IdleState: Idle
 --- !u!1 &6166324327413192873
 GameObject:
   m_ObjectHideFlags: 0
@@ -2982,6 +3006,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8177079921771305970}
   - component: {fileID: 5534921428115598363}
+  - component: {fileID: 6783281539254490507}
   m_Layer: 0
   m_Name: Mesh
   m_TagString: Untagged
@@ -3028,6 +3053,19 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &6783281539254490507
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8911018947369255494}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbac4d9b966f3de4ba3a576d4dda8f2c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  LinkedBridge: {fileID: 7457097303529124246}
 --- !u!1 &9044740539016333766
 GameObject:
   m_ObjectHideFlags: 0

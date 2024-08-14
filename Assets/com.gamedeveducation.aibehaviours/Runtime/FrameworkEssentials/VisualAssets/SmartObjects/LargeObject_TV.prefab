@@ -188,6 +188,12 @@ MonoBehaviour:
   <MaxSimultaneousPerformers>k__BackingField: 3
   <MinDuration>k__BackingField: 4
   <MaxDuration>k__BackingField: 8
+  <AnimationData>k__BackingField:
+    StateName: Gesture
+    BooleanParameters: []
+    IntegerParameters: []
+    FloatParameters: []
+    TriggerParameters: []
   LookTargetGameObjects:
   - {fileID: 6898180603405515815}
   InteractionPointGameObjects:
@@ -254,6 +260,12 @@ MonoBehaviour:
   <MaxSimultaneousPerformers>k__BackingField: 3
   <MinDuration>k__BackingField: 4
   <MaxDuration>k__BackingField: 8
+  <AnimationData>k__BackingField:
+    StateName: Gesture
+    BooleanParameters: []
+    IntegerParameters: []
+    FloatParameters: []
+    TriggerParameters: []
   LookTargetGameObjects:
   - {fileID: 6898180603405515815}
   InteractionPointGameObjects:
@@ -320,6 +332,12 @@ MonoBehaviour:
   <MaxSimultaneousPerformers>k__BackingField: 1
   <MinDuration>k__BackingField: 0
   <MaxDuration>k__BackingField: 0
+  <AnimationData>k__BackingField:
+    StateName: Gesture
+    BooleanParameters: []
+    IntegerParameters: []
+    FloatParameters: []
+    TriggerParameters: []
   LookTargetGameObjects:
   - {fileID: 6898180603405515815}
   InteractionPointGameObjects:
@@ -398,6 +416,12 @@ MonoBehaviour:
   <MaxSimultaneousPerformers>k__BackingField: 3
   <MinDuration>k__BackingField: 3
   <MaxDuration>k__BackingField: 5
+  <AnimationData>k__BackingField:
+    StateName: Gesture
+    BooleanParameters: []
+    IntegerParameters: []
+    FloatParameters: []
+    TriggerParameters: []
   LookTargetGameObjects:
   - {fileID: 6898180603405515815}
   InteractionPointGameObjects:
