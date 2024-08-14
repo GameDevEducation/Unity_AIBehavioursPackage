@@ -11,6 +11,7 @@ namespace HybridGOAP
         protected ILookHandler LookAtHandler;
         protected IInteractionSelector InteractionInterface;
         protected IInteractionPerformer PerformerInterface;
+        protected IAnimationInterface AnimationInterface;
 
         protected Blackboard<FastName> LinkedBlackboard => LinkedBrain.LinkedBlackboard;
 
@@ -42,6 +43,11 @@ namespace HybridGOAP
             ServiceLocator.AsyncLocateService<IInteractionPerformer>((ILocatableService InService) =>
             {
                 PerformerInterface = (IInteractionPerformer)InService;
+            }, gameObject, EServiceSearchMode.LocalOnly);
+
+            ServiceLocator.AsyncLocateService<IAnimationInterface>((ILocatableService InService) =>
+            {
+                AnimationInterface = (IAnimationInterface)InService;
             }, gameObject, EServiceSearchMode.LocalOnly);
 
             PopulateSupportedGoalTypes();

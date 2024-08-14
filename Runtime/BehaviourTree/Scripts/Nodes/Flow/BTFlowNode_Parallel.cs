@@ -45,16 +45,20 @@ namespace BehaviourTree
             return true;
         }
 
-        public void SetPrimary(IBTNode InNode)
+        public IBTNode SetPrimary(IBTNode InNode)
         {
             InNode.SetOwningTree(OwningTree);
             PrimaryTree = InNode;
+
+            return PrimaryTree;
         }
 
-        public void SetSecondary(IBTNode InNode)
+        public IBTNode SetSecondary(IBTNode InNode)
         {
             InNode.SetOwningTree(OwningTree);
             SecondaryTree = InNode;
+
+            return SecondaryTree;
         }
     }
 

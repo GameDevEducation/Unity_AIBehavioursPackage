@@ -9,6 +9,7 @@ namespace BehaviourTree
         public ILookHandler LookAtInterface { get; protected set; }
         public IInteractionSelector InteractionInterface { get; protected set; }
         public IInteractionPerformer PerformerInterface { get; protected set; }
+        public IAnimationInterface AnimationInterface { get; protected set; }
         public Blackboard<FastName> LinkedBlackboard { get; protected set; }
 
         public IBTNode RootNode { get; protected set; }
@@ -35,6 +36,7 @@ namespace BehaviourTree
             ILookHandler InLookAtInterface,
             IInteractionSelector InInteractionInterface,
             IInteractionPerformer InPerformerInterface,
+            IAnimationInterface InAnimationInterface,
             Blackboard<FastName> InBlackboard,
             string InRootNodeName = "Root")
         {
@@ -46,6 +48,7 @@ namespace BehaviourTree
             LookAtInterface = InLookAtInterface;
             InteractionInterface = InInteractionInterface;
             PerformerInterface = InPerformerInterface;
+            AnimationInterface = InAnimationInterface;
             RootNode = new BTFlowNode_Selector(DebugDisplayName);
             RootNode.SetOwningTree(this);
         }

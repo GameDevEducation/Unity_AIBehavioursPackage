@@ -3,10 +3,19 @@ using System.Collections.Generic;
 
 namespace CharacterCore
 {
+    public enum EParameterUndoMode
+    {
+        UseRequestDefault,
+        AlwaysUndo,
+        AlwaysLeave
+    }
+
     [System.Serializable]
     public abstract class AnimationParameter
     {
         public string Name;
+        public EParameterUndoMode UndoOnCancellation = EParameterUndoMode.UseRequestDefault;
+        public EParameterUndoMode UndoOnInterruption = EParameterUndoMode.UseRequestDefault;
     }
 
     [System.Serializable]
@@ -40,6 +49,8 @@ namespace CharacterCore
         public List<IntegerParameter> IntegerParameters;
         public List<FloatParameter> FloatParameters;
         public List<TriggerParameter> TriggerParameters;
+        public bool UndoOnCompletion = true;
+        public bool UndoOnInterruption = true;
 
         public bool IsValid()
         {

@@ -466,6 +466,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MinWaitTime: 1
   MaxWaitTime: 10
+  AnimationData:
+    StateName: Gesture
+    BooleanParameters: []
+    IntegerParameters: []
+    FloatParameters: []
+    TriggerParameters: []
+    UndoOnCompletion: 1
+    UndoOnInterruption: 1
+  MinAnimationCooldownTime: 5
+  MaxAnimationCooldownTime: 10
 --- !u!114 &6286498496878850045
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -484,6 +494,16 @@ MonoBehaviour:
   MaxWaitTime: 8
   ValidNavMeshSearchRange: 2
   StoppingDistance: 0.1
+  AnimationData:
+    StateName: Gesture
+    BooleanParameters: []
+    IntegerParameters: []
+    FloatParameters: []
+    TriggerParameters: []
+    UndoOnCompletion: 1
+    UndoOnInterruption: 1
+  MinAnimationCooldownTime: 5
+  MaxAnimationCooldownTime: 10
 --- !u!114 &9042230532616016109
 MonoBehaviour:
   m_ObjectHideFlags: 0

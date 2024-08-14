@@ -1,4 +1,5 @@
 using BehaviourTree;
+using CharacterCore;
 using UnityEngine;
 
 namespace HybridGOAP
@@ -18,6 +19,10 @@ namespace HybridGOAP
         [Tooltip("Controls how close the AI needs to get to the destination to consider it reached.")]
         [SerializeField] float StoppingDistance = 0.1f;
 
+        [SerializeField] AnimationRequest AnimationData;
+        [SerializeField] float MinAnimationCooldownTime = 5.0f;
+        [SerializeField] float MaxAnimationCooldownTime = 10.0f;
+
         public override float CalculateCost()
         {
             return 1f; // intentionally low cost
@@ -28,7 +33,21 @@ namespace HybridGOAP
             var LocalRoot = AddChildToRootNode(new BTFlowNode_Sequence("Wander")) as BTFlowNode_Sequence;
             LocalRoot.AddChild(new BTAction_CalculateMoveLocation(ValidNavMeshSearchRange, GetWanderLocation, null));
             LocalRoot.AddChild(new BTAction_Move(StoppingDistance));
-            LocalRoot.AddChild(new BTAction_Wait(MinWaitTime, MaxWaitTime));
+
+            if ((AnimationData != null) && AnimationData.IsValid())
+            {
+                var WanderWait = LocalRoot.AddChild(new BTFlowNode_Parallel("Wait")) as BTFlowNode_Parallel;
+
+                WanderWait.SetPrimary(new BTAction_Wait(MinWaitTime, MaxWaitTime));
+
+                var PerformAnimation = WanderWait.SetSecondary(new BTFlowNode_Sequence("Perform Animation")) as BTFlowNode_Sequence;
+                PerformAnimation.AddChild(new BTAction_SendAnimationRequest(AnimationData, true));
+                PerformAnimation.AddChild(new BTAction_Wait(MinAnimationCooldownTime, MaxAnimationCooldownTime));
+            }
+            else
+            {
+                LocalRoot.AddChild(new BTAction_Wait(MinWaitTime, MaxWaitTime));
+            }
         }
 
         protected override ECharacterResources GetRequiredResources()

@@ -93,7 +93,7 @@ namespace BehaviourTree
 
             ConfigureBlackboard();
 
-            LinkedBehaviourTree.Initialise(Navigation, LookAtHandler, InteractionInterface, PerformerInterface, LinkedBlackboard);
+            LinkedBehaviourTree.Initialise(Navigation, LookAtHandler, InteractionInterface, PerformerInterface, AnimationInterface, LinkedBlackboard);
 
             ConfigureBehaviourTree();
 
