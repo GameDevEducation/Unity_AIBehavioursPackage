@@ -152,15 +152,36 @@ namespace CharacterCore
                 OnFinishedCallbackFn = null;
             }
 
-            SetState(IdleState);
-
             if (CurrentRequest != null)
             {
+                bool bUndoByDefault = InReason == EAnimationCompletionReason.Finished ? CurrentRequest.UndoOnCompletion : CurrentRequest.UndoOnInterruption;
+
+                if (bUndoByDefault)
+                    SetState(IdleState);
+
                 foreach (var Parameter in CurrentRequest.BooleanParameters)
-                    PushBool(Parameter.Name, !Parameter.Value);
+                {
+                    EParameterUndoMode UndoMode = InReason == EAnimationCompletionReason.Finished ? Parameter.UndoOnCancellation : Parameter.UndoOnInterruption;
+
+                    if (UndoMode == EParameterUndoMode.AlwaysLeave)
+                        continue;
+
+                    if ((UndoMode == EParameterUndoMode.AlwaysUndo) || !bUndoByDefault)
+                        PushBool(Parameter.Name, !Parameter.Value);
+                }
                 foreach (var Parameter in CurrentRequest.TriggerParameters)
-                    ResetTrigger(Parameter.Name);
+                {
+                    EParameterUndoMode UndoMode = InReason == EAnimationCompletionReason.Finished ? Parameter.UndoOnCancellation : Parameter.UndoOnInterruption;
+
+                    if (UndoMode == EParameterUndoMode.AlwaysLeave)
+                        continue;
+
+                    if ((UndoMode == EParameterUndoMode.AlwaysUndo) || !bUndoByDefault)
+                        ResetTrigger(Parameter.Name);
+                }
             }
+            else
+                SetState(IdleState);
 
             CurrentRequest = null;
             SelectedAnimationState = null;

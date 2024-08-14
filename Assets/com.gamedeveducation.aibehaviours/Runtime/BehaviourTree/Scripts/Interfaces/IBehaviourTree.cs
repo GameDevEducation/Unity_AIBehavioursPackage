@@ -9,11 +9,13 @@ namespace BehaviourTree
         ILookHandler LookAtInterface { get; }
         IInteractionSelector InteractionInterface { get; }
         IInteractionPerformer PerformerInterface { get; }
+        IAnimationInterface AnimationInterface { get; }
         Blackboard<FastName> LinkedBlackboard { get; }
         IBTNode RootNode { get; }
 
         void Initialise(INavigationInterface InNavigationInterface, ILookHandler InLookAtInterface,
                         IInteractionSelector InInteractionInterface, IInteractionPerformer InPerformerInterface,
+                        IAnimationInterface InAnimationInterface,
                         Blackboard<FastName> InBlackboard, string InRootNodeName = "Root");
 
         void Reset();
