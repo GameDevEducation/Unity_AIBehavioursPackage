@@ -40,6 +40,7 @@ namespace StateMachine
         public ILookHandler LookAtHandler { get; protected set; }
         public IInteractionSelector InteractionInterface { get; protected set; }
         public IInteractionPerformer PerformerInterface { get; protected set; }
+        public IAnimationInterface AnimationInterface { get; protected set; }
 
         protected ISMInstance LinkedStateMachine = new SMInstance();
 
@@ -63,10 +64,12 @@ namespace StateMachine
             {
                 Navigation = InService as INavigationInterface;
             }, gameObject, EServiceSearchMode.LocalOnly);
+
             ServiceLocator.AsyncLocateService<ILookHandler>((ILocatableService InService) =>
             {
                 LookAtHandler = (ILookHandler)InService;
             }, gameObject, EServiceSearchMode.LocalOnly);
+
             ServiceLocator.AsyncLocateService<IInteractionSelector>((ILocatableService InService) =>
             {
                 InteractionInterface = InService as IInteractionSelector;
@@ -74,6 +77,11 @@ namespace StateMachine
             ServiceLocator.AsyncLocateService<IInteractionPerformer>((ILocatableService InService) =>
             {
                 PerformerInterface = (IInteractionPerformer)InService;
+            }, gameObject, EServiceSearchMode.LocalOnly);
+
+            ServiceLocator.AsyncLocateService<IAnimationInterface>((ILocatableService InService) =>
+            {
+                AnimationInterface = (IAnimationInterface)InService;
             }, gameObject, EServiceSearchMode.LocalOnly);
 
             LinkedBlackboard = BlackboardManager.GetIndividualBlackboard(this);

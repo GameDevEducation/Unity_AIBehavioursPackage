@@ -22,6 +22,7 @@ namespace CharacterCore
         [field: SerializeField] public int MaxSimultaneousPerformers { get; protected set; } = 1;
         [field: SerializeField] public float MinDuration { get; protected set; } = 0.0f;
         [field: SerializeField] public float MaxDuration { get; protected set; } = 0.0f;
+        [field: SerializeField] public AnimationRequest AnimationData { get; protected set; }
 
         [SerializeField] List<GameObject> LookTargetGameObjects;
         [SerializeField] List<GameObject> InteractionPointGameObjects;
@@ -42,6 +43,7 @@ namespace CharacterCore
         public string DebugDisplayName { get; protected set; }
 
         Dictionary<IInteractionPerformer, PerformerInfo> CurrentPerformers = new();
+        System.Int32 CurrentAnimationRequestID = -1;
 
         protected void Awake()
         {
@@ -271,6 +273,9 @@ namespace CharacterCore
             Owner.BeganInteraction(InPerformer, this);
 
             OnBeganEvent.Invoke(InPerformer, this);
+
+            if ((InPerformer.AnimationInterface) != null && (AnimationData != null) && AnimationData.IsValid())
+                CurrentAnimationRequestID = InPerformer.AnimationInterface.IssueRequest(AnimationData);
         }
 
         protected virtual void OnTickedInteraction(IInteractionPerformer InPerformer, float InTimeElapsed, float InProgress)
@@ -282,6 +287,12 @@ namespace CharacterCore
 
         protected virtual void OnCompletedInteraction(IInteractionPerformer InPerformer)
         {
+            if ((CurrentAnimationRequestID >= 0) && (InPerformer.AnimationInterface != null))
+            {
+                InPerformer.AnimationInterface.CancelRequest(CurrentAnimationRequestID);
+                CurrentAnimationRequestID = -1;
+            }
+
             Owner.FinishedInteraction(InPerformer, this);
 
             OnCompletedEvent.Invoke(InPerformer, this);
@@ -289,6 +300,12 @@ namespace CharacterCore
 
         protected virtual void OnAbandonedInteraction(IInteractionPerformer InPerformer)
         {
+            if ((CurrentAnimationRequestID >= 0) && (InPerformer.AnimationInterface != null))
+            {
+                InPerformer.AnimationInterface.CancelRequest(CurrentAnimationRequestID);
+                CurrentAnimationRequestID = -1;
+            }
+
             Owner.AbandonedInteraction(InPerformer, this);
 
             OnAbandonedEvent.Invoke(InPerformer, this);

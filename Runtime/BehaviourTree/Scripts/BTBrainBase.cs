@@ -13,6 +13,7 @@ namespace BehaviourTree
         public ILookHandler LookAtHandler { get; protected set; }
         public IInteractionSelector InteractionInterface { get; protected set; }
         public IInteractionPerformer PerformerInterface { get; protected set; }
+        public IAnimationInterface AnimationInterface { get; protected set; }
 
         public IBehaviourTree LinkedBehaviourTree { get; protected set; } = new BTInstance();
 
@@ -42,6 +43,11 @@ namespace BehaviourTree
             ServiceLocator.AsyncLocateService<IInteractionPerformer>((ILocatableService InService) =>
             {
                 PerformerInterface = (IInteractionPerformer)InService;
+            }, gameObject, EServiceSearchMode.LocalOnly);
+
+            ServiceLocator.AsyncLocateService<IAnimationInterface>((ILocatableService InService) =>
+            {
+                AnimationInterface = (IAnimationInterface)InService;
             }, gameObject, EServiceSearchMode.LocalOnly);
 
             LinkedBlackboard = BlackboardManager.GetIndividualBlackboard(this);
